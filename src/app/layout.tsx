@@ -1,3 +1,4 @@
+import { SessionAuthProvider } from '@/components/session-auth';
 import '@/styles/globals.css';
 
 export default function RootLayout({
@@ -7,7 +8,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        <SessionAuthProvider>{children}</SessionAuthProvider>
+      </body>
     </html>
   );
 }

@@ -2,6 +2,7 @@
 
 import { LogIn, Menu } from 'lucide-react';
 import Link from 'next/link';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 import {
   Sheet,
@@ -12,15 +13,17 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from '../../../components/ui/button';
+import { handleRegister } from '../_action/login';
 
 export function Header() {
+  const { data: session } = useSession();
   const [isOpen, setIsOpen] = useState(false);
-
-  // biome-ignore lint/suspicious/noEvolvingTypes: dev
-  const session = null;
 
   const navItems = [{ href: '#profissionais', label: 'Profissionais' }];
 
+  async function handleLogin() {
+    await handleRegister('github');
+  }
   // biome-ignore lint/nursery/noNestedComponentDefinitions: dev
   const NavLinks = () => (
     <>
@@ -45,7 +48,7 @@ export function Header() {
           Acessar clinica
         </Link>
       ) : (
-        <Button className="p-4">
+        <Button className="p-4" onClick={handleLogin}>
           <LogIn />
           Portal da clinica
         </Button>
