@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 export function Hero() {
   return (
     <section className="bg-white">
-      <div className="container mx-auto px-4 pt-20 pb-4 sm:px-6 sm:pb-0 lg:px-8">
+      <div className="container mx-auto px-4 pt-20 sm:px-6 lg:px-8">
         <main className="flex items-center justify-center">
           <article className="flex max-w-3xl flex-[2] flex-col justify-center space-y-8">
             <h1 className="max-w-2xl font-bold text-4xl tracking-tight lg:text-5xl">
@@ -27,7 +27,7 @@ export function Hero() {
               height={400}
               priority
               quality={100}
-              src="/medic2.png"
+              src="/medic1.png"
               width={340}
             />
           </div>
