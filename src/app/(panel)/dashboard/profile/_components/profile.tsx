@@ -18,6 +18,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -37,19 +38,21 @@ export function ProfileContent() {
 
   const form = useProfileForm();
 
-  function generateTimeSlot(): string[] {
+  function generateTimeSlots(): string[] {
     const hours: string[] = [];
-    for (let i = 7; i <= 24; i++) {
+
+    for (let i = 8; i <= 24; i++) {
       for (let j = 0; j < 2; j++) {
         const hour = i.toString().padStart(2, '0');
         const minute = (j * 30).toString().padStart(2, '0');
         hours.push(`${hour}:${minute}`);
       }
     }
+
     return hours;
   }
 
-  const hours = generateTimeSlot();
+  const hours = generateTimeSlots();
 
   function toggleHour(hour: string) {
     setSelectedHours((prev) =>
@@ -58,6 +61,18 @@ export function ProfileContent() {
         : [...prev, hour].sort()
     );
   }
+
+  const timeZones = Intl.supportedValuesOf('timeZone').filter(
+    (zone) =>
+      zone.startsWith('America/Sao_Paulo') ||
+      zone.startsWith('America/Fortaleza') ||
+      zone.startsWith('America/Recife') ||
+      zone.startsWith('America/Bahia') ||
+      zone.startsWith('America/Belem') ||
+      zone.startsWith('America/Manaus') ||
+      zone.startsWith('America/Cuiaba') ||
+      zone.startsWith('America/Boa_Vista')
+  );
 
   return (
     <div className="mx-3">
@@ -94,6 +109,7 @@ export function ProfileContent() {
                           placeholder="Digite o nome da clinica..."
                         />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -112,6 +128,7 @@ export function ProfileContent() {
                           placeholder="Digite o endereço da clinica..."
                         />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -125,6 +142,7 @@ export function ProfileContent() {
                       <FormControl>
                         <Input {...field} placeholder="Digite o telefone..." />
                       </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
                 />
@@ -158,177 +176,105 @@ export function ProfileContent() {
                     </FormItem>
                   )}
                 />
-              </div>
 
-              <div className="space-y-2">
-                <Label className="font-semibold">
-                  Configurar horários da clinica
-                </Label>
-                <Dialog onOpenChange={setDialogIsOpen} open={dialogIsOpen}>
-                  <DialogTrigger asChild>
-                    <Button
-                      className="w-full cursor-pointer justify-between"
-                      variant="outline"
-                    >
-                      Clique aqui para selecionar horários
-                      <ArrowRight className="h-5 w-5" />
-                    </Button>
-                  </DialogTrigger>
-                  <DialogContent>
-                    <DialogHeader>
-                      <DialogTitle>Horários da Clinica</DialogTitle>
-                    </DialogHeader>
-                    <DialogDescription>
-                      Selecione abaixo os horários de funcionamento da clinica:
-                    </DialogDescription>
+                <div className="space-y-2">
+                  <Label className="font-semibold">
+                    Configurar horários da clinica
+                  </Label>
 
-                    <section className="py-4">
-                      <p className="mb-2 text-muted-foreground text-sm">
-                        Clique nos horários abaixo para marcar ou desmarcar:
-                      </p>
-                      <div className="grid grid-cols-5 gap-2">
-                        {hours.map((hour) => (
-                          <Button
-                            className={cn(
-                              'h-10',
-                              selectedHours.includes(hour) &&
-                                'border-2 border-emerald-500 text-primary'
-                            )}
-                            key={hour}
-                            onClick={() => toggleHour(hour)}
-                            variant="outline"
-                          >
-                            {hour}
-                          </Button>
-                        ))}
-                      </div>
-                    </section>
-
-                    <Button
-                      className="w-full"
-                      onClick={() => setDialogIsOpen(false)}
-                    >
-                      Salvar hórarios
-                    </Button>
-                  </DialogContent>
-                </Dialog>
-              </div>
-
-              <FormField
-                control={form.control}
-                name="timeZone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="font-semibold">
-                      Selecione o Fuso Horário
-                    </FormLabel>
-                    <FormControl>
-                      <Select
-                        defaultValue={field.value}
-                        onValueChange={field.onChange}
+                  <Dialog onOpenChange={setDialogIsOpen} open={dialogIsOpen}>
+                    <DialogTrigger asChild>
+                      <Button
+                        className="w-full justify-between"
+                        variant="outline"
                       >
-                        <SelectTrigger>
-                          <SelectValue placeholder="Selecione o Fuso Horário" />
-                    </SelectTrigger>
-  
-                    <SelectContent>
-  
-                      <SelectItem value="active">
-  
-                        ATIVO (clinica aberta)
-  
-                      </SelectItem>
-  
-                      <SelectItem value="inactive">
-  
-                        INATIVO (clinica fechada)
-  
-                      </SelectItem>
-  
-                    </SelectContent>
-  
-                  </Select>
-  
-                </FormControl>
-  
-              </FormItem>
-  
-            )}
-  
-          />
+                        Clique aqui para selecionar horários
+                        <ArrowRight className="h-5 w-5" />
+                      </Button>
+                    </DialogTrigger>
+
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>Horários da clinica</DialogTitle>
+                        <DialogDescription>
+                          Selecione abaixo os horários de funcionamento da
+                          clinica:
+                        </DialogDescription>
+                      </DialogHeader>
+
+                      <section className="py-4">
+                        <p className="mb-2 text-muted-foreground text-sm">
+                          Clique nos horários abaixo para marcar ou desmcar:
+                        </p>
+
+                        <div className="grid grid-cols-5 gap-2">
+                          {hours.map((hour) => (
+                            <Button
+                              className={cn(
+                                'h-10',
+                                selectedHours.includes(hour) &&
+                                  'border-2 border-emerald-500 text-primary'
+                              )}
+                              key={hour}
+                              onClick={() => toggleHour(hour)}
+                              variant="outline"
+                            >
+                              {hour}
+                            </Button>
+                          ))}
+                        </div>
+                      </section>
+
+                      <Button
+                        className="w-full"
+                        onClick={() => setDialogIsOpen(false)}
+                      >
+                        Fechar modal
+                      </Button>
+                    </DialogContent>
+                  </Dialog>
+                </div>
+
+                <FormField
+                  control={form.control}
+                  name="timeZone"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="font-semibold">
+                        Selecione o fuso horário
+                      </FormLabel>
+                      <FormControl>
+                        <Select
+                          defaultValue={field.value}
+                          onValueChange={field.onChange}
+                        >
+                          <SelectTrigger>
+                            <SelectValue placeholder="Selecione o seu fuso horário" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {timeZones.map((zone) => (
+                              <SelectItem key={zone} value={zone}>
+                                {zone}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+
+                <Button
+                  className="w-full bg-emerald-500 hover:bg-emerald-400"
+                  type="submit"
+                >
+                  Salvar alterações
+                </Button>
+              </div>
             </CardContent>
-
-
-      </Card>
-  
-    </form>
-  
-  </Form>
-  
-</div>
-t
-
-      ;
-  ;
-Select;
-   defaultVa
-e=
-{
-  field.value ? 'active' :
-inactive';
-}
-onValueChange=
-ield.onChange}
-                     
- 
-  >
-                        <SelectT;
-r
-        <SelectValue placehold
-="Selecione o status da
-lincia" />
-                        </S
-ectTrigger>
-                        <SelectContent>
-                          <Sele
-Item value="active">
-                  
-        ATIVO (clinica aberta)
-       
-                 </SelectItem>
-                     
-   <SelectItem
-value=INATIVO (clinica fechada)<
-
-                          "inactive"
-<
-electItem>
-                        <
-SelectContent>
- 
-                   </Select>
-                    </F
-   </FormItem
-
-                )}
-              />
- 
-         </CardContent>
-      
-  </Card>
+          </Card>
         </form>
-      
-Form>
+      </Form>
     </div>
-  )
+  );
 }
-
-
-
-
-
-
-
-
-
-
