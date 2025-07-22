@@ -1,4 +1,5 @@
 'use client';
+import type { Prisma } from '@prisma/client';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
@@ -30,13 +31,31 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import { useProfileForm } from './profile-form';
+import { updateProfile } from '../_actions/update-profile';
+import { type ProfileFormData, useProfileForm } from './profile-form';
 
-export function ProfileContent() {
-  const [selectedHours, setSelectedHours] = useState<string[]>([]);
+type UserWithSubscrition = Prisma.UserGetPayload<{
+  include: {
+    subscription: true;
+  };
+}>;
+
+interface ProfileContentProps {
+  user: UserWithSubscrition;
+}
+export function ProfileContent({ user }: ProfileContentProps) {
+  const [selectedHours, setSelectedHours] = useState<string[]>(
+    user.times ?? []
+  );
   const [dialogIsOpen, setDialogIsOpen] = useState(false);
 
-  const form = useProfileForm();
+  const form = useProfileForm({
+    name: user.name,
+    address: user.address,
+    phone: user.phone,
+    status: user.status,
+    timeZone: user.timeZone,
+  });
 
   function generateTimeSlots(): string[] {
     const hours: string[] = [];
@@ -74,10 +93,23 @@ export function ProfileContent() {
       zone.startsWith('America/Boa_Vista')
   );
 
+  async function onSubmit(values: ProfileFormData) {
+    const response = await updateProfile({
+      name: values.name,
+      address: values.address,
+      phone: values.phone, 
+      status: values.status === 'active' ? true : false,
+      timeZone: values.timeZone,
+      times: selectedHours || [],
+    });
+
+    console.info('resposta', response);
+  }
+
   return (
     <div className="mx-3">
       <Form {...form}>
-        <form>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
           <Card>
             <CardHeader>
               <CardTitle>Meu Perfil</CardTitle>
@@ -89,7 +121,7 @@ export function ProfileContent() {
                     alt="Foto da clinica"
                     className="object-cover"
                     fill
-                    src="/medic2.png"
+                    src={user.image ? user.image : 'medic2.png'}
                   />
                 </div>
               </div>
@@ -160,7 +192,7 @@ export function ProfileContent() {
                           defaultValue={field.value ? 'active' : 'inactive'}
                           onValueChange={field.onChange}
                         >
-                          <SelectTrigger>
+                          <SelectTrigger className="w-full">
                             <SelectValue placeholder="Selecione o status da clincia" />
                           </SelectTrigger>
                           <SelectContent>
@@ -248,7 +280,7 @@ export function ProfileContent() {
                           defaultValue={field.value}
                           onValueChange={field.onChange}
                         >
-                          <SelectTrigger>
+                          <SelectTrigger className="w-full">
                             <SelectValue placeholder="Selecione o seu fuso horário" />
                           </SelectTrigger>
                           <SelectContent>

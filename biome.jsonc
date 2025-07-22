@@ -3,6 +3,9 @@
   "extends": ["ultracite"],
   "linter": {
     "rules": {
+      "complexity": {
+        "noUselessTernary": "off"
+      },
       "style": {
         "noExportedImports": "off"
       },
