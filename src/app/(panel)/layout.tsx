@@ -1,5 +1,9 @@
 import { redirect } from 'next/navigation';
-import { SidebarProvider, SidebarTrigger } from '@/components/ui/sidebar';
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from '@/components/ui/sidebar';
 import getSession from '@/lib/getSession';
 import { AppSidebar } from './dashboard/_components/sidebar';
 
@@ -16,10 +20,10 @@ export default async function Layout({
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
+      <SidebarInset>
         <SidebarTrigger />
         {children}
-      </main>
+      </SidebarInset>
     </SidebarProvider>
   );
 }
