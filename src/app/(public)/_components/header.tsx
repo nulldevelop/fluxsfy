@@ -13,10 +13,10 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet';
 import { Button } from '../../../components/ui/button';
-import { handleRegister } from '../_action/login';
+import { handleRegister } from '../_actions/login';
 
 export function Header() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [{ href: '#profissionais', label: 'Profissionais' }];
@@ -24,7 +24,7 @@ export function Header() {
   async function handleLogin() {
     await handleRegister('github');
   }
-  // biome-ignore lint/nursery/noNestedComponentDefinitions: dev
+
   const NavLinks = () => (
     <>
       {navItems.map((item) => (
@@ -40,15 +40,17 @@ export function Header() {
         </Button>
       ))}
 
-      {session ? (
+      {status === 'loading' ? (
+        <></>
+      ) : session ? (
         <Link
-          className="flex items-center justify-center gap-2 p-4"
+          className="flex items-center justify-center gap-2 rounded-md bg-zinc-900 px-4 py-1 text-white"
           href="/dashboard"
         >
           Acessar clinica
         </Link>
       ) : (
-        <Button className="p-4" onClick={handleLogin}>
+        <Button onClick={handleLogin}>
           <LogIn />
           Portal da clinica
         </Button>
@@ -60,7 +62,7 @@ export function Header() {
     <header className="fixed top-0 right-0 left-0 z-[999] bg-white px-6 py-4">
       <div className="container mx-auto flex items-center justify-between">
         <Link className="font-bold text-3xl text-zinc-900" href="/">
-          NE<span className="text-emerald-500">Odonto</span>
+          Odonto<span className="text-emerald-500">PRO</span>
         </Link>
 
         <nav className="hidden items-center space-x-4 md:flex">
