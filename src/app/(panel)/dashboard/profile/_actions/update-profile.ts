@@ -3,6 +3,7 @@
 import z from 'zod/v4';
 import { auth } from '@/lib/auth';
 import prisma from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
 
 const formSchema = z.object({
   name: z.string().min(2, 'O nome é obrigatório!'),
@@ -46,6 +47,8 @@ export async function updateProfile(formData: FormSchema) {
       },
     });
 
+
+    revalidatePath('/dashboard/profile')
     return {
       data: 'Clinica atualizada com sucesso!',
     };
