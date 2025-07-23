@@ -9,6 +9,10 @@
   },
   "linter": {
     "rules": {
+      "nursery": {
+        "useParseIntRadix": "off",
+        "noShadow": "off"
+      },
       "complexity": {
         "noUselessTernary": "off"
       },

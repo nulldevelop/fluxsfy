@@ -27,7 +27,7 @@ const data = {
     },
     {
       title: 'Serviços',
-      url: '/dashboard/service',
+      url: '/dashboard/services',
       icon: Folder,
     },
   ],
