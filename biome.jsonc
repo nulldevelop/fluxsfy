@@ -17,7 +17,8 @@
         "noUselessTernary": "off"
       },
       "style": {
-        "noExportedImports": "off"
+        "noExportedImports": "off",
+        "noNestedTernary": "off"
       },
       "suspicious": {
         "noConsole": {

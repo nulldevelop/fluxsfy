@@ -1,4 +1,5 @@
 import { SessionAuthProvider } from '@/components/session-auth';
+import { Toaster } from '@/components/ui/sonner';
 import '@/styles/globals.css';
 
 export default function RootLayout({
@@ -7,10 +8,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    <html lang='pt-BR'>
       <body>
-        <SessionAuthProvider>{children}</SessionAuthProvider>
+        <SessionAuthProvider>
+          {children}
+          <Toaster duration={2500} expand={true} richColors />
+        </SessionAuthProvider>
       </body>
     </html>
-  );
+  )
 }

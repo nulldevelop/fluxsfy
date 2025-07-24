@@ -1,8 +1,8 @@
 import { redirect } from 'next/navigation'
-import { ClinicContent } from './_components/clinics-content'
-import { getInfoClinic } from './_data-access/get-info-clinic'
+import { ScheduleContent } from './_components/schedule-content'
+import { getInfoClinic } from './_data-access/get-info-schedule'
 
-export default async function Clinica({
+export default async function SchedulePage({
   params,
 }: {
   params: Promise<{ id: string }>
@@ -14,5 +14,5 @@ export default async function Clinica({
     redirect('/')
   }
 
-  return <ClinicContent clinic={user} />
+  return <ScheduleContent clinic={user} />
 }
