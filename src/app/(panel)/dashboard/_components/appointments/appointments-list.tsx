@@ -1,15 +1,15 @@
 'use client'
 
 import type { Prisma } from '@prisma/client'
-import { useQuery } from '@tanstack/react-query'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
+import { Eye, X } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
-import {
-  Card,
-  CardContent, CardHeader,
-  CardTitle
-} from '@/components/ui/card'
+import { toast } from 'sonner'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { cancelAppointment } from '../../_actions/cancel-appointment'
 
 type AppointmentWithService = Prisma.AppointmentGetPayload<{
   include: {
@@ -24,8 +24,9 @@ interface AppointmentsListProps {
 export function AppointmentsList({ times }: AppointmentsListProps) {
   const searchParams = useSearchParams()
   const date = searchParams.get('date')
+  const queryClient = useQueryClient()
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ['get-appointments', date],
     queryFn: async () => {
       let activeDate = date
@@ -41,30 +42,22 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
 
       const json = (await response.json()) as AppointmentWithService[]
 
-      console.info(json)
-
       if (!response.ok) {
         return []
       }
 
       return json
     },
+    staleTime: 20_000,
+    refetchInterval: 30_000,
   })
 
-  // Monta occupantMap slot > appointment
-  // Se um Appointment começa no time (15:00) e tem requiredSlots 2
-  // occupantMap["15:00", appoitment] occupantMap["15:30", appoitment]
   const occupantMap: Record<string, AppointmentWithService> = {}
 
   if (data && data.length > 0) {
     for (const appointment of data) {
-      // Calcular quantos slots necessarios ocupa
       const requiredSlots = Math.ceil(appointment.service.duration / 30)
-
-      // Descobrir qual é o indice do nosso array de horarios esse agendamento começa.
       const startIndex = times.indexOf(appointment.time)
-
-      // Se encontrou o index
       if (startIndex !== -1) {
         for (let i = 0; i < requiredSlots; i++) {
           const slotIndex = startIndex + i
@@ -77,6 +70,18 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
     }
   }
 
+  async function handleCancelAppointment(appointmentId: string) {
+    const reponse = await cancelAppointment({ appointmentIs: appointmentId })
+
+    if (reponse.error) {
+      toast.error(reponse.error)
+    }
+
+    queryClient.invalidateQueries({ queryKey: ['get-appointments'] })
+    await refetch()
+    toast.success(reponse.data)
+  }
+
   return (
     <Card>
       <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
@@ -84,7 +89,7 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
           Agendamentos
         </CardTitle>
 
-        <button>SELECIONAR DATA</button>
+        <button type='button'>SELECIONAR DATA</button>
       </CardHeader>
 
       <CardContent>
@@ -107,6 +112,19 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
                       <div className='font-semibold'>{occupant.name}</div>
                       <div className='text-gray-500 text-sm'>
                         {occupant.phone}
+                      </div>
+                    </div>
+                    <div className='ml-auto'>
+                      <div className='flex gap-1'>
+                        <Button size={'icon'} variant={'ghost'}>
+                          <Eye className='h-5 w-5' />
+                        </Button>
+                        <Button
+                          onClick={() => handleCancelAppointment(occupant.id)}
+                          size={'icon'}
+                        >
+                          <X className='h-5 w-5' />
+                        </Button>
                       </div>
                     </div>
                   </div>
