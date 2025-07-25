@@ -32,7 +32,7 @@ export function isSlotSequenceAvailable(
   startSlot: string,
   requiredSlots: number, 
   allSlots: string[], 
-  blockedSlots: string[] 
+  blockedSlots: string[]  
 ) {
   const startIndex = allSlots.indexOf(startSlot)
   if (startIndex === -1 || startIndex + requiredSlots > allSlots.length) {
