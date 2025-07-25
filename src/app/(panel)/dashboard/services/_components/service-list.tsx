@@ -34,7 +34,15 @@ export function ServiceList({ services }: ServiceListProps) {
   }
 
   return (
-    <Dialog onOpenChange={setIsDialogOpen} open={isDialogOpen}>
+    <Dialog
+      onOpenChange={(open) => {
+        setIsDialogOpen(open)
+        if (!open) {
+          setEditingService(null)
+        }
+      }}
+      open={isDialogOpen}
+    >
       <section>
         <Card className='mx-3'>
           <CardHeader className='flex justify-between space-y-0'>
@@ -93,11 +101,11 @@ export function ServiceList({ services }: ServiceListProps) {
                     </span>
                     <span className='text-gray-300'>-</span>
                     <span className='font-medium text-gray-500'>
-                      {(service.duration)}m
+                      {service.duration}m
                     </span>
                   </div>
 
-                  <div className=''>
+                  <div className='flex gap-2'>
                     <Button
                       onClick={() => handleEditService(service)}
                       size='icon'

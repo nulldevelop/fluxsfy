@@ -14,7 +14,8 @@
         "noShadow": "off"
       },
       "complexity": {
-        "noUselessTernary": "off"
+        "noUselessTernary": "off",
+        "noExcessiveCognitiveComplexity": "off"
       },
       "style": {
         "noExportedImports": "off",

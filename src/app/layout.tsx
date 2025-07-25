@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import '@/styles/globals.css'
 import { Toaster } from 'sonner'
 import { SessionAuthProvider } from '@/components/session-auth'
+import { QueryProvider } from '@/providers/queryclient'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -30,8 +31,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionAuthProvider>
-          <Toaster duration={2500} />
-          {children}
+          <QueryProvider>
+            <Toaster duration={2500} />
+            {children}
+          </QueryProvider>
         </SessionAuthProvider>
       </body>
     </html>

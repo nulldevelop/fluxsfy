@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import getSesion from '@/lib/getSession'
+import { Appointments } from './_components/appointments/appointments'
 import { ButtonCopyLink } from './_components/button-copy-link'
 import { Reminders } from './_components/reminder/reminders'
 
@@ -27,8 +28,9 @@ export default async function Dashboard() {
       </div>
 
       <section className='mt-4 grid grid-cols-1 gap-4 lg:grid-cols-2'>
-        <div>Agenda</div>
-        <Reminders userId={session.user?.id}/>
+        <Appointments userId={session.user?.id} />
+
+        <Reminders userId={session.user?.id} />
       </section>
     </main>
   )
