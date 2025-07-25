@@ -23,9 +23,11 @@ export default async function Layout({
       <AppSidebar />
       <SidebarInset>
         <SidebarTrigger />
-        {children}
-        <Toaster duration={2500} expand={true} richColors />
+        <main className='p-1'>
+          {children}
+          <Toaster duration={2500} expand={true} richColors />
+        </main>
       </SidebarInset>
     </SidebarProvider>
-  );
+  )
 }

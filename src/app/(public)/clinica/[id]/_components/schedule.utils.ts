@@ -19,7 +19,7 @@ export function isSlotInThePast(slotTime: string) {
   const currentMinute = now.getMinutes()
 
   if (slotHour < currentHour) {
-    return true 
+    return true
   }
   if (slotHour === currentHour && slotMinute <= currentMinute) {
     return true
@@ -30,9 +30,9 @@ export function isSlotInThePast(slotTime: string) {
 
 export function isSlotSequenceAvailable(
   startSlot: string,
-  requiredSlots: number, 
-  allSlots: string[], 
-  blockedSlots: string[]  
+  requiredSlots: number,
+  allSlots: string[],
+  blockedSlots: string[]
 ) {
   const startIndex = allSlots.indexOf(startSlot)
   if (startIndex === -1 || startIndex + requiredSlots > allSlots.length) {
