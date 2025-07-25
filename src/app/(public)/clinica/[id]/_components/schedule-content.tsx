@@ -1,4 +1,3 @@
-/** biome-ignore-all lint/style/noNonNullAssertion:dev */
 'use client'
 
 import type { Prisma } from '@prisma/client'
@@ -56,6 +55,8 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
   const [selectedTime, setSelectedTime] = useState('')
   const [availableTimeSlots, setAvailableTimeSlots] = useState<TimeSlot[]>([])
   const [loadingSlots, setLoadingSlots] = useState(false)
+
+  // Quais os horários bloqueados 01/02/2025 > ["15:00", "18:00"]
   const [blockedTimes, setBlockedTimes] = useState<string[]>([])
 
   const fetchBlockedTimes = useCallback(
@@ -69,9 +70,8 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
         const json = await response.json()
         setLoadingSlots(false)
-        return json
-      } catch (err) {
-        console.warn(err)
+        return json 
+      } catch  {
         setLoadingSlots(false)
         return []
       }
@@ -91,6 +91,9 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
           available: !blocked.includes(time),
         }))
 
+        setAvailableTimeSlots(finalSlots)
+
+        // Se o slot atual estiver indisponivel, limpamos a seleção
         const stillAvailable = finalSlots.find(
           (slot) => slot.time === selectedTime && slot.available
         )
@@ -98,8 +101,6 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
         if (!stillAvailable) {
           setSelectedTime('')
         }
-
-        setAvailableTimeSlots(finalSlots)
       })
     }
   }, [selectedDate, clinic.times, fetchBlockedTimes, selectedTime])
@@ -108,21 +109,23 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
     if (!selectedTime) {
       return
     }
+
     const response = await createNewAppointment({
       name: formData.name,
       email: formData.email,
       phone: formData.phone,
+      time: selectedTime,
       date: formData.date,
       serviceId: formData.serviceId,
-      time: selectedTime,
-      clinidId: clinic.id,
+      clinicId: clinic.id,
     })
 
-    if (!response.error) {
+    if (response.error) {
       toast.error(response.error)
+      return
     }
 
-    toast.success('Agendamento realizado com sucesso!')
+    toast.success('Consulta agendada com sucesso!')
     form.reset()
     setSelectedTime('')
   }
@@ -236,6 +239,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                       onChange={(date) => {
                         if (date) {
                           field.onChange(date)
+                          setSelectedTime('')
                         }
                       }}
                     />
@@ -254,8 +258,13 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                     Selecione o serviço:
                   </FormLabel>
                   <FormControl>
-                    <Select onValueChange={field.onChange}>
-                      <SelectTrigger className='w-full'>
+                    <Select
+                      onValueChange={(value) => {
+                        field.onChange(value)
+                        setSelectedTime('')
+                      }}
+                    >
+                      <SelectTrigger>
                         <SelectValue placeholder='Selecione um serviço' />
                       </SelectTrigger>
                       <SelectContent>
@@ -292,6 +301,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                           (service) => service.id === selectedServiceId
                         )
                           ? Math.ceil(
+                              // biome-ignore lint/style/noNonNullAssertion: dev
                               clinic.services.find(
                                 (service) => service.id === selectedServiceId
                               )!.duration / 30

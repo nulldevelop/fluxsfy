@@ -19,7 +19,7 @@ export function isSlotInThePast(slotTime: string) {
   const currentMinute = now.getMinutes()
 
   if (slotHour < currentHour) {
-    return true
+    return true // true quer dize que a hora já passou
   }
   if (slotHour === currentHour && slotMinute <= currentMinute) {
     return true
@@ -28,11 +28,16 @@ export function isSlotInThePast(slotTime: string) {
   return false
 }
 
+/**
+ * Verificar se, a partir de um slot inicial, existe uma sequencia de 'requiredSlots' disponiveis
+ * Explo: se um serviço tem 2 required slots e começa no time 15:00,
+ * precisa garantir que 15:00 e 15:30 não estejam no nosso blockedSlots
+ */
 export function isSlotSequenceAvailable(
-  startSlot: string,
-  requiredSlots: number,
-  allSlots: string[],
-  blockedSlots: string[]
+  startSlot: string, //> Primeiro horario disponivel
+  requiredSlots: number, //> Quantidade de slots necessários
+  allSlots: string[], //> Todos horarios da clinica
+  blockedSlots: string[] //> Horarios bloqueados
 ) {
   const startIndex = allSlots.indexOf(startSlot)
   if (startIndex === -1 || startIndex + requiredSlots > allSlots.length) {

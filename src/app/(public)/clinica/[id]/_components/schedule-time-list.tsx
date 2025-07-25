@@ -2,12 +2,12 @@
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
+import type { TimeSlot } from './schedule-content'
 import {
   isSlotInThePast,
   isSlotSequenceAvailable,
   isToday,
-} from './schedule.utils'
-import type { TimeSlot } from './schedule-content'
+} from './schedule-utils'
 
 interface ScheduleTimeListProps {
   selectedDate: Date
