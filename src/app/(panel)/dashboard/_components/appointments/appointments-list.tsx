@@ -1,17 +1,21 @@
 'use client'
 
 import type { Prisma } from '@prisma/client'
+
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { Eye, X } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
+import { useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cancelAppointment } from '../../_actions/cancel-appointment'
+import { DialogAppointment } from './dialog-appointments'
 
-type AppointmentWithService = Prisma.AppointmentGetPayload<{
+export type AppointmentWithService = Prisma.AppointmentGetPayload<{
   include: {
     service: true
   }
@@ -25,6 +29,9 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
   const searchParams = useSearchParams()
   const date = searchParams.get('date')
   const queryClient = useQueryClient()
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [detailAppointment, setDetailAppointment] =
+    useState<AppointmentWithService | null>(null)
 
   const { data, isLoading, refetch } = useQuery({
     queryKey: ['get-appointments', date],
@@ -83,67 +90,79 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
   }
 
   return (
-    <Card>
-      <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-        <CardTitle className='font-bold text-xl md:text-2xl'>
-          Agendamentos
-        </CardTitle>
+    <Dialog onOpenChange={setIsDialogOpen} open={isDialogOpen}>
+      <Card>
+        <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
+          <CardTitle className='font-bold text-xl md:text-2xl'>
+            Agendamentos
+          </CardTitle>
 
-        <button type='button'>SELECIONAR DATA</button>
-      </CardHeader>
+          <button type='button'>SELECIONAR DATA</button>
+        </CardHeader>
 
-      <CardContent>
-        <ScrollArea className='h-[calc(100vh-20rem)] pr-4 lg:h-[calc(100vh-15rem)]'>
-          {isLoading ? (
-            <p>Carregando agenda...</p>
-          ) : (
-            times.map((slot) => {
-              // ocupantMap["15:00"]
-              const occupant = occupantMap[slot]
+        <CardContent>
+          <ScrollArea className='h-[calc(100vh-20rem)] pr-4 lg:h-[calc(100vh-15rem)]'>
+            {isLoading ? (
+              <p>Carregando agenda...</p>
+            ) : (
+              times.map((slot) => {
+                // ocupantMap["15:00"]
+                const occupant = occupantMap[slot]
 
-              if (occupant) {
+                if (occupant) {
+                  return (
+                    <div
+                      className='flex items-center border-t py-2 last:border-b'
+                      key={slot}
+                    >
+                      <div className='w-16 font-semibold text-sm'>{slot}</div>
+                      <div className='flex-1 text-sm'>
+                        <div className='font-semibold'>{occupant.name}</div>
+                        <div className='text-gray-500 text-sm'>
+                          {occupant.phone}
+                        </div>
+                      </div>
+                      <div className='ml-auto'>
+                        <div className='flex gap-1'>
+                          <DialogTrigger asChild>
+                            <Button
+                              onClick={() => {
+                                setDetailAppointment(occupant)
+                              }}
+                              size={'icon'}
+                              variant={'ghost'}
+                            >
+                              <Eye className='h-5 w-5' />
+                            </Button>
+                          </DialogTrigger>
+                          <Button
+                            onClick={() => handleCancelAppointment(occupant.id)}
+                            size={'icon'}
+                          >
+                            <X className='h-5 w-5' />
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  )
+                }
+
                 return (
                   <div
                     className='flex items-center border-t py-2 last:border-b'
                     key={slot}
                   >
                     <div className='w-16 font-semibold text-sm'>{slot}</div>
-                    <div className='flex-1 text-sm'>
-                      <div className='font-semibold'>{occupant.name}</div>
-                      <div className='text-gray-500 text-sm'>
-                        {occupant.phone}
-                      </div>
-                    </div>
-                    <div className='ml-auto'>
-                      <div className='flex gap-1'>
-                        <Button size={'icon'} variant={'ghost'}>
-                          <Eye className='h-5 w-5' />
-                        </Button>
-                        <Button
-                          onClick={() => handleCancelAppointment(occupant.id)}
-                          size={'icon'}
-                        >
-                          <X className='h-5 w-5' />
-                        </Button>
-                      </div>
-                    </div>
+                    <div className='flex-1 text-sm'>Disponível</div>
                   </div>
                 )
-              }
+              })
+            )}
+          </ScrollArea>
+        </CardContent>
+      </Card>
 
-              return (
-                <div
-                  className='flex items-center border-t py-2 last:border-b'
-                  key={slot}
-                >
-                  <div className='w-16 font-semibold text-sm'>{slot}</div>
-                  <div className='flex-1 text-sm'>Disponível</div>
-                </div>
-              )
-            })
-          )}
-        </ScrollArea>
-      </CardContent>
-    </Card>
+      <DialogAppointment appointment={detailAppointment} />
+    </Dialog>
   )
 }
