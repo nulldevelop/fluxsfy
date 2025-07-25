@@ -1,9 +1,9 @@
-'use server';
+'use server'
 
-import z from 'zod/v4';
-import { auth } from '@/lib/auth';
-import prisma from '@/lib/prisma';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath } from 'next/cache'
+import z from 'zod/v4'
+import { auth } from '@/lib/auth'
+import prisma from '@/lib/prisma'
 
 const formSchema = z.object({
   name: z.string().min(2, 'O nome é obrigatório!'),
@@ -12,25 +12,25 @@ const formSchema = z.object({
   status: z.boolean(),
   timeZone: z.string().min(1, 'O time zone é obrigatório!'),
   times: z.array(z.string()),
-});
+})
 
-type FormSchema = z.infer<typeof formSchema>;
+type FormSchema = z.infer<typeof formSchema>
 
 export async function updateProfile(formData: FormSchema) {
-  const session = await auth();
+  const session = await auth()
 
   if (!session?.user?.id) {
     return {
       error: 'Usuário não encontrado',
-    };
+    }
   }
 
-  const schema = formSchema.safeParse(formData);
+  const schema = formSchema.safeParse(formData)
 
   if (!schema.success) {
     return {
       error: 'Preencha todos os campos',
-    };
+    }
   }
 
   try {
@@ -45,17 +45,16 @@ export async function updateProfile(formData: FormSchema) {
         timeZone: formData.timeZone,
         times: formData.times || [],
       },
-    });
-
+    })
 
     revalidatePath('/dashboard/profile')
     return {
       data: 'Clinica atualizada com sucesso!',
-    };
+    }
   } catch (err) {
-    console.warn(err);
+    console.warn(err)
     return {
       error: 'Falha ao atualizar a clinica!',
-    };
+    }
   }
 }

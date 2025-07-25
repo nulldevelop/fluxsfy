@@ -2,14 +2,42 @@
 
 import type { Reminder } from '@prisma/client'
 import { Plus, Trash } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
+import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { deleteReminder } from '../../_actions/delete-reminder'
+import { ReminderContent } from './reminder-content'
 
 interface ReminderListProps {
   reminder: Reminder[]
 }
 export function ReminderList({ reminder }: ReminderListProps) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const router = useRouter()
+
+  async function handleDeleteReminder(id: string) {
+    const response = await deleteReminder({ reminderId: id })
+
+    if (response.error) {
+      toast.error(response.error)
+      return
+    }
+
+    toast.success(response.data)
+    router.refresh()
+  }
+
   return (
     <div className='flex flex-col gap-3 '>
       <Card>
@@ -17,10 +45,25 @@ export function ReminderList({ reminder }: ReminderListProps) {
           <CardTitle className='font-bold text-xl md:text-2xl'>
             Lembretes
           </CardTitle>
-          <Button className='w-9 p-0' size={'sm'} variant={'ghost'}>
-            <Plus className='h-4 w-4' />
-          </Button>
+
+          <Dialog onOpenChange={setIsDialogOpen} open={isDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className='w-9 p-0' size={'sm'} variant={'ghost'}>
+                <Plus className='h-4 w-4' />
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Novo lembrete</DialogTitle>
+                <DialogDescription>Criar novo lembrete</DialogDescription>
+              </DialogHeader>
+              <ReminderContent
+                closeDialog={() => setIsDialogOpen(false)}
+              />
+            </DialogContent>
+          </Dialog>
         </CardHeader>
+
         <CardContent>
           {reminder.length === 0 && (
             <p className='text-gray-500 text-sm'>Nenhum lembrete cadastrado</p>
@@ -34,7 +77,9 @@ export function ReminderList({ reminder }: ReminderListProps) {
                 <p className='text-sm'>{reminder.description}</p>
                 <Button
                   className='rounded-full bg-red-500 p-2 shadow-none hover:bg-red-400'
+                  onClick={() => handleDeleteReminder(reminder.id)}
                   size={'sm'}
+                  variant={'ghost'}
                 >
                   <Trash className='h-4 w-4 text-white' />
                 </Button>
