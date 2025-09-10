@@ -234,7 +234,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                   </FormLabel>
                   <FormControl>
                     <DateTimePicker
-                      className='w-full rounded border p-2'
+                      className='w-full rounded border p-2 '
                       inicitalDate={new Date()}
                       onChange={(date) => {
                         if (date) {
@@ -264,7 +264,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                         setSelectedTime('')
                       }}
                     >
-                      <SelectTrigger>
+                      <SelectTrigger className='w-full'>
                         <SelectValue placeholder='Selecione um serviço' />
                       </SelectTrigger>
                       <SelectContent>

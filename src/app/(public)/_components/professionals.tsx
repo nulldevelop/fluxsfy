@@ -2,8 +2,13 @@ import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Card, CardContent } from '@/components/ui/card';
+import { User } from '@prisma/client';
 
-export function Professionals() {
+interface ProfessionalsProps {
+  professionals: User[]
+}
+
+export function Professionals({ professionals }: ProfessionalsProps) {
   return (
     <section className="bg-gray-50 py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -12,15 +17,16 @@ export function Professionals() {
         </h2>
 
         <section className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="overflow-hidden">
+          {professionals.map((clinic) => (
+            <Card className="overflow-hidden hover:shadow-lg duration-200" key={clinic.id}>
             <CardContent className="p-0">
               <div>
                 <div className="relative h-48">
                   <Image
                     alt="Foto da clinica"
-                    className="object-cover"
+                    className="object-cover w-full h-full"
                     fill
-                    src="/medic.jpg"
+                    src={clinic.image || '/medic1.png'}
                   />
                 </div>
               </div>
@@ -28,9 +34,9 @@ export function Professionals() {
               <div className="space-y-4 p-4">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h3 className="font-semibold">Clinica centro</h3>
+                    <h3 className="font-semibold">{clinic.name}</h3>
                     <p className="text-gray-500 text-sm">
-                      Rua x, centro, Campo Grande - MS
+                     {clinic.address}
                     </p>
                   </div>
 
@@ -39,7 +45,8 @@ export function Professionals() {
 
                 <Link
                   className="flex w-full items-center justify-center rounded-md bg-emerald-500 py-2 font-medium text-sm text-white hover:bg-emerald-400 md:text-base"
-                  href="/clinica/123"
+                  href={`/clinica/${clinic.id}`}
+                  target='_blank'
                 >
                   Agendar horário
                   <ArrowRight className="ml-2" />
@@ -47,6 +54,7 @@ export function Professionals() {
               </div>
             </CardContent>
           </Card>
+          ))}
         </section>
       </div>
     </section>
