@@ -14,6 +14,7 @@ import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { cancelAppointment } from '../../_actions/cancel-appointment'
 import { DialogAppointment } from './dialog-appointments'
+import { ButtonDatePicker } from './button-date'
 
 export type AppointmentWithService = Prisma.AppointmentGetPayload<{
   include: {
@@ -97,7 +98,7 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
             Agendamentos
           </CardTitle>
 
-          <button type='button'>SELECIONAR DATA</button>
+          <ButtonDatePicker />
         </CardHeader>
 
         <CardContent>
