@@ -1,11 +1,10 @@
-import { format } from 'date-fns'
 import {
   DialogContent,
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import type { AppointmentWithService } from './appointments-list'
 import { formatCurrency } from '@/utils/formatCurrency'
+import type { AppointmentWithService } from './appointments-list'
 
 interface DialogAppointmentProps {
   appointment: AppointmentWithService | null
@@ -24,7 +23,13 @@ export function DialogAppointment({ appointment }: DialogAppointmentProps) {
           <div className='flex flex-col gap-2'>
             <p className='font-semibold text-sm'>Hora: {appointment.time}</p>
             <p className='mb-2 font-semibold text-sm'>
-              Hora: {format(appointment.appointmentDate, 'dd/MM/yyyy')}
+              Hora:{' '}
+              {new Intl.DateTimeFormat('pt-BR', {
+                timeZone: 'UTC',
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+              }).format(new Date(appointment.appointmentDate))}
             </p>
             <p className='font-semibold text-sm'>Nome: {appointment.name}</p>
             <p className='font-semibold text-sm'>
