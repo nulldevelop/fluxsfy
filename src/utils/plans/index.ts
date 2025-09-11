@@ -3,7 +3,9 @@ export type PlanDetailsProps = {
 }
 
 export type PlansProps = {
-  id: 'BASIC' | 'PROFESSIONAL'
+  BASIC: PlanDetailsProps
+  PLUS: PlanDetailsProps
+  PROFESSIONAL: PlanDetailsProps
 }
 
 export const plans = {
@@ -56,6 +58,7 @@ export const subscriptionPlans = [
       'Agendamentos ilimitados',
       'Suporte via e-mail e telefone',
       'Relatórios avançados',
+      'Acesso multiusuário',
     ],
     description: 'Perfeito para quem é profissional ou grandes negócios',
     maxServices: plans.PROFESSIONAL.maxServices,

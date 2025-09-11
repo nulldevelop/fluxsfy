@@ -35,7 +35,7 @@ export function SubscriptionDetail({ subscription }: SubscriptionDetailProps) {
     <Card className='mx-auto w-full'>
       <CardHeader>
         <CardTitle className='text-center text-xl md:text-2xl'>
-          Seu Plano está ativa!
+          Seu Plano está ativo!
         </CardTitle>
         <CardDescription>Você já possui uma assinatura ativa</CardDescription>
       </CardHeader>

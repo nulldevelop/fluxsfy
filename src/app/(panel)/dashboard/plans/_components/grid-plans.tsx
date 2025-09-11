@@ -19,7 +19,7 @@ export function GridPlans() {
         >
           {index === 1 && (
             <div className='w-full rounded-t-xl bg-emerald-500 py-3 text-center'>
-              <p className='font-semibold text-white'>PROMOÇÃO EXCLUSIVA</p>
+              <p className='font-semibold text-white'>MELHOR PLANO</p>
             </div>
           )}
 
