@@ -19,7 +19,8 @@
       },
       "style": {
         "noExportedImports": "off",
-        "noNestedTernary": "off"
+        "noNestedTernary": "off",
+        "noNonNullAssertion": "off"
       },
       "suspicious": {
         "noConsole": {
