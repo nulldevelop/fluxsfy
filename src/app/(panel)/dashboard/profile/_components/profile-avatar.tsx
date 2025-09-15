@@ -1,9 +1,11 @@
 'use client'
 import { Loader, Upload } from 'lucide-react'
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
 import { type ChangeEvent, useState } from 'react'
 import { toast } from 'sonner'
-import semFoto from '../../../../../../public/medic1.png'
+import semFoto from '../../../../../../public/medic.jpg'
+import { updateProfileAvatar } from '../_actions/update-avatar'
 
 interface AvatarProfileProps {
   avatarUrl: string | null
@@ -13,15 +15,10 @@ interface AvatarProfileProps {
 export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
   const [previewImage, setPreviewImage] = useState(avatarUrl)
   const [loading, setLoading] = useState(false)
+  const { update } = useSession()
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    // (X) Criar o componente
-    // (X) Receber a imagem de troca.
-    // Enviar a imagem para o servidor (storage)
-    // Receber a url da imagem do servidor
-    // Salva a nova url da imagem no banco de dados
-
-    // biome-ignore lint/complexity/useOptionalChain: dev
+    // biome-ignore lint/complexity/useOptionalChain: Dev
     if (e.target.files && e.target.files[0]) {
       setLoading(true)
       const image = e.target.files[0]
@@ -36,9 +33,17 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
 
       const urlImage = await uploadImage(newFile)
 
-      if (urlImage) {
-        setPreviewImage(urlImage)
+      if (!urlImage || urlImage === '') {
+        toast.error('Falha ao alterar imagem')
+        return
       }
+
+      setPreviewImage(urlImage)
+
+      await updateProfileAvatar({ avatarUrl: urlImage })
+      await update({
+        image: urlImage,
+      })
 
       setLoading(false)
     }
