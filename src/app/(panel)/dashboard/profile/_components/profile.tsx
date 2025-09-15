@@ -1,7 +1,6 @@
 'use client'
 import type { Prisma } from '@prisma/client'
 import { ArrowRight } from 'lucide-react'
-import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { signOut, useSession } from 'next-auth/react'
 import { useState } from 'react'
@@ -36,22 +35,24 @@ import {
 import { cn } from '@/lib/utils'
 import { formatPhone } from '@/utils/formatPhone'
 import { updateProfile } from '../_actions/update-profile'
+import { AvatarProfile } from './profile-avatar'
 import { type ProfileFormData, useProfileForm } from './profile-form'
 
-type UserWithSubscrition = Prisma.UserGetPayload<{
+type UserWithSubscription = Prisma.UserGetPayload<{
   include: {
     subscription: true
   }
 }>
 
 interface ProfileContentProps {
-  user: UserWithSubscrition
+  user: UserWithSubscription
 }
+
 export function ProfileContent({ user }: ProfileContentProps) {
+  const router = useRouter()
   const [selectedHours, setSelectedHours] = useState<string[]>(user.times ?? [])
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
   const { update } = useSession()
-  const router = useRouter()
 
   const form = useProfileForm({
     name: user.name,
@@ -85,12 +86,6 @@ export function ProfileContent({ user }: ProfileContentProps) {
     )
   }
 
-  async function handleLogout() {
-    await signOut()
-    await update()
-    router.replace('/')
-  }
-
   const timeZones = Intl.supportedValuesOf('timeZone').filter(
     (zone) =>
       zone.startsWith('America/Sao_Paulo') ||
@@ -107,22 +102,28 @@ export function ProfileContent({ user }: ProfileContentProps) {
     const response = await updateProfile({
       name: values.name,
       address: values.address,
-      phone: values.phone,
       status: values.status === 'active' ? true : false,
+      phone: values.phone,
       timeZone: values.timeZone,
       times: selectedHours || [],
     })
 
     if (response.error) {
-      toast.error(response.error, { closeButton: true })
+      toast.error(response.error)
       return
     }
 
     toast.success(response.data)
   }
 
+  async function handleLogout() {
+    await signOut()
+    await update()
+    router.replace('/')
+  }
+
   return (
-    <div className='mx-3'>
+    <div className='mx-auto'>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Card>
@@ -131,14 +132,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
             </CardHeader>
             <CardContent className='space-y-6'>
               <div className='flex justify-center'>
-                <div className='relative h-40 w-40 overflow-hidden rounded-full bg-gray-200'>
-                  <Image
-                    alt='Foto da clinica'
-                    className='object-cover'
-                    fill
-                    src={user.image ? user.image : 'medic2.png'}
-                  />
-                </div>
+                <AvatarProfile avatarUrl={user.image} userId={user.id} />
               </div>
 
               <div className='space-y-4'>
@@ -193,7 +187,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                             const formattedValue = formatPhone(e.target.value)
                             field.onChange(formattedValue)
                           }}
-                          placeholder='(XX) 91234-1234'
+                          placeholder='(67) 99912-3456'
                         />
                       </FormControl>
                       <FormMessage />
@@ -214,7 +208,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                           defaultValue={field.value ? 'active' : 'inactive'}
                           onValueChange={field.onChange}
                         >
-                          <SelectTrigger className='w-full'>
+                          <SelectTrigger>
                             <SelectValue placeholder='Selecione o status da clincia' />
                           </SelectTrigger>
                           <SelectContent>
@@ -302,7 +296,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                           defaultValue={field.value}
                           onValueChange={field.onChange}
                         >
-                          <SelectTrigger className='w-full'>
+                          <SelectTrigger>
                             <SelectValue placeholder='Selecione o seu fuso horário' />
                           </SelectTrigger>
                           <SelectContent>
@@ -329,9 +323,10 @@ export function ProfileContent({ user }: ProfileContentProps) {
           </Card>
         </form>
       </Form>
-      <section>
-        <Button className='mt-4' onClick={handleLogout} variant='destructive'>
-          Sair da Conta
+
+      <section className='mt-4'>
+        <Button onClick={handleLogout} variant='destructive'>
+          Sair da conta
         </Button>
       </section>
     </div>
