@@ -313,7 +313,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                     <Label className='font-semibold text-white'>
                       Horários disponíveis:
                     </Label>
-                    <div className='rounded-lg bg-gray-100 p-4'>
+                    <div className='rounded-lg bg-gray-100 p-4 text-black'>
                       {loadingSlots ? (
                         <p>Carregando horários...</p>
                       ) : availableTimeSlots.length === 0 ? (

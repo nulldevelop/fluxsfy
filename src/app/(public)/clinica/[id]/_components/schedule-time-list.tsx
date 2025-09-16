@@ -47,7 +47,7 @@ export function ScheduleTimeList({
         return (
           <Button
             className={cn(
-              'h-10 select-none',
+              'h-10 select-none border-black',
               selectedTime === slot.time &&
                 'border-2 border-emerald-500 text-primary',
               !slotEnabled && 'cursor-not-allowed opacity-50'
