@@ -4,6 +4,10 @@ import '@/styles/globals.css'
 import { Toaster } from 'sonner'
 import { SessionAuthProvider } from '@/components/session-auth'
 import { QueryProvider } from '@/providers/queryclient'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
+
+
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -52,6 +56,8 @@ export default function RootLayout({
           <QueryProvider>
             <Toaster duration={2500} />
             {children}
+            <Analytics />
+            <SpeedInsights />
           </QueryProvider>
         </SessionAuthProvider>
       </body>
