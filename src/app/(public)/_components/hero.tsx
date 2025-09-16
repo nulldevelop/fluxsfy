@@ -24,12 +24,12 @@ export function Hero() {
             Encontre os melhores profissionais em um único local!
           </h1>
           <p className='animate-slideUp text-base text-gray-200 [animation-delay:200ms] md:text-lg'>
-            Nós somos uma plataforma para profissionais da saúde com foco em
-            agilizar seu atendimento de forma simplificada e organizada.
+            A plataforma completa para profissionais e barbearias:
+            organize seus atendimentos e ganhe mais tempo para o que importa.
           </p>
 
-          <Button className='w-fit animate-zoomIn bg-emerald-500 px-6 font-semibold [animation-delay:500ms] hover:bg-emerald-400'>
-            Encontre uma clínica
+          <Button className='w-fit animate-zoomIn bg-gray-500 px-6 font-semibold [animation-delay:500ms] hover:bg-emerald-400'>
+            Encontre um profissional
           </Button>
         </article>
       </div>
