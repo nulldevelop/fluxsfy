@@ -3,7 +3,8 @@ import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Card, CardContent } from '@/components/ui/card'
-import { Premiunbadge } from './premium'
+import { PremiumBadge } from './premium'
+import { Rating } from './ratingstar'
 
 type UserWithSubscription = Prisma.UserGetPayload<{
   include: {
@@ -39,7 +40,13 @@ export function Professionals({ professionals }: ProfessionalsProps) {
                       fill
                       src={clinic.image || '/medic1.png'}
                     />
-                    {clinic?.subscription?.plan === 'PLUS' && <Premiunbadge />}
+                    {clinic?.subscription?.plan && (
+                      <PremiumBadge
+                        plan={
+                          clinic.subscription.plan as 'BASIC' | 'PLUS' | 'PRO'
+                        }
+                      />
+                    )}
                   </div>
                 </div>
 
@@ -49,6 +56,7 @@ export function Professionals({ professionals }: ProfessionalsProps) {
                       <h3 className='font-semibold text-white'>
                         {clinic.name}
                       </h3>
+                      <Rating value={clinic.rating || 3} />
                       <p className='line-clamp-2 text-gray-400 text-sm'>
                         {clinic.address}
                       </p>

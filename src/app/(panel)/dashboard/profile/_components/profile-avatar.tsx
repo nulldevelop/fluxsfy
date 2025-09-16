@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useSession } from 'next-auth/react'
 import { type ChangeEvent, useState } from 'react'
 import { toast } from 'sonner'
-import semFoto from '../../../../../../public/medic.jpg'
+import semFoto from '../../../../../../public/banner.png'
 import { updateProfileAvatar } from '../_actions/update-avatar'
 
 interface AvatarProfileProps {

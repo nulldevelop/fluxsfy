@@ -1,7 +1,12 @@
+'use client'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
+import { handleRegister } from '../_actions/login'
 
 export function Hero() {
+  async function handleLogin() {
+    await handleRegister('google')
+  }
   return (
     <section className='relative h-[90vh] w-full overflow-hidden'>
       {/* Imagem de fundo */}
@@ -33,8 +38,11 @@ export function Hero() {
               Encontre um Profissional
             </Button>
 
-            <Button className='w-fit animate-zoomIn bg-emerald-500 px-6 py-3 font-semibold [animation-delay:500ms] hover:bg-emerald-400'>
-              <a href='/dashboard'>Sou Profissional</a>
+            <Button
+              className='w-fit animate-zoomIn bg-emerald-500 px-6 py-3 font-semibold [animation-delay:500ms] hover:bg-emerald-400'
+              onClick={handleLogin}
+            >
+              Sou Profissional
             </Button>
           </div>
         </article>

@@ -70,8 +70,8 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
         const json = await response.json()
         setLoadingSlots(false)
-        return json 
-      } catch  {
+        return json
+      } catch {
         setLoadingSlots(false)
         return []
       }
@@ -132,12 +132,22 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
   return (
     <div className='flex min-h-screen flex-col'>
-      <div className='h-32 bg-emerald-500' />
+      {/* Banner com overlay esverdeado */}
+      <div className='relative h-40 w-full md:h-56'>
+        <Image
+          alt='Banner'
+          className='object-cover'
+          fill
+          priority
+          src='/banner.png'
+        />
+      </div>
 
-      <section className='contianer -mt-16 mx-auto px-4'>
-        <div className='mx-auto max-w-2xl'>
-          <article className='flex flex-col items-center'>
-            <div className='relative mb-8 h-48 w-48 overflow-hidden rounded-full border-4 border-white'>
+      <section className='container relative z-10 mx-auto w-full max-w-6xl px-4 py-8 md:py-10'>
+        <div className='grid grid-cols-1 items-center gap-8 md:grid-cols-2'>
+          {/* Coluna esquerda: foto e detalhes */}
+          <article className='flex flex-col items-center text-center'>
+            <div className='relative mb-6 h-48 w-48 overflow-hidden rounded-full border-4 border-white'>
               <Image
                 alt='Foto da clinica'
                 className='object-cover'
@@ -147,197 +157,205 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
             </div>
 
             <h1 className='mb-2 font-bold text-2xl'>{clinic.name}</h1>
-            <div className='flex items-center gap-1'>
+            <div className='mb-1 flex items-center gap-1'>
               <MapPin className='h-5 w-5' />
               <span>
                 {clinic.address ? clinic.address : 'Endereço não informado'}
               </span>
             </div>
+            <div className='text-muted-foreground'>
+              {clinic.phone && clinic.phone.length > 0
+                ? clinic.phone
+                : 'Telefone não informado'}
+            </div>
           </article>
-        </div>
-      </section>
 
-      <section className='mx-auto mt-6 w-full max-w-2xl'>
-        {/* Formulário de agendamento */}
-        <Form {...form}>
-          <form
-            className='mx-2 space-y-6 rounded-md border bg-white p-6 shadow-sm'
-            onSubmit={form.handleSubmit(handleRegisterAppointmnent)}
-          >
-            <FormField
-              control={form.control}
-              name='name'
-              render={({ field }) => (
-                <FormItem className='my-2'>
-                  <FormLabel className='font-semibold'>
-                    Nome completo:
-                  </FormLabel>
-                  <FormControl>
-                    <Input
-                      id='name'
-                      placeholder='Digite seu nome completo...'
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name='email'
-              render={({ field }) => (
-                <FormItem className='my-2'>
-                  <FormLabel className='font-semibold'>Email:</FormLabel>
-                  <FormControl>
-                    <Input
-                      id='email'
-                      placeholder='Digite seu email...'
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name='phone'
-              render={({ field }) => (
-                <FormItem className='my-2'>
-                  <FormLabel className='font-semibold'>Telefone:</FormLabel>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      id='phone'
-                      onChange={(e) => {
-                        const formattedValue = formatPhone(e.target.value)
-                        field.onChange(formattedValue)
-                      }}
-                      placeholder='(XX) XXXXX-XXXX'
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name='date'
-              render={({ field }) => (
-                <FormItem className='flex items-center gap-2 space-y-1'>
-                  <FormLabel className='font-semibold'>
-                    Data do agendamento:
-                  </FormLabel>
-                  <FormControl>
-                    <DateTimePicker
-                      className='w-full rounded border p-2 '
-                      inicitalDate={new Date()}
-                      onChange={(date) => {
-                        if (date) {
-                          field.onChange(date)
-                          setSelectedTime('')
-                        }
-                      }}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name='serviceId'
-              render={({ field }) => (
-                <FormItem className=''>
-                  <FormLabel className='font-semibold'>
-                    Selecione o serviço:
-                  </FormLabel>
-                  <FormControl>
-                    <Select
-                      onValueChange={(value) => {
-                        field.onChange(value)
-                        setSelectedTime('')
-                      }}
-                    >
-                      <SelectTrigger className='w-full'>
-                        <SelectValue placeholder='Selecione um serviço' />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {clinic.services.map((service) => (
-                          <SelectItem key={service.id} value={service.id}>
-                            {service.name} - {Math.floor(service.duration / 60)}
-                            h {service.duration % 60}min
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            {selectedServiceId && (
-              <div className='space-y-2'>
-                <Label className='font-semibold'>Horários disponíveis:</Label>
-                <div className='rounded-lg bg-gray-100 p-4'>
-                  {loadingSlots ? (
-                    <p>Carregando horários...</p>
-                  ) : availableTimeSlots.length === 0 ? (
-                    <p>Nenhum horário disponível</p>
-                  ) : (
-                    <ScheduleTimeList
-                      availableTimeSlots={availableTimeSlots}
-                      blockedTimes={blockedTimes}
-                      clinicTimes={clinic.times}
-                      onSelectTime={(time) => setSelectedTime(time)}
-                      requiredSlots={
-                        clinic.services.find(
-                          (service) => service.id === selectedServiceId
-                        )
-                          ? Math.ceil(
-                              // biome-ignore lint/style/noNonNullAssertion: dev
-                              clinic.services.find(
-                                (service) => service.id === selectedServiceId
-                              )!.duration / 30
-                            )
-                          : 1
-                      }
-                      selectedDate={selectedDate}
-                      selectedTime={selectedTime}
-                    />
-                  )}
-                </div>
-              </div>
-            )}
-
-            {clinic.status ? (
-              <Button
-                className='w-full bg-emerald-500 hover:bg-emerald-400'
-                disabled={
-                  !(
-                    watch('name') &&
-                    watch('email') &&
-                    watch('phone') &&
-                    watch('date')
-                  )
-                }
-                type='submit'
+          {/* Coluna direita: formulário */}
+          <div className='w-full'>
+            <Form {...form}>
+              <form
+                className='space-y-6 rounded-md border bg-white p-6 shadow-sm'
+                onSubmit={form.handleSubmit(handleRegisterAppointmnent)}
               >
-                Realizar agendamento
-              </Button>
-            ) : (
-              <p className='rounded-md bg-red-500 px-4 py-2 text-center text-white'>
-                A clinica está fechada nesse momento.
-              </p>
-            )}
-          </form>
-        </Form>
+                <FormField
+                  control={form.control}
+                  name='name'
+                  render={({ field }) => (
+                    <FormItem className='my-2'>
+                      <FormLabel className='font-semibold'>
+                        Nome completo:
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          id='name'
+                          placeholder='Digite seu nome completo...'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name='email'
+                  render={({ field }) => (
+                    <FormItem className='my-2'>
+                      <FormLabel className='font-semibold'>Email:</FormLabel>
+                      <FormControl>
+                        <Input
+                          id='email'
+                          placeholder='Digite seu email...'
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name='phone'
+                  render={({ field }) => (
+                    <FormItem className='my-2'>
+                      <FormLabel className='font-semibold'>Telefone:</FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          id='phone'
+                          onChange={(e) => {
+                            const formattedValue = formatPhone(e.target.value)
+                            field.onChange(formattedValue)
+                          }}
+                          placeholder='(XX) XXXXX-XXXX'
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name='date'
+                  render={({ field }) => (
+                    <FormItem className='flex items-center gap-2 space-y-1'>
+                      <FormLabel className='font-semibold'>
+                        Data do agendamento:
+                      </FormLabel>
+                      <FormControl>
+                        <DateTimePicker
+                          className='w-full rounded border p-2 '
+                          inicitalDate={new Date()}
+                          onChange={(date) => {
+                            if (date) {
+                              field.onChange(date)
+                              setSelectedTime('')
+                            }
+                          }}
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name='serviceId'
+                  render={({ field }) => (
+                    <FormItem className=''>
+                      <FormLabel className='font-semibold'>
+                        Selecione o serviço:
+                      </FormLabel>
+                      <FormControl>
+                        <Select
+                          onValueChange={(value) => {
+                            field.onChange(value)
+                            setSelectedTime('')
+                          }}
+                        >
+                          <SelectTrigger className='w-full'>
+                            <SelectValue placeholder='Selecione um serviço' />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {clinic.services.map((service) => (
+                              <SelectItem key={service.id} value={service.id}>
+                                {service.name} -{' '}
+                                {Math.floor(service.duration / 60)}h{' '}
+                                {service.duration % 60}min
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                {selectedServiceId && (
+                  <div className='space-y-2'>
+                    <Label className='font-semibold'>
+                      Horários disponíveis:
+                    </Label>
+                    <div className='rounded-lg bg-gray-100 p-4'>
+                      {loadingSlots ? (
+                        <p>Carregando horários...</p>
+                      ) : availableTimeSlots.length === 0 ? (
+                        <p>Nenhum horário disponível</p>
+                      ) : (
+                        <ScheduleTimeList
+                          availableTimeSlots={availableTimeSlots}
+                          blockedTimes={blockedTimes}
+                          clinicTimes={clinic.times}
+                          onSelectTime={(time) => setSelectedTime(time)}
+                          requiredSlots={
+                            clinic.services.find(
+                              (service) => service.id === selectedServiceId
+                            )
+                              ? Math.ceil(
+                                  clinic.services.find(
+                                    (service) =>
+                                      service.id === selectedServiceId
+                                  )!.duration / 30
+                                )
+                              : 1
+                          }
+                          selectedDate={selectedDate}
+                          selectedTime={selectedTime}
+                        />
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {clinic.status ? (
+                  <Button
+                    className='w-full bg-black hover:bg-emerald-400'
+                    disabled={
+                      !(
+                        watch('name') &&
+                        watch('email') &&
+                        watch('phone') &&
+                        watch('date')
+                      )
+                    }
+                    type='submit'
+                  >
+                    Realizar agendamento
+                  </Button>
+                ) : (
+                  <p className='rounded-md bg-red-500 px-4 py-2 text-center text-white'>
+                    A clinica está fechada nesse momento.
+                  </p>
+                )}
+              </form>
+            </Form>
+          </div>
+        </div>
       </section>
     </div>
   )

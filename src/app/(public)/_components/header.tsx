@@ -44,12 +44,12 @@ export function Header() {
       {status === 'loading' ? (
         <Loader className='animate-spin text-white' />
       ) : session ? (
-        <Link
+        <Button
           className='flex items-center justify-center gap-2 rounded-md bg-gray-500 px-4 py-1 text-white'
-          href='/dashboard'
+          onClick={handleLogin}
         >
           Sou Profissional
-        </Link>
+        </Button>
       ) : (
         <Button
           className='bg-emerald-500 px-4 text-white hover:bg-emerald-400'
@@ -64,7 +64,6 @@ export function Header() {
 
   return (
     <header className='fixed top-0 right-0 left-0 z-[999] h-[80px]'>
-
       {/* Overlay */}
       <div className='absolute inset-0 bg-black/40' />
 

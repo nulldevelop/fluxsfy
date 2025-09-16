@@ -1,20 +1,25 @@
+'use client'
 import {
- CalendarCheck2,
- DollarSign,
- Folder, Settings
-} from 'lucide-react';
+  CalendarCheck2,
+  DollarSign,
+  Folder,
+  LogOut,
+  Settings,
+} from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import {
- Sidebar,
- SidebarContent,
- SidebarFooter,
- SidebarGroup,
- SidebarGroupContent,
- SidebarGroupLabel,
- SidebarMenu,
- SidebarMenuBadge,
- SidebarMenuButton,
- SidebarMenuItem,
-} from '@/components/ui/sidebar';
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuBadge,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from '@/components/ui/sidebar'
+import { handleLogoutAction } from '../_actions/logout'
 
 // Menu items.
 const data = {
@@ -43,9 +48,13 @@ const data = {
       icon: DollarSign,
     },
   ],
-};
+}
 
 export function AppSidebar() {
+  const handleLogout = async () => {
+    await handleLogoutAction()
+  }
+
   return (
     <Sidebar>
       <SidebarContent>
@@ -88,19 +97,15 @@ export function AppSidebar() {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild size="lg">
-              <div className="flex items-center gap-2 p-2">
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">{'Admin'}</span>
-                  <span className="truncate text-muted-foreground text-xs">
-                    {'Admin'}
-                  </span>
-                </div>
-              </div>
+            <SidebarMenuButton asChild onClick={handleLogout} size='lg'>
+              <Button className='flex w-full items-center gap-2 rounded p-2 text-left hover:bg-gray-200'>
+                <LogOut size={16} />
+                <span>Sair</span>
+              </Button>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
     </Sidebar>
-  );
+  )
 }
