@@ -59,7 +59,7 @@ export function OwnerUsers() {
           <input
             className='w-full rounded-md border border-gray-200 px-3 py-2 text-sm outline-none focus:border-gray-400 sm:w-72'
             onChange={(e) => setQuery(e.target.value)}
-            placeholder='Buscar por nome, email, plano...'
+            placeholder='Buscar por nome, email, plano..'
             value={query}
           />
         </div>
