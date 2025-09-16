@@ -1,7 +1,8 @@
 import type { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fluxsfy.com'
+  const siteUrl =
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://www.fluxsfy.com.br'
 
   const routes = ['', '/agendamento', '/plans'].map((path) => ({
     url: `${siteUrl}${path}`,

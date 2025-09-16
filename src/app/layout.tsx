@@ -17,9 +17,12 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 })
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://fluxsfy.com'
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.fluxsfy.com.br'
 
 export const metadata: Metadata = {
+  verification: {
+    google: 'td2lr96g3W26eGQFYEtsl7Ue4l-w1XpxcETrvKV0HtI',
+  },
   metadataBase: new URL(siteUrl),
   title: 'Fluxsfy — Encontre os melhores profissionais em um único local',
   description:
