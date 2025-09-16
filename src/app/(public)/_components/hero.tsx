@@ -1,5 +1,4 @@
 import Image from 'next/image'
-import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 export function Hero() {
@@ -30,15 +29,13 @@ export function Hero() {
           </p>
 
           <div className='flex items-center justify-center gap-4'>
-            <Button className='w-fit animate-zoomIn bg-emerald-500 px-6 font-semibold [animation-delay:500ms] hover:bg-emerald-400'>
+            <Button className='w-fit animate-zoomIn bg-emerald-500 px-6 py-3 font-semibold [animation-delay:500ms] hover:bg-emerald-400'>
               Encontre um Profissional
             </Button>
-            <Link
-              className='w-fit animate-zoomIn bg-emerald-500 px-6 font-semibold [animation-delay:500ms] hover:bg-emerald-400'
-              href='/dashboard'
-            >
-              Sou Profissional
-            </Link>
+
+            <Button className='w-fit animate-zoomIn bg-emerald-500 px-6 py-3 font-semibold [animation-delay:500ms] hover:bg-emerald-400'>
+              <a href='/dashboard'>Sou Profissional</a>
+            </Button>
           </div>
         </article>
       </div>
