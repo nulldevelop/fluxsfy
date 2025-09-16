@@ -97,6 +97,9 @@ model User {
   rating             Int       @default(0)
   role               Role      @default(USER)
 
+  latitude Float?
+  longitude Float?
+
   subscription Subscription?
   services     Service[]
   reminders    Reminder[]

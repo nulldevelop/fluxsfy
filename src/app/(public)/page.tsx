@@ -1,13 +1,13 @@
 import { Footer } from './_components/footer'
 import { Header } from './_components/header'
 import { Hero } from './_components/hero'
-import { Professionals } from './_components/professionals'
+import { ProfessionalsNearby } from './_components/professionals-nearby'
 import { getProfessionals } from './_data-access/get-professionals'
 
 export const revalidate = 60 // 2 minutes
 
 export default async function Home() {
-  const professionals = await getProfessionals()
+  const fallbackProfessionals = await getProfessionals()
 
   return (
     <div className='flex min-h-screen flex-col'>
@@ -16,7 +16,10 @@ export default async function Home() {
       <div>
         <Hero />
 
-        <Professionals professionals={professionals || []} />
+        {/* Renderiza uma única seção: usa proximidade se disponível, senão fallback SSR */}
+        <div className='space-y-8'>
+          <ProfessionalsNearby fallback={fallbackProfessionals || []} />
+        </div>
 
         <Footer />
       </div>
