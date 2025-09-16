@@ -22,7 +22,15 @@ import {
 import { handleLogoutAction } from '../_actions/logout'
 
 // Menu items.
-const data = {
+type NavItem = {
+  title: string
+  url: string
+  icon: React.ElementType
+  bagde?: number
+  adminOnly?: boolean
+}
+
+const data: { navMain: NavItem[]; navSecondary: NavItem[] } = {
   navMain: [
     {
       title: 'Agendamento',
@@ -34,6 +42,12 @@ const data = {
       title: 'Serviços',
       url: '/dashboard/services',
       icon: Folder,
+    },
+    {
+      title: 'Admin',
+      url: '/dashboard-owner',
+      icon: Settings,
+      adminOnly: true,
     },
   ],
   navSecondary: [
@@ -50,7 +64,7 @@ const data = {
   ],
 }
 
-export function AppSidebar() {
+export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
   const handleLogout = async () => {
     await handleLogoutAction()
   }
@@ -62,17 +76,19 @@ export function AppSidebar() {
           <SidebarGroupLabel>Painel</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {data.navMain.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                      <SidebarMenuBadge>{item.bagde}</SidebarMenuBadge>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {data.navMain
+                .filter((item) => (item.adminOnly ? isAdmin : true))
+                .map((item) => (
+                  <SidebarMenuItem key={item.title}>
+                    <SidebarMenuButton asChild>
+                      <a href={item.url}>
+                        <item.icon />
+                        <span>{item.title}</span>
+                        <SidebarMenuBadge>{item.bagde}</SidebarMenuBadge>
+                      </a>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

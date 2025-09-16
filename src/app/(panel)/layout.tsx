@@ -1,26 +1,27 @@
-import { redirect } from 'next/navigation';
+import { redirect } from 'next/navigation'
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
-} from '@/components/ui/sidebar';
-import { Toaster } from '@/components/ui/sonner';
-import getSession from '@/lib/getSession';
-import { AppSidebar } from './dashboard/_components/sidebar';
+} from '@/components/ui/sidebar'
+import { Toaster } from '@/components/ui/sonner'
+import getSession from '@/lib/getSession'
+import { AppSidebar } from './dashboard/_components/sidebar'
 
 export default async function Layout({
   children,
 }: {
-  children: React.ReactNode;
+  children: React.ReactNode
 }) {
-  const session = await getSession();
+  const session = await getSession()
 
   if (!session) {
-    redirect('/');
+    redirect('/')
   }
+  const isAdmin = session?.user?.role === 'ADMIN'
   return (
     <SidebarProvider>
-      <AppSidebar />
+      <AppSidebar isAdmin={isAdmin} />
       <SidebarInset>
         <SidebarTrigger />
         <main className='p-1'>

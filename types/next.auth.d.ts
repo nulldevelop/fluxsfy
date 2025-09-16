@@ -17,6 +17,7 @@ interface User {
   address?: string;
   phone?: string;
   status: boolean;
+  role?: 'USER' | 'ADMIN';
   createdAt: string;
   updateAt: string;
 }

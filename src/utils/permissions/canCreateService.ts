@@ -16,6 +16,7 @@ export async function canCreateService(
     const serviceCount = await prisma.service.count({
       where: {
         userId: session?.user?.id,
+        status: true,
       },
     })
 
@@ -26,7 +27,7 @@ export async function canCreateService(
       return {
         hasPermission:
           planLimits.maxServices === null ||
-          serviceCount <= planLimits.maxServices,
+          serviceCount < planLimits.maxServices,
         planId: subscription.plan,
         expired: false,
         plan: plans[subscription.plan],

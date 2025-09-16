@@ -13,6 +13,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  USER
+  ADMIN
+}
+
 model Appointment {
   id              String   @id @default(uuid())
   name            String
@@ -89,8 +94,8 @@ model User {
   timeZone           String?
   stripe_customer_id String?
   times              String[]  @default([])
-    rating             Int       @default(0)
-
+  rating             Int       @default(0)
+  role               Role      @default(USER)
 
   subscription Subscription?
   services     Service[]

@@ -19,6 +19,23 @@ export const metadata: Metadata = {
   title: 'FlusxFy | Encontre os melhores profissionais em um único local!',
   description:
     'A plataforma completa para profissionais e barbearias: organize seus atendimentos e ganhe mais tempo para o que importa.',
+  keywords: ['FlusxFy', 'Barber', 'Barbearia', 'SaaS', 'Agendamento', 'Profissional'],
+  icons: '/logofluxsfy.png',
+  robots: {
+    index: true,
+    follow: true,
+    nocache: true,
+  },
+  openGraph: {
+    title: 'FlusxFy | Encontre os melhores profissionais em um único local!',
+    description:
+      'A plataforma completa para profissionais e barbearias: organize seus atendimentos e ganhe mais tempo para o que importa.',
+    images: ['/logofluxsfy.png'],
+    url: 'https://fluxsfy.com',
+    siteName: 'FlusxFy',
+    locale: 'pt-BR',
+    type: 'website',
+  },
 }
 
 export default function RootLayout({

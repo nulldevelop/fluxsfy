@@ -6,7 +6,9 @@ interface PremiumBadgeProps {
 
 export function PremiumBadge({ plan }: PremiumBadgeProps) {
   // biome-ignore lint/style/useBlockStatements: dev
-  if (plan === 'BASIC') return null
+  if (plan === 'BASIC') {
+    return null
+  }
   const bgColor =
     plan === 'PLUS'
       ? 'bg-gray-300'
