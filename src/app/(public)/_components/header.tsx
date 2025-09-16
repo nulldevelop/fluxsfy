@@ -48,7 +48,7 @@ export function Header() {
           className='flex items-center justify-center gap-2 rounded-md bg-gray-500 px-4 py-1 text-white'
           href='/dashboard'
         >
-          Acessar Dashboard
+          Sou Profissional
         </Link>
       ) : (
         <Button

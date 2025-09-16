@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 
 export function Hero() {
@@ -24,13 +25,21 @@ export function Hero() {
             Encontre os melhores profissionais em um único local!
           </h1>
           <p className='animate-slideUp text-base text-gray-200 [animation-delay:200ms] md:text-lg'>
-            A plataforma completa para profissionais e barbearias:
-            organize seus atendimentos e ganhe mais tempo para o que importa.
+            A plataforma completa para profissionais e barbearias: organize seus
+            atendimentos e ganhe mais tempo para o que importa.
           </p>
 
-          <Button className='w-fit animate-zoomIn bg-gray-500 px-6 font-semibold [animation-delay:500ms] hover:bg-emerald-400'>
-            Encontre um profissional
-          </Button>
+          <div className='flex items-center justify-center gap-4'>
+            <Button className='w-fit animate-zoomIn bg-emerald-500 px-6 font-semibold [animation-delay:500ms] hover:bg-emerald-400'>
+              Encontre um Profissional
+            </Button>
+            <Link
+              className='w-fit animate-zoomIn bg-emerald-500 px-6 font-semibold [animation-delay:500ms] hover:bg-emerald-400'
+              href='/dashboard'
+            >
+              Sou Profissional
+            </Link>
+          </div>
         </article>
       </div>
     </section>
