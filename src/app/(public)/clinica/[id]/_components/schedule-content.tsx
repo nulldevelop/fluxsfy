@@ -3,6 +3,7 @@
 import type { Prisma } from '@prisma/client'
 import { MapPin } from 'lucide-react'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 import { useCallback, useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -48,6 +49,7 @@ export interface TimeSlot {
 export function ScheduleContent({ clinic }: ScheduleContentProps) {
   const form = useAppointmentForm()
   const { watch } = form
+  const router = useRouter()
 
   const selectedDate = watch('date')
   const selectedServiceId = watch('serviceId')
@@ -126,14 +128,16 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
     }
 
     toast.success('Consulta agendada com sucesso!')
-    form.reset()
-    setSelectedTime('')
+    if (response.data?.id) {
+      // Redireciona para página de confirmação (com comprovante)
+      router.push(`/agendamento/${response.data.id}`)
+    }
   }
 
   return (
-    <div className='flex min-h-screen flex-col'>
-      {/* Banner com overlay esverdeado */}
-      <div className='relative h-40 w-full md:h-56'>
+    <div className='min-h-screen bg-gradient-to-b from-zinc-900 via-zinc-900 to-zinc-950 text-white'>
+      {/* Banner com overlay */}
+      <div className='relative h-40 w-full overflow-hidden md:h-56'>
         <Image
           alt='Banner'
           className='object-cover'
@@ -141,9 +145,13 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
           priority
           src='/banner.png'
         />
+        <div className='absolute inset-0 bg-black/50' />
       </div>
 
-      <section className='container relative z-10 mx-auto w-full max-w-6xl px-4 py-8 md:py-10'>
+      {/* Glow decorativo */}
+      <div className='pointer-events-none mx-auto max-w-6xl px-4 [background:radial-gradient(900px_400px_at_50%_-50%,rgba(16,185,129,0.15),transparent_60%)]' />
+
+      <section className='container relative z-10 mx-auto w-full max-w-6xl px-4 py-10'>
         <div className='grid grid-cols-1 items-center gap-8 md:grid-cols-2'>
           {/* Coluna esquerda: foto e detalhes */}
           <article className='flex flex-col items-center text-center'>
@@ -158,12 +166,12 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
             <h1 className='mb-2 font-bold text-2xl'>{clinic.name}</h1>
             <div className='mb-1 flex items-center gap-1'>
-              <MapPin className='h-5 w-5' />
+              <MapPin className='h-5 w-5 text-white' />
               <span>
                 {clinic.address ? clinic.address : 'Endereço não informado'}
               </span>
             </div>
-            <div className='text-muted-foreground'>
+            <div className='text-gray-300'>
               {clinic.phone && clinic.phone.length > 0
                 ? clinic.phone
                 : 'Telefone não informado'}
@@ -174,7 +182,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
           <div className='w-full'>
             <Form {...form}>
               <form
-                className='space-y-6 rounded-md border bg-white p-6 shadow-sm'
+                className='space-y-6 rounded-xl border border-zinc-800 bg-white/10 p-6 shadow-2xl backdrop-blur'
                 onSubmit={form.handleSubmit(handleRegisterAppointmnent)}
               >
                 <FormField
@@ -182,7 +190,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                   name='name'
                   render={({ field }) => (
                     <FormItem className='my-2'>
-                      <FormLabel className='font-semibold'>
+                      <FormLabel className='font-semibold text-white'>
                         Nome completo:
                       </FormLabel>
                       <FormControl>
@@ -202,7 +210,9 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                   name='email'
                   render={({ field }) => (
                     <FormItem className='my-2'>
-                      <FormLabel className='font-semibold'>Email:</FormLabel>
+                      <FormLabel className='font-semibold text-white'>
+                        Email:
+                      </FormLabel>
                       <FormControl>
                         <Input
                           id='email'
@@ -220,7 +230,9 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                   name='phone'
                   render={({ field }) => (
                     <FormItem className='my-2'>
-                      <FormLabel className='font-semibold'>Telefone:</FormLabel>
+                      <FormLabel className='font-semibold text-white'>
+                        Telefone:
+                      </FormLabel>
                       <FormControl>
                         <Input
                           {...field}
@@ -242,7 +254,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                   name='date'
                   render={({ field }) => (
                     <FormItem className='flex items-center gap-2 space-y-1'>
-                      <FormLabel className='font-semibold'>
+                      <FormLabel className='font-semibold text-white'>
                         Data do agendamento:
                       </FormLabel>
                       <FormControl>
@@ -267,7 +279,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                   name='serviceId'
                   render={({ field }) => (
                     <FormItem className=''>
-                      <FormLabel className='font-semibold'>
+                      <FormLabel className='font-semibold text-white'>
                         Selecione o serviço:
                       </FormLabel>
                       <FormControl>
@@ -298,7 +310,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
                 {selectedServiceId && (
                   <div className='space-y-2'>
-                    <Label className='font-semibold'>
+                    <Label className='font-semibold text-white'>
                       Horários disponíveis:
                     </Label>
                     <div className='rounded-lg bg-gray-100 p-4'>
@@ -334,7 +346,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
                 {clinic.status ? (
                   <Button
-                    className='w-full bg-black hover:bg-emerald-400'
+                    className='w-full bg-emerald-500 hover:bg-emerald-400'
                     disabled={
                       !(
                         watch('name') &&

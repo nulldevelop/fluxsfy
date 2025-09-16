@@ -18,17 +18,29 @@ interface ProfessionalsProps {
 
 export function Professionals({ professionals }: ProfessionalsProps) {
   return (
-    <section className='bg-zinc-900 py-16'>
-      <div className='container mx-auto px-4 sm:px-6 lg:px-8'>
-        {/* Título em branco para contraste */}
-        <h2 className='mb-12 text-center font-bold text-3xl text-white'>
-          Barbearias disponíveis
-        </h2>
+    <section
+      className='relative overflow-hidden bg-gradient-to-b from-zinc-900 via-zinc-900 to-zinc-950 py-16'
+      id='professionals'
+    >
+      {/* Glow radial decorativo */}
+      <div className='pointer-events-none absolute inset-0 opacity-70 [background:radial-gradient(1200px_600px_at_50%_-10%,rgba(16,185,129,0.18),transparent_60%)]' />
+
+      <div className='container relative z-10 mx-auto px-4 sm:px-6 lg:px-8'>
+        {/* Título com subtítulo */}
+        <div className='mx-auto mb-12 max-w-3xl text-center'>
+          <h2 className='font-bold text-3xl text-white md:text-4xl'>
+            Barbearias disponíveis
+          </h2>
+          <p className='mt-3 text-gray-300'>
+            Explore barbearias próximas de você com avaliações e planos em
+            destaque.
+          </p>
+        </div>
 
         <section className='grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4'>
           {professionals.map((clinic) => (
             <Card
-              className='overflow-hidden border border-zinc-700 bg-zinc-800 duration-200 hover:shadow-lg'
+              className='hover:-translate-y-1 overflow-hidden border border-zinc-700 bg-zinc-800 transition-all duration-200 hover:shadow-lg hover:ring-1 hover:ring-emerald-400/30'
               key={clinic.id}
             >
               <CardContent className='p-0'>

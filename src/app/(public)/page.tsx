@@ -4,7 +4,7 @@ import { Hero } from './_components/hero'
 import { Professionals } from './_components/professionals'
 import { getProfessionals } from './_data-access/get-professionals'
 
-export const revalidate = 120 // 2 minutes
+export const revalidate = 60 // 2 minutes
 
 export default async function Home() {
   const professionals = await getProfessionals()

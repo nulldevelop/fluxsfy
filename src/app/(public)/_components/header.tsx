@@ -19,7 +19,7 @@ export function Header() {
   const { data: session, status } = useSession()
   const [isOpen, setIsOpen] = useState(false)
 
-  const navItems = [{ href: '#profissionais', label: 'Profissionais' }]
+  const navItems = [{ href: '#professionals', label: 'Profissionais' }]
 
   async function handleLogin() {
     await handleRegister('google')
@@ -89,12 +89,14 @@ export function Header() {
           </SheetTrigger>
 
           <SheetContent
-            className='z-[9999] w-[240px] sm:w-[300px]'
+            className='z-[9999] w-[240px] border-zinc-800 border-l bg-zinc-900 text-white sm:w-[300px]'
             side='right'
           >
-            <SheetTitle>Menu</SheetTitle>
+            <SheetTitle className='text-white'>Menu</SheetTitle>
             <SheetHeader />
-            <SheetDescription>Veja nossos links</SheetDescription>
+            <SheetDescription className='text-gray-400'>
+              Veja nossos links
+            </SheetDescription>
 
             <nav className='mt-6 flex flex-col space-y-4'>
               <NavLinks />

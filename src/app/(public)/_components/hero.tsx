@@ -7,8 +7,14 @@ export function Hero() {
   async function handleLogin() {
     await handleRegister('google')
   }
+  function scrollToProfessionals() {
+    const el = document.getElementById('professionals')
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
   return (
-    <section className='relative h-[90vh] w-full overflow-hidden'>
+    <section className='relative h-[100vh] w-full overflow-hidden'>
       {/* Imagem de fundo */}
       <Image
         alt='Foto ilustrativa de barbearia'
@@ -34,7 +40,10 @@ export function Hero() {
           </p>
 
           <div className='flex items-center justify-center gap-4'>
-            <Button className='w-fit animate-zoomIn bg-emerald-500 px-6 py-3 font-semibold [animation-delay:500ms] hover:bg-emerald-400'>
+            <Button
+              className='w-fit animate-zoomIn bg-emerald-500 px-6 py-3 font-semibold [animation-delay:500ms] hover:bg-emerald-400'
+              onClick={scrollToProfessionals}
+            >
               Encontre um Profissional
             </Button>
 
