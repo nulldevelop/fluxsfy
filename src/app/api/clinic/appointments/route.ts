@@ -1,16 +1,9 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import { auth } from '@/lib/auth'
+import { authClient } from '@/lib/auth-client'
 import { prisma } from '@/lib/prisma'
 
-/*
-  Rota para buscar todos os agendamentos de uma clinica
-
-  > Preciso ter a data
-  > Preciso ter o id da clinica (NAO POSSO RECEBER DA ROTA req.params)
-*/
-
 export async function GET(request: NextRequest) {
-  const session = await auth()
+  const session = await authClient.getSession()
 
   if (!session) {
     return NextResponse.json(
@@ -21,7 +14,7 @@ export async function GET(request: NextRequest) {
 
   const searchParams = request.nextUrl.searchParams
   const dateString = searchParams.get('date') as string
-  const clinicId = session.user?.id
+  const clinicId = session.data?.user.id
 
   if (!dateString) {
     return NextResponse.json({ error: 'Data não informada!' }, { status: 400 })
