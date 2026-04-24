@@ -30,15 +30,20 @@ import { DateTimePicker } from './date-picker'
 import { type AppointmentFormData, useAppointmentForm } from './schedule-form'
 import { ScheduleTimeList } from './schedule-time-list'
 
-type UserWithServiceAndSubscription = Prisma.UserGetPayload<{
+type UserWithServiceAndSubscriptionAndStaff = Prisma.UserGetPayload<{
   include: {
     subscription: true
     services: true
+    staff: {
+      include: {
+        services: true
+      }
+    }
   }
 }>
 
 interface ScheduleContentProps {
-  clinic: UserWithServiceAndSubscription
+  clinic: UserWithServiceAndSubscriptionAndStaff
 }
 
 export interface TimeSlot {
@@ -48,26 +53,31 @@ export interface TimeSlot {
 
 export function ScheduleContent({ clinic }: ScheduleContentProps) {
   const form = useAppointmentForm()
-  const { watch } = form
+  const { watch, setValue } = form
   const router = useRouter()
 
   const selectedDate = watch('date')
   const selectedServiceId = watch('serviceId')
+  const selectedStaffId = watch('staffId')
 
   const [selectedTime, setSelectedTime] = useState('')
   const [availableTimeSlots, setAvailableTimeSlots] = useState<TimeSlot[]>([])
   const [loadingSlots, setLoadingSlots] = useState(false)
 
-  // Quais os horários bloqueados 01/02/2025 > ["15:00", "18:00"]
+  // Filter staff based on selected service
+  const filteredStaff = clinic.staff.filter((s) =>
+    s.services.some((service) => service.id === selectedServiceId)
+  )
+
   const [blockedTimes, setBlockedTimes] = useState<string[]>([])
 
   const fetchBlockedTimes = useCallback(
-    async (date: Date): Promise<string[]> => {
+    async (date: Date, staffId: string): Promise<string[]> => {
       setLoadingSlots(true)
       try {
         const dateString = date.toISOString().split('T')[0]
         const response = await fetch(
-          `/api/schedule/get-appointments?userId=${clinic.id}&date=${dateString}`
+          `/api/schedule/get-appointments?staffId=${staffId}&date=${dateString}`
         )
 
         const json = await response.json()
@@ -78,15 +88,16 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
         return []
       }
     },
-    [clinic.id]
+    []
   )
 
   useEffect(() => {
-    if (selectedDate) {
-      fetchBlockedTimes(selectedDate).then((blocked) => {
+    if (selectedDate && selectedStaffId) {
+      fetchBlockedTimes(selectedDate, selectedStaffId).then((blocked) => {
         setBlockedTimes(blocked)
 
-        const times = clinic.times || []
+        const staffMember = clinic.staff.find(s => s.id === selectedStaffId)
+        const times = (staffMember?.times as string[]) || []
 
         const finalSlots = times.map((time) => ({
           time,
@@ -95,7 +106,6 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
         setAvailableTimeSlots(finalSlots)
 
-        // Se o slot atual estiver indisponivel, limpamos a seleção
         const stillAvailable = finalSlots.find(
           (slot) => slot.time === selectedTime && slot.available
         )
@@ -104,21 +114,21 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
           setSelectedTime('')
         }
       })
+    } else {
+      setAvailableTimeSlots([])
+      setBlockedTimes([])
     }
-  }, [selectedDate, clinic.times, fetchBlockedTimes, selectedTime])
+  }, [selectedDate, selectedStaffId, clinic.staff, fetchBlockedTimes, selectedTime])
 
   async function handleRegisterAppointmnent(formData: AppointmentFormData) {
     if (!selectedTime) {
+      toast.error('Selecione um horário')
       return
     }
 
     const response = await createNewAppointment({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
+      ...formData,
       time: selectedTime,
-      date: formData.date,
-      serviceId: formData.serviceId,
       clinicId: clinic.id,
     })
 

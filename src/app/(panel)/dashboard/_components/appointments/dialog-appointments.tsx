@@ -38,8 +38,13 @@ export function DialogAppointment({ appointment }: DialogAppointmentProps) {
             <p className='font-semibold text-sm'>Email: {appointment.email}</p>
             <span className='mt-4 bg-gray-200 p-2 text-sm'>
               <p className=' rounded-md font-semibold'>
-                Seriço: {appointment.service.name}
+                Serviço: {appointment.service.name}
               </p>
+              {appointment.staff && (
+                <p className='font-semibold'>
+                  Profissional: {appointment.staff.name}
+                </p>
+              )}
               <p className='font-semibold text-sm'>
                 Valor: {formatCurrency(appointment.service.price / 100)}
               </p>

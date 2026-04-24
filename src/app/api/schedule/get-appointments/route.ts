@@ -5,9 +5,10 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
 
   const userId = searchParams.get('userId')
+  const staffId = searchParams.get('staffId')
   const dateParam = searchParams.get('date')
 
-  if (!(userId && dateParam)) {
+  if (!((userId || staffId) && dateParam)) {
     return NextResponse.json(
       {
         error: 'Nenhum agendamento encontrado',
@@ -20,30 +21,33 @@ export async function GET(request: NextRequest) {
     const [year, month, day] = dateParam.split('-').map(Number)
     const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0))
     const endDate = new Date(Date.UTC(year, month - 1, day, 23, 59, 59, 999))
-    const user = await prisma.user.findFirst({
-      where: {
-        id: userId,
+    
+    let availableTimes: string[] = []
+    let appointmentsWhere: any = {
+      appointmentDate: {
+        gte: startDate,
+        lte: endDate,
       },
-    })
-    if (!user) {
-      return NextResponse.json(
-        {
-          error: 'Nenhum agendamento encontrado',
-        },
-        {
-          status: 400,
-        }
-      )
+    }
+
+    if (staffId) {
+      const staff = await prisma.staff.findUnique({
+        where: { id: staffId },
+      })
+      if (!staff) return NextResponse.json([], { status: 404 })
+      availableTimes = staff.times as string[]
+      appointmentsWhere.staffId = staffId
+    } else {
+      const user = await prisma.user.findFirst({
+        where: { id: userId! },
+      })
+      if (!user) return NextResponse.json([], { status: 404 })
+      availableTimes = user.times as string[]
+      appointmentsWhere.userId = userId
     }
 
     const appointments = await prisma.appointment.findMany({
-      where: {
-        userId,
-        appointmentDate: {
-          gte: startDate,
-          lte: endDate,
-        },
-      },
+      where: appointmentsWhere,
       include: {
         service: true,
       },
@@ -51,14 +55,13 @@ export async function GET(request: NextRequest) {
 
     const blockedSlots = new Set<string>()
 
-    const userTimes = user.times as string[]
     for (const apt of appointments) {
       const requiredSlots = Math.ceil(apt.service.duration / 30)
-      const startIndex = userTimes.indexOf(apt.time)
+      const startIndex = availableTimes.indexOf(apt.time)
 
       if (startIndex !== -1) {
         for (let i = 0; i < requiredSlots; i++) {
-          const blokedSlot = userTimes[startIndex + i]
+          const blokedSlot = availableTimes[startIndex + i]
           if (blokedSlot) {
             blockedSlots.add(blokedSlot)
           }
@@ -66,9 +69,7 @@ export async function GET(request: NextRequest) {
       }
     }
 
-    const blockedTimes = Array.from(blockedSlots)
-
-    return NextResponse.json(blockedTimes)
+    return NextResponse.json(Array.from(blockedSlots))
   } catch {
     return NextResponse.json(
       {

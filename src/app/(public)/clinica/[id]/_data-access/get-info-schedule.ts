@@ -22,6 +22,14 @@ export async function getInfoSchedule({ userId }: { userId: string }) {
             status: true,
           },
         },
+        staff: {
+          where: {
+            status: true,
+          },
+          include: {
+            services: true,
+          },
+        },
       },
     })
 

@@ -9,6 +9,7 @@ const formSchema = z.object({
   phone: z.string().min(1, 'O telefone é obrigatório'),
   date: z.date(),
   serviceId: z.string().min(1, 'O serviço é obrigatório'),
+  staffId: z.string().min(1, 'O profissional é obrigatório'),
   time: z.string().min(1, 'O horário é obrigatório'),
   clinicId: z.string().min(1, 'O horário é obrigatório'),
 })
@@ -41,6 +42,7 @@ export async function createNewAppointment(formData: FormSchema) {
         time: formData.time,
         appointmentDate,
         serviceId: formData.serviceId,
+        staffId: formData.staffId,
         userId: formData.clinicId,
       },
     })

@@ -19,6 +19,7 @@ import { ButtonDatePicker } from './button-date'
 export type AppointmentWithService = Prisma.AppointmentGetPayload<{
   include: {
     service: true
+    staff: true
   }
 }>
 
@@ -119,7 +120,10 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
                       <div className='w-16 font-semibold text-sm'>{slot}</div>
                       <div className='flex-1 text-sm'>
                         <div className='font-semibold'>{occupant.name}</div>
-                        <div className='text-gray-500 text-sm'>
+                        <div className='text-gray-500 text-xs'>
+                          {occupant.service.name} {occupant.staff && `- ${occupant.staff.name}`}
+                        </div>
+                        <div className='text-gray-400 text-xs italic'>
                           {occupant.phone}
                         </div>
                       </div>
