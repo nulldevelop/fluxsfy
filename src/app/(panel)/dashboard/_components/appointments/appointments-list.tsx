@@ -16,7 +16,7 @@ import { cancelAppointment } from '../../_actions/cancel-appointment'
 import { DialogAppointment } from './dialog-appointments'
 import { ButtonDatePicker } from './button-date'
 
-export type AppointmentWithService = Prisma.AppointmentGetPayload<{
+export type AppointmentWithService = Prisma.appointmentGetPayload<{
   include: {
     service: true
     staff: true

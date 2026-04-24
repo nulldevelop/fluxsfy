@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     const endDate = new Date(Date.UTC(year, month - 1, day, 23, 59, 59, 999))
 
     let availableTimes: string[] = []
-    const appointmentsWhere: Prisma.AppointmentWhereInput = {
+    const appointmentsWhere: Prisma.appointmentWhereInput = {
       appointmentDate: {
         gte: startDate,
         lte: endDate,
