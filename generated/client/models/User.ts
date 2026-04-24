@@ -55,6 +55,7 @@ export type UserMinAggregateOutputType = {
   role: $Enums.Role | null
   latitude: number | null
   longitude: number | null
+  slug: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -74,6 +75,7 @@ export type UserMaxAggregateOutputType = {
   role: $Enums.Role | null
   latitude: number | null
   longitude: number | null
+  slug: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -94,6 +96,7 @@ export type UserCountAggregateOutputType = {
   role: number
   latitude: number
   longitude: number
+  slug: number
   _all: number
 }
 
@@ -127,6 +130,7 @@ export type UserMinAggregateInputType = {
   role?: true
   latitude?: true
   longitude?: true
+  slug?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -146,6 +150,7 @@ export type UserMaxAggregateInputType = {
   role?: true
   latitude?: true
   longitude?: true
+  slug?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -166,6 +171,7 @@ export type UserCountAggregateInputType = {
   role?: true
   latitude?: true
   longitude?: true
+  slug?: true
   _all?: true
 }
 
@@ -273,6 +279,7 @@ export type UserGroupByOutputType = {
   role: $Enums.Role
   latitude: number | null
   longitude: number | null
+  slug: string | null
   _count: UserCountAggregateOutputType | null
   _avg: UserAvgAggregateOutputType | null
   _sum: UserSumAggregateOutputType | null
@@ -316,6 +323,7 @@ export type UserWhereInput = {
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   latitude?: Prisma.FloatNullableFilter<"User"> | number | null
   longitude?: Prisma.FloatNullableFilter<"User"> | number | null
+  slug?: Prisma.StringNullableFilter<"User"> | string | null
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
   services?: Prisma.ServiceListRelationFilter
   reminders?: Prisma.ReminderListRelationFilter
@@ -342,6 +350,7 @@ export type UserOrderByWithRelationInput = {
   role?: Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   subscription?: Prisma.SubscriptionOrderByWithRelationInput
   services?: Prisma.ServiceOrderByRelationAggregateInput
   reminders?: Prisma.ReminderOrderByRelationAggregateInput
@@ -354,6 +363,7 @@ export type UserOrderByWithRelationInput = {
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  slug?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
@@ -378,7 +388,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   appointments?: Prisma.AppointmentListRelationFilter
   sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
-}, "id" | "email">
+}, "id" | "email" | "slug">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -398,6 +408,7 @@ export type UserOrderByWithAggregationInput = {
   role?: Prisma.SortOrder
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -426,6 +437,7 @@ export type UserScalarWhereWithAggregatesInput = {
   role?: Prisma.EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   latitude?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
   longitude?: Prisma.FloatNullableWithAggregatesFilter<"User"> | number | null
+  slug?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -446,6 +458,7 @@ export type UserCreateInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
@@ -472,6 +485,7 @@ export type UserUncheckedCreateInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
@@ -498,6 +512,7 @@ export type UserUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
@@ -524,6 +539,7 @@ export type UserUncheckedUpdateInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -550,6 +566,7 @@ export type UserCreateManyInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -570,6 +587,7 @@ export type UserUpdateManyMutationInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -590,6 +608,7 @@ export type UserUncheckedUpdateManyInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserScalarRelationFilter = {
@@ -621,6 +640,7 @@ export type UserCountOrderByAggregateInput = {
   role?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
 }
 
 export type UserAvgOrderByAggregateInput = {
@@ -646,6 +666,7 @@ export type UserMaxOrderByAggregateInput = {
   role?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -665,6 +686,7 @@ export type UserMinOrderByAggregateInput = {
   role?: Prisma.SortOrder
   latitude?: Prisma.SortOrder
   longitude?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
 }
 
 export type UserSumOrderByAggregateInput = {
@@ -791,6 +813,7 @@ export type UserCreateWithoutAppointmentsInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
@@ -816,6 +839,7 @@ export type UserUncheckedCreateWithoutAppointmentsInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
@@ -857,6 +881,7 @@ export type UserUpdateWithoutAppointmentsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
@@ -882,6 +907,7 @@ export type UserUncheckedUpdateWithoutAppointmentsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -907,6 +933,7 @@ export type UserCreateWithoutRemindersInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
@@ -932,6 +959,7 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -973,6 +1001,7 @@ export type UserUpdateWithoutRemindersInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
@@ -998,6 +1027,7 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -1023,6 +1053,7 @@ export type UserCreateWithoutServicesInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
@@ -1048,6 +1079,7 @@ export type UserUncheckedCreateWithoutServicesInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -1089,6 +1121,7 @@ export type UserUpdateWithoutServicesInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
@@ -1114,6 +1147,7 @@ export type UserUncheckedUpdateWithoutServicesInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -1139,6 +1173,7 @@ export type UserCreateWithoutSubscriptionInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
@@ -1164,6 +1199,7 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -1205,6 +1241,7 @@ export type UserUpdateWithoutSubscriptionInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
@@ -1230,6 +1267,7 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -1255,6 +1293,7 @@ export type UserCreateWithoutSessionsInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
@@ -1280,6 +1319,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1321,6 +1361,7 @@ export type UserUpdateWithoutSessionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
@@ -1346,6 +1387,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1371,6 +1413,7 @@ export type UserCreateWithoutAccountsInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
@@ -1396,6 +1439,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
+  slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
@@ -1437,6 +1481,7 @@ export type UserUpdateWithoutAccountsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
@@ -1462,6 +1507,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
@@ -1554,6 +1600,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   role?: boolean
   latitude?: boolean
   longitude?: boolean
+  slug?: boolean
   subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   services?: boolean | Prisma.User$servicesArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
@@ -1583,9 +1630,10 @@ export type UserSelectScalar = {
   role?: boolean
   latitude?: boolean
   longitude?: boolean
+  slug?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "address" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "times" | "rating" | "role" | "latitude" | "longitude", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "address" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "times" | "rating" | "role" | "latitude" | "longitude" | "slug", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   services?: boolean | Prisma.User$servicesArgs<ExtArgs>
@@ -1624,6 +1672,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     role: $Enums.Role
     latitude: number | null
     longitude: number | null
+    slug: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2016,6 +2065,7 @@ export interface UserFieldRefs {
   readonly role: Prisma.FieldRef<"User", 'Role'>
   readonly latitude: Prisma.FieldRef<"User", 'Float'>
   readonly longitude: Prisma.FieldRef<"User", 'Float'>
+  readonly slug: Prisma.FieldRef<"User", 'String'>
 }
     
 

@@ -1049,7 +1049,8 @@ export const UserScalarFieldEnum = {
   rating: 'rating',
   role: 'role',
   latitude: 'latitude',
-  longitude: 'longitude'
+  longitude: 'longitude',
+  slug: 'slug'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -1189,7 +1190,8 @@ export const UserOrderByRelevanceFieldEnum = {
   address: 'address',
   phone: 'phone',
   timeZone: 'timeZone',
-  stripe_customer_id: 'stripe_customer_id'
+  stripe_customer_id: 'stripe_customer_id',
+  slug: 'slug'
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]

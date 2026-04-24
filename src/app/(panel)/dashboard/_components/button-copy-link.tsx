@@ -4,10 +4,12 @@ import { LinkIcon } from 'lucide-react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 
-export function ButtonCopyLink({ userId }: { userId: string }) {
+export function ButtonCopyLink({ userId, slug }: { userId: string, slug?: string | null }) {
   async function handleCopyLink() {
+    const baseUrl = process.env.NEXT_PUBLIC_URL || window.location.origin
+    const identifier = slug || userId
     await navigator.clipboard.writeText(
-      `${process.env.NEXT_PUBLIC_URL}/clinica/${userId}`
+      `${baseUrl}/clinica/${identifier}`
     )
     toast.success('Link copiado com sucesso!')
   }

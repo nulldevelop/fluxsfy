@@ -23,14 +23,14 @@ export default async function Dashboard() {
       <div className='flex flex-col md:flex-row md:items-center justify-between gap-4'>
         <h1 className='font-bebas text-5xl text-primary tracking-widest'>PAINEL DE CONTROLE</h1>
         {subscription?.subscriptionStatus !== 'EXPIRED' && (
-          <div className='flex items-center space-x-2'>
-            <Link href={`/clinica/${session.user?.id}`} target='_blank'>
-              <Button variant="default" className='flex-1 md:flex-[0]'>
+          <div className='flex items-center justify-end space-x-2'>
+            <Link href={`/clinica/${session.user?.slug || session.user?.id}`} target='_blank'>
+              <Button className='flex-1 bg-emerald-500 hover:bg-emerald-400 md:flex-[0]'>
                 <Calendar className='h-5 w-5' />
                 <span>Minha Barbearia</span>
               </Button>
             </Link>
-            <ButtonCopyLink userId={session.user?.id} />
+            <ButtonCopyLink userId={session.user?.id} slug={session.user?.slug} />
           </div>
         )}
       </div>

@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation'
-import getSesion from '@/lib/getSession'
+import { getSession } from '@/lib/getSession'
 import { getSubs } from '@/utils/get-subs'
 import { GridPlans } from './_components/grid-plans'
 import { SubscriptionDetail } from './_components/subscription-detail'
 
 export default async function Plans() {
-  const session = await getSesion()
+  const session = await getSession()
 
   if (!session) {
     redirect('/')

@@ -1,5 +1,5 @@
 import { redirect } from 'next/navigation'
-import getSession from '@/lib/getSession'
+import { getSession } from '@/lib/getSession'
 import { OwnerUsers } from './_components/owner-users'
 
 export default async function OwnerPage() {
