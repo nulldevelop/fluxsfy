@@ -4,7 +4,7 @@
 // biome-ignore-all lint: generated file
 // @ts-nocheck 
 /*
- * This file exports the `Reminder` model and its related types.
+ * This file exports the `reminder` model and its related types.
  *
  * 🟢 You can import this file directly.
  */
@@ -13,10 +13,10 @@ import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
 /**
- * Model Reminder
+ * Model reminder
  * 
  */
-export type ReminderModel = runtime.Types.Result.DefaultSelection<Prisma.$ReminderPayload>
+export type reminderModel = runtime.Types.Result.DefaultSelection<Prisma.$reminderPayload>
 
 export type AggregateReminder = {
   _count: ReminderCountAggregateOutputType | null
@@ -77,37 +77,37 @@ export type ReminderCountAggregateInputType = {
 
 export type ReminderAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which Reminder to aggregate.
+   * Filter which reminder to aggregate.
    */
-  where?: Prisma.ReminderWhereInput
+  where?: Prisma.reminderWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Reminders to fetch.
+   * Determine the order of reminders to fetch.
    */
-  orderBy?: Prisma.ReminderOrderByWithRelationInput | Prisma.ReminderOrderByWithRelationInput[]
+  orderBy?: Prisma.reminderOrderByWithRelationInput | Prisma.reminderOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
    * Sets the start position
    */
-  cursor?: Prisma.ReminderWhereUniqueInput
+  cursor?: Prisma.reminderWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Reminders from the position of the cursor.
+   * Take `±n` reminders from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Reminders.
+   * Skip the first `n` reminders.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Count returned Reminders
+   * Count returned reminders
   **/
   _count?: true | ReminderCountAggregateInputType
   /**
@@ -135,11 +135,11 @@ export type GetReminderAggregateType<T extends ReminderAggregateArgs> = {
 
 
 
-export type ReminderGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ReminderWhereInput
-  orderBy?: Prisma.ReminderOrderByWithAggregationInput | Prisma.ReminderOrderByWithAggregationInput[]
+export type reminderGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.reminderWhereInput
+  orderBy?: Prisma.reminderOrderByWithAggregationInput | Prisma.reminderOrderByWithAggregationInput[]
   by: Prisma.ReminderScalarFieldEnum[] | Prisma.ReminderScalarFieldEnum
-  having?: Prisma.ReminderScalarWhereWithAggregatesInput
+  having?: Prisma.reminderScalarWhereWithAggregatesInput
   take?: number
   skip?: number
   _count?: ReminderCountAggregateInputType | true
@@ -158,7 +158,7 @@ export type ReminderGroupByOutputType = {
   _max: ReminderMaxAggregateOutputType | null
 }
 
-export type GetReminderGroupByPayload<T extends ReminderGroupByArgs> = Prisma.PrismaPromise<
+export type GetReminderGroupByPayload<T extends reminderGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<ReminderGroupByOutputType, T['by']> &
       {
@@ -173,87 +173,87 @@ export type GetReminderGroupByPayload<T extends ReminderGroupByArgs> = Prisma.Pr
 
 
 
-export type ReminderWhereInput = {
-  AND?: Prisma.ReminderWhereInput | Prisma.ReminderWhereInput[]
-  OR?: Prisma.ReminderWhereInput[]
-  NOT?: Prisma.ReminderWhereInput | Prisma.ReminderWhereInput[]
-  id?: Prisma.StringFilter<"Reminder"> | string
-  description?: Prisma.StringFilter<"Reminder"> | string
-  userId?: Prisma.StringFilter<"Reminder"> | string
-  createdAt?: Prisma.DateTimeFilter<"Reminder"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Reminder"> | Date | string
+export type reminderWhereInput = {
+  AND?: Prisma.reminderWhereInput | Prisma.reminderWhereInput[]
+  OR?: Prisma.reminderWhereInput[]
+  NOT?: Prisma.reminderWhereInput | Prisma.reminderWhereInput[]
+  id?: Prisma.StringFilter<"reminder"> | string
+  description?: Prisma.StringFilter<"reminder"> | string
+  userId?: Prisma.StringFilter<"reminder"> | string
+  createdAt?: Prisma.DateTimeFilter<"reminder"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"reminder"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
-export type ReminderOrderByWithRelationInput = {
+export type reminderOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  _relevance?: Prisma.ReminderOrderByRelevanceInput
+  _relevance?: Prisma.reminderOrderByRelevanceInput
 }
 
-export type ReminderWhereUniqueInput = Prisma.AtLeast<{
+export type reminderWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  AND?: Prisma.ReminderWhereInput | Prisma.ReminderWhereInput[]
-  OR?: Prisma.ReminderWhereInput[]
-  NOT?: Prisma.ReminderWhereInput | Prisma.ReminderWhereInput[]
-  description?: Prisma.StringFilter<"Reminder"> | string
-  userId?: Prisma.StringFilter<"Reminder"> | string
-  createdAt?: Prisma.DateTimeFilter<"Reminder"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Reminder"> | Date | string
+  AND?: Prisma.reminderWhereInput | Prisma.reminderWhereInput[]
+  OR?: Prisma.reminderWhereInput[]
+  NOT?: Prisma.reminderWhereInput | Prisma.reminderWhereInput[]
+  description?: Prisma.StringFilter<"reminder"> | string
+  userId?: Prisma.StringFilter<"reminder"> | string
+  createdAt?: Prisma.DateTimeFilter<"reminder"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"reminder"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }, "id">
 
-export type ReminderOrderByWithAggregationInput = {
+export type reminderOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  _count?: Prisma.ReminderCountOrderByAggregateInput
-  _max?: Prisma.ReminderMaxOrderByAggregateInput
-  _min?: Prisma.ReminderMinOrderByAggregateInput
+  _count?: Prisma.reminderCountOrderByAggregateInput
+  _max?: Prisma.reminderMaxOrderByAggregateInput
+  _min?: Prisma.reminderMinOrderByAggregateInput
 }
 
-export type ReminderScalarWhereWithAggregatesInput = {
-  AND?: Prisma.ReminderScalarWhereWithAggregatesInput | Prisma.ReminderScalarWhereWithAggregatesInput[]
-  OR?: Prisma.ReminderScalarWhereWithAggregatesInput[]
-  NOT?: Prisma.ReminderScalarWhereWithAggregatesInput | Prisma.ReminderScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Reminder"> | string
-  description?: Prisma.StringWithAggregatesFilter<"Reminder"> | string
-  userId?: Prisma.StringWithAggregatesFilter<"Reminder"> | string
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"Reminder"> | Date | string
-  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Reminder"> | Date | string
+export type reminderScalarWhereWithAggregatesInput = {
+  AND?: Prisma.reminderScalarWhereWithAggregatesInput | Prisma.reminderScalarWhereWithAggregatesInput[]
+  OR?: Prisma.reminderScalarWhereWithAggregatesInput[]
+  NOT?: Prisma.reminderScalarWhereWithAggregatesInput | Prisma.reminderScalarWhereWithAggregatesInput[]
+  id?: Prisma.StringWithAggregatesFilter<"reminder"> | string
+  description?: Prisma.StringWithAggregatesFilter<"reminder"> | string
+  userId?: Prisma.StringWithAggregatesFilter<"reminder"> | string
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"reminder"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"reminder"> | Date | string
 }
 
-export type ReminderCreateInput = {
-  id?: string
+export type reminderCreateInput = {
+  id: string
   description: string
   createdAt?: Date | string
-  updatedAt?: Date | string
-  user: Prisma.UserCreateNestedOneWithoutRemindersInput
+  updatedAt: Date | string
+  user: Prisma.UserCreateNestedOneWithoutReminderInput
 }
 
-export type ReminderUncheckedCreateInput = {
-  id?: string
+export type reminderUncheckedCreateInput = {
+  id: string
   description: string
   userId: string
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt: Date | string
 }
 
-export type ReminderUpdateInput = {
+export type reminderUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutRemindersNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutReminderNestedInput
 }
 
-export type ReminderUncheckedUpdateInput = {
+export type reminderUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -261,22 +261,22 @@ export type ReminderUncheckedUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ReminderCreateManyInput = {
-  id?: string
+export type reminderCreateManyInput = {
+  id: string
   description: string
   userId: string
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt: Date | string
 }
 
-export type ReminderUpdateManyMutationInput = {
+export type reminderUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ReminderUncheckedUpdateManyInput = {
+export type reminderUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -284,13 +284,23 @@ export type ReminderUncheckedUpdateManyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ReminderOrderByRelevanceInput = {
-  fields: Prisma.ReminderOrderByRelevanceFieldEnum | Prisma.ReminderOrderByRelevanceFieldEnum[]
+export type ReminderListRelationFilter = {
+  every?: Prisma.reminderWhereInput
+  some?: Prisma.reminderWhereInput
+  none?: Prisma.reminderWhereInput
+}
+
+export type reminderOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
+export type reminderOrderByRelevanceInput = {
+  fields: Prisma.reminderOrderByRelevanceFieldEnum | Prisma.reminderOrderByRelevanceFieldEnum[]
   sort: Prisma.SortOrder
   search: string
 }
 
-export type ReminderCountOrderByAggregateInput = {
+export type reminderCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -298,7 +308,7 @@ export type ReminderCountOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type ReminderMaxOrderByAggregateInput = {
+export type reminderMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -306,7 +316,7 @@ export type ReminderMaxOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type ReminderMinOrderByAggregateInput = {
+export type reminderMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   description?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -314,131 +324,121 @@ export type ReminderMinOrderByAggregateInput = {
   updatedAt?: Prisma.SortOrder
 }
 
-export type ReminderListRelationFilter = {
-  every?: Prisma.ReminderWhereInput
-  some?: Prisma.ReminderWhereInput
-  none?: Prisma.ReminderWhereInput
+export type reminderCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.reminderCreateWithoutUserInput, Prisma.reminderUncheckedCreateWithoutUserInput> | Prisma.reminderCreateWithoutUserInput[] | Prisma.reminderUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.reminderCreateOrConnectWithoutUserInput | Prisma.reminderCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.reminderCreateManyUserInputEnvelope
+  connect?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
 }
 
-export type ReminderOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
+export type reminderUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.reminderCreateWithoutUserInput, Prisma.reminderUncheckedCreateWithoutUserInput> | Prisma.reminderCreateWithoutUserInput[] | Prisma.reminderUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.reminderCreateOrConnectWithoutUserInput | Prisma.reminderCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.reminderCreateManyUserInputEnvelope
+  connect?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
 }
 
-export type ReminderCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.ReminderCreateWithoutUserInput, Prisma.ReminderUncheckedCreateWithoutUserInput> | Prisma.ReminderCreateWithoutUserInput[] | Prisma.ReminderUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.ReminderCreateOrConnectWithoutUserInput | Prisma.ReminderCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.ReminderCreateManyUserInputEnvelope
-  connect?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
+export type reminderUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.reminderCreateWithoutUserInput, Prisma.reminderUncheckedCreateWithoutUserInput> | Prisma.reminderCreateWithoutUserInput[] | Prisma.reminderUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.reminderCreateOrConnectWithoutUserInput | Prisma.reminderCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.reminderUpsertWithWhereUniqueWithoutUserInput | Prisma.reminderUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.reminderCreateManyUserInputEnvelope
+  set?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
+  disconnect?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
+  delete?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
+  connect?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
+  update?: Prisma.reminderUpdateWithWhereUniqueWithoutUserInput | Prisma.reminderUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.reminderUpdateManyWithWhereWithoutUserInput | Prisma.reminderUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.reminderScalarWhereInput | Prisma.reminderScalarWhereInput[]
 }
 
-export type ReminderUncheckedCreateNestedManyWithoutUserInput = {
-  create?: Prisma.XOR<Prisma.ReminderCreateWithoutUserInput, Prisma.ReminderUncheckedCreateWithoutUserInput> | Prisma.ReminderCreateWithoutUserInput[] | Prisma.ReminderUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.ReminderCreateOrConnectWithoutUserInput | Prisma.ReminderCreateOrConnectWithoutUserInput[]
-  createMany?: Prisma.ReminderCreateManyUserInputEnvelope
-  connect?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
+export type reminderUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.reminderCreateWithoutUserInput, Prisma.reminderUncheckedCreateWithoutUserInput> | Prisma.reminderCreateWithoutUserInput[] | Prisma.reminderUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.reminderCreateOrConnectWithoutUserInput | Prisma.reminderCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.reminderUpsertWithWhereUniqueWithoutUserInput | Prisma.reminderUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.reminderCreateManyUserInputEnvelope
+  set?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
+  disconnect?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
+  delete?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
+  connect?: Prisma.reminderWhereUniqueInput | Prisma.reminderWhereUniqueInput[]
+  update?: Prisma.reminderUpdateWithWhereUniqueWithoutUserInput | Prisma.reminderUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.reminderUpdateManyWithWhereWithoutUserInput | Prisma.reminderUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.reminderScalarWhereInput | Prisma.reminderScalarWhereInput[]
 }
 
-export type ReminderUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.ReminderCreateWithoutUserInput, Prisma.ReminderUncheckedCreateWithoutUserInput> | Prisma.ReminderCreateWithoutUserInput[] | Prisma.ReminderUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.ReminderCreateOrConnectWithoutUserInput | Prisma.ReminderCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.ReminderUpsertWithWhereUniqueWithoutUserInput | Prisma.ReminderUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.ReminderCreateManyUserInputEnvelope
-  set?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
-  disconnect?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
-  delete?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
-  connect?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
-  update?: Prisma.ReminderUpdateWithWhereUniqueWithoutUserInput | Prisma.ReminderUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.ReminderUpdateManyWithWhereWithoutUserInput | Prisma.ReminderUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.ReminderScalarWhereInput | Prisma.ReminderScalarWhereInput[]
-}
-
-export type ReminderUncheckedUpdateManyWithoutUserNestedInput = {
-  create?: Prisma.XOR<Prisma.ReminderCreateWithoutUserInput, Prisma.ReminderUncheckedCreateWithoutUserInput> | Prisma.ReminderCreateWithoutUserInput[] | Prisma.ReminderUncheckedCreateWithoutUserInput[]
-  connectOrCreate?: Prisma.ReminderCreateOrConnectWithoutUserInput | Prisma.ReminderCreateOrConnectWithoutUserInput[]
-  upsert?: Prisma.ReminderUpsertWithWhereUniqueWithoutUserInput | Prisma.ReminderUpsertWithWhereUniqueWithoutUserInput[]
-  createMany?: Prisma.ReminderCreateManyUserInputEnvelope
-  set?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
-  disconnect?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
-  delete?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
-  connect?: Prisma.ReminderWhereUniqueInput | Prisma.ReminderWhereUniqueInput[]
-  update?: Prisma.ReminderUpdateWithWhereUniqueWithoutUserInput | Prisma.ReminderUpdateWithWhereUniqueWithoutUserInput[]
-  updateMany?: Prisma.ReminderUpdateManyWithWhereWithoutUserInput | Prisma.ReminderUpdateManyWithWhereWithoutUserInput[]
-  deleteMany?: Prisma.ReminderScalarWhereInput | Prisma.ReminderScalarWhereInput[]
-}
-
-export type ReminderCreateWithoutUserInput = {
-  id?: string
+export type reminderCreateWithoutUserInput = {
+  id: string
   description: string
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt: Date | string
 }
 
-export type ReminderUncheckedCreateWithoutUserInput = {
-  id?: string
+export type reminderUncheckedCreateWithoutUserInput = {
+  id: string
   description: string
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt: Date | string
 }
 
-export type ReminderCreateOrConnectWithoutUserInput = {
-  where: Prisma.ReminderWhereUniqueInput
-  create: Prisma.XOR<Prisma.ReminderCreateWithoutUserInput, Prisma.ReminderUncheckedCreateWithoutUserInput>
+export type reminderCreateOrConnectWithoutUserInput = {
+  where: Prisma.reminderWhereUniqueInput
+  create: Prisma.XOR<Prisma.reminderCreateWithoutUserInput, Prisma.reminderUncheckedCreateWithoutUserInput>
 }
 
-export type ReminderCreateManyUserInputEnvelope = {
-  data: Prisma.ReminderCreateManyUserInput | Prisma.ReminderCreateManyUserInput[]
+export type reminderCreateManyUserInputEnvelope = {
+  data: Prisma.reminderCreateManyUserInput | Prisma.reminderCreateManyUserInput[]
   skipDuplicates?: boolean
 }
 
-export type ReminderUpsertWithWhereUniqueWithoutUserInput = {
-  where: Prisma.ReminderWhereUniqueInput
-  update: Prisma.XOR<Prisma.ReminderUpdateWithoutUserInput, Prisma.ReminderUncheckedUpdateWithoutUserInput>
-  create: Prisma.XOR<Prisma.ReminderCreateWithoutUserInput, Prisma.ReminderUncheckedCreateWithoutUserInput>
+export type reminderUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.reminderWhereUniqueInput
+  update: Prisma.XOR<Prisma.reminderUpdateWithoutUserInput, Prisma.reminderUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.reminderCreateWithoutUserInput, Prisma.reminderUncheckedCreateWithoutUserInput>
 }
 
-export type ReminderUpdateWithWhereUniqueWithoutUserInput = {
-  where: Prisma.ReminderWhereUniqueInput
-  data: Prisma.XOR<Prisma.ReminderUpdateWithoutUserInput, Prisma.ReminderUncheckedUpdateWithoutUserInput>
+export type reminderUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.reminderWhereUniqueInput
+  data: Prisma.XOR<Prisma.reminderUpdateWithoutUserInput, Prisma.reminderUncheckedUpdateWithoutUserInput>
 }
 
-export type ReminderUpdateManyWithWhereWithoutUserInput = {
-  where: Prisma.ReminderScalarWhereInput
-  data: Prisma.XOR<Prisma.ReminderUpdateManyMutationInput, Prisma.ReminderUncheckedUpdateManyWithoutUserInput>
+export type reminderUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.reminderScalarWhereInput
+  data: Prisma.XOR<Prisma.reminderUpdateManyMutationInput, Prisma.reminderUncheckedUpdateManyWithoutUserInput>
 }
 
-export type ReminderScalarWhereInput = {
-  AND?: Prisma.ReminderScalarWhereInput | Prisma.ReminderScalarWhereInput[]
-  OR?: Prisma.ReminderScalarWhereInput[]
-  NOT?: Prisma.ReminderScalarWhereInput | Prisma.ReminderScalarWhereInput[]
-  id?: Prisma.StringFilter<"Reminder"> | string
-  description?: Prisma.StringFilter<"Reminder"> | string
-  userId?: Prisma.StringFilter<"Reminder"> | string
-  createdAt?: Prisma.DateTimeFilter<"Reminder"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"Reminder"> | Date | string
+export type reminderScalarWhereInput = {
+  AND?: Prisma.reminderScalarWhereInput | Prisma.reminderScalarWhereInput[]
+  OR?: Prisma.reminderScalarWhereInput[]
+  NOT?: Prisma.reminderScalarWhereInput | Prisma.reminderScalarWhereInput[]
+  id?: Prisma.StringFilter<"reminder"> | string
+  description?: Prisma.StringFilter<"reminder"> | string
+  userId?: Prisma.StringFilter<"reminder"> | string
+  createdAt?: Prisma.DateTimeFilter<"reminder"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"reminder"> | Date | string
 }
 
-export type ReminderCreateManyUserInput = {
-  id?: string
+export type reminderCreateManyUserInput = {
+  id: string
   description: string
   createdAt?: Date | string
-  updatedAt?: Date | string
+  updatedAt: Date | string
 }
 
-export type ReminderUpdateWithoutUserInput = {
+export type reminderUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ReminderUncheckedUpdateWithoutUserInput = {
+export type reminderUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type ReminderUncheckedUpdateManyWithoutUserInput = {
+export type reminderUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -447,7 +447,7 @@ export type ReminderUncheckedUpdateManyWithoutUserInput = {
 
 
 
-export type ReminderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type reminderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   description?: boolean
   userId?: boolean
@@ -458,7 +458,7 @@ export type ReminderSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
 
 
 
-export type ReminderSelectScalar = {
+export type reminderSelectScalar = {
   id?: boolean
   description?: boolean
   userId?: boolean
@@ -466,13 +466,13 @@ export type ReminderSelectScalar = {
   updatedAt?: boolean
 }
 
-export type ReminderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "description" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["reminder"]>
-export type ReminderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "description" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["reminder"]>
+export type reminderInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
-export type $ReminderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  name: "Reminder"
+export type $reminderPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  name: "reminder"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
   }
@@ -486,18 +486,18 @@ export type $ReminderPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   composites: {}
 }
 
-export type ReminderGetPayload<S extends boolean | null | undefined | ReminderDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$ReminderPayload, S>
+export type reminderGetPayload<S extends boolean | null | undefined | reminderDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$reminderPayload, S>
 
-export type ReminderCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  Omit<ReminderFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+export type reminderCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  Omit<reminderFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
     select?: ReminderCountAggregateInputType | true
   }
 
-export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Reminder'], meta: { name: 'Reminder' } }
+export interface reminderDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['reminder'], meta: { name: 'reminder' } }
   /**
    * Find zero or one Reminder that matches the filter.
-   * @param {ReminderFindUniqueArgs} args - Arguments to find a Reminder
+   * @param {reminderFindUniqueArgs} args - Arguments to find a Reminder
    * @example
    * // Get one Reminder
    * const reminder = await prisma.reminder.findUnique({
@@ -506,12 +506,12 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    *   }
    * })
    */
-  findUnique<T extends ReminderFindUniqueArgs>(args: Prisma.SelectSubset<T, ReminderFindUniqueArgs<ExtArgs>>): Prisma.Prisma__ReminderClient<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findUnique<T extends reminderFindUniqueArgs>(args: Prisma.SelectSubset<T, reminderFindUniqueArgs<ExtArgs>>): Prisma.Prisma__reminderClient<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find one Reminder that matches the filter or throw an error with `error.code='P2025'`
    * if no matches were found.
-   * @param {ReminderFindUniqueOrThrowArgs} args - Arguments to find a Reminder
+   * @param {reminderFindUniqueOrThrowArgs} args - Arguments to find a Reminder
    * @example
    * // Get one Reminder
    * const reminder = await prisma.reminder.findUniqueOrThrow({
@@ -520,13 +520,13 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    *   }
    * })
    */
-  findUniqueOrThrow<T extends ReminderFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, ReminderFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__ReminderClient<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findUniqueOrThrow<T extends reminderFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, reminderFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__reminderClient<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first Reminder that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ReminderFindFirstArgs} args - Arguments to find a Reminder
+   * @param {reminderFindFirstArgs} args - Arguments to find a Reminder
    * @example
    * // Get one Reminder
    * const reminder = await prisma.reminder.findFirst({
@@ -535,14 +535,14 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    *   }
    * })
    */
-  findFirst<T extends ReminderFindFirstArgs>(args?: Prisma.SelectSubset<T, ReminderFindFirstArgs<ExtArgs>>): Prisma.Prisma__ReminderClient<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findFirst<T extends reminderFindFirstArgs>(args?: Prisma.SelectSubset<T, reminderFindFirstArgs<ExtArgs>>): Prisma.Prisma__reminderClient<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first Reminder that matches the filter or
    * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ReminderFindFirstOrThrowArgs} args - Arguments to find a Reminder
+   * @param {reminderFindFirstOrThrowArgs} args - Arguments to find a Reminder
    * @example
    * // Get one Reminder
    * const reminder = await prisma.reminder.findFirstOrThrow({
@@ -551,13 +551,13 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    *   }
    * })
    */
-  findFirstOrThrow<T extends ReminderFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, ReminderFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__ReminderClient<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findFirstOrThrow<T extends reminderFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, reminderFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__reminderClient<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find zero or more Reminders that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ReminderFindManyArgs} args - Arguments to filter and select certain fields only.
+   * @param {reminderFindManyArgs} args - Arguments to filter and select certain fields only.
    * @example
    * // Get all Reminders
    * const reminders = await prisma.reminder.findMany()
@@ -569,11 +569,11 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * const reminderWithIdOnly = await prisma.reminder.findMany({ select: { id: true } })
    * 
    */
-  findMany<T extends ReminderFindManyArgs>(args?: Prisma.SelectSubset<T, ReminderFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+  findMany<T extends reminderFindManyArgs>(args?: Prisma.SelectSubset<T, reminderFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
   /**
    * Create a Reminder.
-   * @param {ReminderCreateArgs} args - Arguments to create a Reminder.
+   * @param {reminderCreateArgs} args - Arguments to create a Reminder.
    * @example
    * // Create one Reminder
    * const Reminder = await prisma.reminder.create({
@@ -583,11 +583,11 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * })
    * 
    */
-  create<T extends ReminderCreateArgs>(args: Prisma.SelectSubset<T, ReminderCreateArgs<ExtArgs>>): Prisma.Prisma__ReminderClient<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  create<T extends reminderCreateArgs>(args: Prisma.SelectSubset<T, reminderCreateArgs<ExtArgs>>): Prisma.Prisma__reminderClient<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Create many Reminders.
-   * @param {ReminderCreateManyArgs} args - Arguments to create many Reminders.
+   * @param {reminderCreateManyArgs} args - Arguments to create many Reminders.
    * @example
    * // Create many Reminders
    * const reminder = await prisma.reminder.createMany({
@@ -597,11 +597,11 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * })
    *     
    */
-  createMany<T extends ReminderCreateManyArgs>(args?: Prisma.SelectSubset<T, ReminderCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  createMany<T extends reminderCreateManyArgs>(args?: Prisma.SelectSubset<T, reminderCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Delete a Reminder.
-   * @param {ReminderDeleteArgs} args - Arguments to delete one Reminder.
+   * @param {reminderDeleteArgs} args - Arguments to delete one Reminder.
    * @example
    * // Delete one Reminder
    * const Reminder = await prisma.reminder.delete({
@@ -611,11 +611,11 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * })
    * 
    */
-  delete<T extends ReminderDeleteArgs>(args: Prisma.SelectSubset<T, ReminderDeleteArgs<ExtArgs>>): Prisma.Prisma__ReminderClient<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  delete<T extends reminderDeleteArgs>(args: Prisma.SelectSubset<T, reminderDeleteArgs<ExtArgs>>): Prisma.Prisma__reminderClient<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Update one Reminder.
-   * @param {ReminderUpdateArgs} args - Arguments to update one Reminder.
+   * @param {reminderUpdateArgs} args - Arguments to update one Reminder.
    * @example
    * // Update one Reminder
    * const reminder = await prisma.reminder.update({
@@ -628,11 +628,11 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * })
    * 
    */
-  update<T extends ReminderUpdateArgs>(args: Prisma.SelectSubset<T, ReminderUpdateArgs<ExtArgs>>): Prisma.Prisma__ReminderClient<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  update<T extends reminderUpdateArgs>(args: Prisma.SelectSubset<T, reminderUpdateArgs<ExtArgs>>): Prisma.Prisma__reminderClient<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Delete zero or more Reminders.
-   * @param {ReminderDeleteManyArgs} args - Arguments to filter Reminders to delete.
+   * @param {reminderDeleteManyArgs} args - Arguments to filter Reminders to delete.
    * @example
    * // Delete a few Reminders
    * const { count } = await prisma.reminder.deleteMany({
@@ -642,13 +642,13 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * })
    * 
    */
-  deleteMany<T extends ReminderDeleteManyArgs>(args?: Prisma.SelectSubset<T, ReminderDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  deleteMany<T extends reminderDeleteManyArgs>(args?: Prisma.SelectSubset<T, reminderDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Update zero or more Reminders.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ReminderUpdateManyArgs} args - Arguments to update one or more rows.
+   * @param {reminderUpdateManyArgs} args - Arguments to update one or more rows.
    * @example
    * // Update many Reminders
    * const reminder = await prisma.reminder.updateMany({
@@ -661,11 +661,11 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * })
    * 
    */
-  updateMany<T extends ReminderUpdateManyArgs>(args: Prisma.SelectSubset<T, ReminderUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  updateMany<T extends reminderUpdateManyArgs>(args: Prisma.SelectSubset<T, reminderUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Create or update one Reminder.
-   * @param {ReminderUpsertArgs} args - Arguments to update or create a Reminder.
+   * @param {reminderUpsertArgs} args - Arguments to update or create a Reminder.
    * @example
    * // Update or create a Reminder
    * const reminder = await prisma.reminder.upsert({
@@ -680,14 +680,14 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    *   }
    * })
    */
-  upsert<T extends ReminderUpsertArgs>(args: Prisma.SelectSubset<T, ReminderUpsertArgs<ExtArgs>>): Prisma.Prisma__ReminderClient<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  upsert<T extends reminderUpsertArgs>(args: Prisma.SelectSubset<T, reminderUpsertArgs<ExtArgs>>): Prisma.Prisma__reminderClient<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
   /**
    * Count the number of Reminders.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ReminderCountArgs} args - Arguments to filter Reminders to count.
+   * @param {reminderCountArgs} args - Arguments to filter Reminders to count.
    * @example
    * // Count the number of Reminders
    * const count = await prisma.reminder.count({
@@ -696,8 +696,8 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    *   }
    * })
   **/
-  count<T extends ReminderCountArgs>(
-    args?: Prisma.Subset<T, ReminderCountArgs>,
+  count<T extends reminderCountArgs>(
+    args?: Prisma.Subset<T, reminderCountArgs>,
   ): Prisma.PrismaPromise<
     T extends runtime.Types.Utils.Record<'select', any>
       ? T['select'] extends true
@@ -736,7 +736,7 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * Group by Reminder.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {ReminderGroupByArgs} args - Group by arguments.
+   * @param {reminderGroupByArgs} args - Group by arguments.
    * @example
    * // Group by city, order by createdAt, get count
    * const result = await prisma.user.groupBy({
@@ -751,14 +751,14 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
    * 
   **/
   groupBy<
-    T extends ReminderGroupByArgs,
+    T extends reminderGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: ReminderGroupByArgs['orderBy'] }
-      : { orderBy?: ReminderGroupByArgs['orderBy'] },
+      ? { orderBy: reminderGroupByArgs['orderBy'] }
+      : { orderBy?: reminderGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
@@ -807,20 +807,20 @@ export interface ReminderDelegate<ExtArgs extends runtime.Types.Extensions.Inter
           ? never
           : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
       }[OrderFields]
-  >(args: Prisma.SubsetIntersection<T, ReminderGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReminderGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  >(args: Prisma.SubsetIntersection<T, reminderGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetReminderGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 /**
- * Fields of the Reminder model
+ * Fields of the reminder model
  */
-readonly fields: ReminderFieldRefs;
+readonly fields: reminderFieldRefs;
 }
 
 /**
- * The delegate class that acts as a "Promise-like" for Reminder.
+ * The delegate class that acts as a "Promise-like" for reminder.
  * Why is this prefixed with `Prisma__`?
  * Because we want to prevent naming conflicts as mentioned in
  * https://github.com/prisma/prisma-client-js/issues/707
  */
-export interface Prisma__ReminderClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+export interface Prisma__reminderClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
@@ -849,375 +849,375 @@ export interface Prisma__ReminderClient<T, Null = never, ExtArgs extends runtime
 
 
 /**
- * Fields of the Reminder model
+ * Fields of the reminder model
  */
-export interface ReminderFieldRefs {
-  readonly id: Prisma.FieldRef<"Reminder", 'String'>
-  readonly description: Prisma.FieldRef<"Reminder", 'String'>
-  readonly userId: Prisma.FieldRef<"Reminder", 'String'>
-  readonly createdAt: Prisma.FieldRef<"Reminder", 'DateTime'>
-  readonly updatedAt: Prisma.FieldRef<"Reminder", 'DateTime'>
+export interface reminderFieldRefs {
+  readonly id: Prisma.FieldRef<"reminder", 'String'>
+  readonly description: Prisma.FieldRef<"reminder", 'String'>
+  readonly userId: Prisma.FieldRef<"reminder", 'String'>
+  readonly createdAt: Prisma.FieldRef<"reminder", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"reminder", 'DateTime'>
 }
     
 
 // Custom InputTypes
 /**
- * Reminder findUnique
+ * reminder findUnique
  */
-export type ReminderFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
   /**
-   * Filter, which Reminder to fetch.
+   * Filter, which reminder to fetch.
    */
-  where: Prisma.ReminderWhereUniqueInput
+  where: Prisma.reminderWhereUniqueInput
 }
 
 /**
- * Reminder findUniqueOrThrow
+ * reminder findUniqueOrThrow
  */
-export type ReminderFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
   /**
-   * Filter, which Reminder to fetch.
+   * Filter, which reminder to fetch.
    */
-  where: Prisma.ReminderWhereUniqueInput
+  where: Prisma.reminderWhereUniqueInput
 }
 
 /**
- * Reminder findFirst
+ * reminder findFirst
  */
-export type ReminderFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
   /**
-   * Filter, which Reminder to fetch.
+   * Filter, which reminder to fetch.
    */
-  where?: Prisma.ReminderWhereInput
+  where?: Prisma.reminderWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Reminders to fetch.
+   * Determine the order of reminders to fetch.
    */
-  orderBy?: Prisma.ReminderOrderByWithRelationInput | Prisma.ReminderOrderByWithRelationInput[]
+  orderBy?: Prisma.reminderOrderByWithRelationInput | Prisma.reminderOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for Reminders.
+   * Sets the position for searching for reminders.
    */
-  cursor?: Prisma.ReminderWhereUniqueInput
+  cursor?: Prisma.reminderWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Reminders from the position of the cursor.
+   * Take `±n` reminders from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Reminders.
+   * Skip the first `n` reminders.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of Reminders.
+   * Filter by unique combinations of reminders.
    */
   distinct?: Prisma.ReminderScalarFieldEnum | Prisma.ReminderScalarFieldEnum[]
 }
 
 /**
- * Reminder findFirstOrThrow
+ * reminder findFirstOrThrow
  */
-export type ReminderFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
   /**
-   * Filter, which Reminder to fetch.
+   * Filter, which reminder to fetch.
    */
-  where?: Prisma.ReminderWhereInput
+  where?: Prisma.reminderWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Reminders to fetch.
+   * Determine the order of reminders to fetch.
    */
-  orderBy?: Prisma.ReminderOrderByWithRelationInput | Prisma.ReminderOrderByWithRelationInput[]
+  orderBy?: Prisma.reminderOrderByWithRelationInput | Prisma.reminderOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for Reminders.
+   * Sets the position for searching for reminders.
    */
-  cursor?: Prisma.ReminderWhereUniqueInput
+  cursor?: Prisma.reminderWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Reminders from the position of the cursor.
+   * Take `±n` reminders from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Reminders.
+   * Skip the first `n` reminders.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of Reminders.
+   * Filter by unique combinations of reminders.
    */
   distinct?: Prisma.ReminderScalarFieldEnum | Prisma.ReminderScalarFieldEnum[]
 }
 
 /**
- * Reminder findMany
+ * reminder findMany
  */
-export type ReminderFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
   /**
-   * Filter, which Reminders to fetch.
+   * Filter, which reminders to fetch.
    */
-  where?: Prisma.ReminderWhereInput
+  where?: Prisma.reminderWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Reminders to fetch.
+   * Determine the order of reminders to fetch.
    */
-  orderBy?: Prisma.ReminderOrderByWithRelationInput | Prisma.ReminderOrderByWithRelationInput[]
+  orderBy?: Prisma.reminderOrderByWithRelationInput | Prisma.reminderOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for listing Reminders.
+   * Sets the position for listing reminders.
    */
-  cursor?: Prisma.ReminderWhereUniqueInput
+  cursor?: Prisma.reminderWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Reminders from the position of the cursor.
+   * Take `±n` reminders from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Reminders.
+   * Skip the first `n` reminders.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of Reminders.
+   * Filter by unique combinations of reminders.
    */
   distinct?: Prisma.ReminderScalarFieldEnum | Prisma.ReminderScalarFieldEnum[]
 }
 
 /**
- * Reminder create
+ * reminder create
  */
-export type ReminderCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
   /**
-   * The data needed to create a Reminder.
+   * The data needed to create a reminder.
    */
-  data: Prisma.XOR<Prisma.ReminderCreateInput, Prisma.ReminderUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.reminderCreateInput, Prisma.reminderUncheckedCreateInput>
 }
 
 /**
- * Reminder createMany
+ * reminder createMany
  */
-export type ReminderCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to create many Reminders.
+   * The data used to create many reminders.
    */
-  data: Prisma.ReminderCreateManyInput | Prisma.ReminderCreateManyInput[]
+  data: Prisma.reminderCreateManyInput | Prisma.reminderCreateManyInput[]
   skipDuplicates?: boolean
 }
 
 /**
- * Reminder update
+ * reminder update
  */
-export type ReminderUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
   /**
-   * The data needed to update a Reminder.
+   * The data needed to update a reminder.
    */
-  data: Prisma.XOR<Prisma.ReminderUpdateInput, Prisma.ReminderUncheckedUpdateInput>
+  data: Prisma.XOR<Prisma.reminderUpdateInput, Prisma.reminderUncheckedUpdateInput>
   /**
-   * Choose, which Reminder to update.
+   * Choose, which reminder to update.
    */
-  where: Prisma.ReminderWhereUniqueInput
+  where: Prisma.reminderWhereUniqueInput
 }
 
 /**
- * Reminder updateMany
+ * reminder updateMany
  */
-export type ReminderUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to update Reminders.
+   * The data used to update reminders.
    */
-  data: Prisma.XOR<Prisma.ReminderUpdateManyMutationInput, Prisma.ReminderUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.reminderUpdateManyMutationInput, Prisma.reminderUncheckedUpdateManyInput>
   /**
-   * Filter which Reminders to update
+   * Filter which reminders to update
    */
-  where?: Prisma.ReminderWhereInput
+  where?: Prisma.reminderWhereInput
   /**
-   * Limit how many Reminders to update.
+   * Limit how many reminders to update.
    */
   limit?: number
 }
 
 /**
- * Reminder upsert
+ * reminder upsert
  */
-export type ReminderUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
   /**
-   * The filter to search for the Reminder to update in case it exists.
+   * The filter to search for the reminder to update in case it exists.
    */
-  where: Prisma.ReminderWhereUniqueInput
+  where: Prisma.reminderWhereUniqueInput
   /**
-   * In case the Reminder found by the `where` argument doesn't exist, create a new Reminder with this data.
+   * In case the reminder found by the `where` argument doesn't exist, create a new reminder with this data.
    */
-  create: Prisma.XOR<Prisma.ReminderCreateInput, Prisma.ReminderUncheckedCreateInput>
+  create: Prisma.XOR<Prisma.reminderCreateInput, Prisma.reminderUncheckedCreateInput>
   /**
-   * In case the Reminder was found with the provided `where` argument, update it with this data.
+   * In case the reminder was found with the provided `where` argument, update it with this data.
    */
-  update: Prisma.XOR<Prisma.ReminderUpdateInput, Prisma.ReminderUncheckedUpdateInput>
+  update: Prisma.XOR<Prisma.reminderUpdateInput, Prisma.reminderUncheckedUpdateInput>
 }
 
 /**
- * Reminder delete
+ * reminder delete
  */
-export type ReminderDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
   /**
-   * Filter which Reminder to delete.
+   * Filter which reminder to delete.
    */
-  where: Prisma.ReminderWhereUniqueInput
+  where: Prisma.reminderWhereUniqueInput
 }
 
 /**
- * Reminder deleteMany
+ * reminder deleteMany
  */
-export type ReminderDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which Reminders to delete
+   * Filter which reminders to delete
    */
-  where?: Prisma.ReminderWhereInput
+  where?: Prisma.reminderWhereInput
   /**
-   * Limit how many Reminders to delete.
+   * Limit how many reminders to delete.
    */
   limit?: number
 }
 
 /**
- * Reminder without action
+ * reminder without action
  */
-export type ReminderDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type reminderDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
+  include?: Prisma.reminderInclude<ExtArgs> | null
 }

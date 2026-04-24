@@ -324,13 +324,13 @@ export type UserWhereInput = {
   latitude?: Prisma.FloatNullableFilter<"User"> | number | null
   longitude?: Prisma.FloatNullableFilter<"User"> | number | null
   slug?: Prisma.StringNullableFilter<"User"> | string | null
-  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
-  staff?: Prisma.StaffListRelationFilter
-  services?: Prisma.ServiceListRelationFilter
-  reminders?: Prisma.ReminderListRelationFilter
-  appointments?: Prisma.AppointmentListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  appointment?: Prisma.AppointmentListRelationFilter
+  reminder?: Prisma.ReminderListRelationFilter
+  service?: Prisma.ServiceListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
+  staff?: Prisma.StaffListRelationFilter
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.subscriptionWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -352,13 +352,13 @@ export type UserOrderByWithRelationInput = {
   latitude?: Prisma.SortOrderInput | Prisma.SortOrder
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   slug?: Prisma.SortOrderInput | Prisma.SortOrder
-  subscription?: Prisma.SubscriptionOrderByWithRelationInput
-  staff?: Prisma.StaffOrderByRelationAggregateInput
-  services?: Prisma.ServiceOrderByRelationAggregateInput
-  reminders?: Prisma.ReminderOrderByRelationAggregateInput
-  appointments?: Prisma.AppointmentOrderByRelationAggregateInput
-  sessions?: Prisma.SessionOrderByRelationAggregateInput
   accounts?: Prisma.AccountOrderByRelationAggregateInput
+  appointment?: Prisma.appointmentOrderByRelationAggregateInput
+  reminder?: Prisma.reminderOrderByRelationAggregateInput
+  service?: Prisma.serviceOrderByRelationAggregateInput
+  sessions?: Prisma.SessionOrderByRelationAggregateInput
+  staff?: Prisma.StaffOrderByRelationAggregateInput
+  subscription?: Prisma.subscriptionOrderByWithRelationInput
   _relevance?: Prisma.UserOrderByRelevanceInput
 }
 
@@ -384,13 +384,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   role?: Prisma.EnumRoleFilter<"User"> | $Enums.Role
   latitude?: Prisma.FloatNullableFilter<"User"> | number | null
   longitude?: Prisma.FloatNullableFilter<"User"> | number | null
-  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
-  staff?: Prisma.StaffListRelationFilter
-  services?: Prisma.ServiceListRelationFilter
-  reminders?: Prisma.ReminderListRelationFilter
-  appointments?: Prisma.AppointmentListRelationFilter
-  sessions?: Prisma.SessionListRelationFilter
   accounts?: Prisma.AccountListRelationFilter
+  appointment?: Prisma.AppointmentListRelationFilter
+  reminder?: Prisma.ReminderListRelationFilter
+  service?: Prisma.ServiceListRelationFilter
+  sessions?: Prisma.SessionListRelationFilter
+  staff?: Prisma.StaffListRelationFilter
+  subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.subscriptionWhereInput> | null
 }, "id" | "email" | "slug">
 
 export type UserOrderByWithAggregationInput = {
@@ -456,19 +456,19 @@ export type UserCreateInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -484,19 +484,19 @@ export type UserUncheckedCreateInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
-  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderUncheckedCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -518,13 +518,13 @@ export type UserUpdateInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -546,13 +546,13 @@ export type UserUncheckedUpdateInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUncheckedUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUncheckedUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -568,7 +568,7 @@ export type UserCreateManyInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -616,11 +616,6 @@ export type UserUncheckedUpdateManyInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-}
-
-export type UserScalarRelationFilter = {
-  is?: Prisma.UserWhereInput
-  isNot?: Prisma.UserWhereInput
 }
 
 export type UserOrderByRelevanceInput = {
@@ -702,60 +697,33 @@ export type UserSumOrderByAggregateInput = {
   longitude?: Prisma.SortOrder
 }
 
-export type UserCreateNestedOneWithoutAppointmentsInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAppointmentsInput, Prisma.UserUncheckedCreateWithoutAppointmentsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAppointmentsInput
-  connect?: Prisma.UserWhereUniqueInput
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
-export type UserUpdateOneRequiredWithoutAppointmentsNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutAppointmentsInput, Prisma.UserUncheckedCreateWithoutAppointmentsInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAppointmentsInput
-  upsert?: Prisma.UserUpsertWithoutAppointmentsInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAppointmentsInput, Prisma.UserUpdateWithoutAppointmentsInput>, Prisma.UserUncheckedUpdateWithoutAppointmentsInput>
+export type StringFieldUpdateOperationsInput = {
+  set?: string
 }
 
-export type UserCreateNestedOneWithoutRemindersInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutRemindersInput, Prisma.UserUncheckedCreateWithoutRemindersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRemindersInput
-  connect?: Prisma.UserWhereUniqueInput
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
-export type UserUpdateOneRequiredWithoutRemindersNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutRemindersInput, Prisma.UserUncheckedCreateWithoutRemindersInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutRemindersInput
-  upsert?: Prisma.UserUpsertWithoutRemindersInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutRemindersInput, Prisma.UserUpdateWithoutRemindersInput>, Prisma.UserUncheckedUpdateWithoutRemindersInput>
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
 }
 
-export type UserCreateNestedOneWithoutServicesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutServicesInput, Prisma.UserUncheckedCreateWithoutServicesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServicesInput
-  connect?: Prisma.UserWhereUniqueInput
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
 }
 
-export type UserUpdateOneRequiredWithoutServicesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutServicesInput, Prisma.UserUncheckedCreateWithoutServicesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServicesInput
-  upsert?: Prisma.UserUpsertWithoutServicesInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutServicesInput, Prisma.UserUpdateWithoutServicesInput>, Prisma.UserUncheckedUpdateWithoutServicesInput>
-}
-
-export type UserCreateNestedOneWithoutSubscriptionInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
-export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionInput
-  upsert?: Prisma.UserUpsertWithoutSubscriptionInput
-  connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionInput, Prisma.UserUpdateWithoutSubscriptionInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
 }
 
 export type EnumRoleFieldUpdateOperationsInput = {
@@ -812,500 +780,60 @@ export type UserUpdateOneRequiredWithoutAccountsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountsInput, Prisma.UserUpdateWithoutAccountsInput>, Prisma.UserUncheckedUpdateWithoutAccountsInput>
 }
 
-export type UserCreateWithoutAppointmentsInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string | null
-  createdAt: Date | string
-  updatedAt: Date | string
-  address?: string | null
-  phone?: string | null
-  status?: boolean
-  timeZone?: string | null
-  stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: number
-  role?: $Enums.Role
-  latitude?: number | null
-  longitude?: number | null
-  slug?: string | null
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+export type UserCreateNestedOneWithoutAppointmentInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAppointmentInput, Prisma.UserUncheckedCreateWithoutAppointmentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAppointmentInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUncheckedCreateWithoutAppointmentsInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string | null
-  createdAt: Date | string
-  updatedAt: Date | string
-  address?: string | null
-  phone?: string | null
-  status?: boolean
-  timeZone?: string | null
-  stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: number
-  role?: $Enums.Role
-  latitude?: number | null
-  longitude?: number | null
-  slug?: string | null
-  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+export type UserUpdateOneRequiredWithoutAppointmentNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAppointmentInput, Prisma.UserUncheckedCreateWithoutAppointmentInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAppointmentInput
+  upsert?: Prisma.UserUpsertWithoutAppointmentInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAppointmentInput, Prisma.UserUpdateWithoutAppointmentInput>, Prisma.UserUncheckedUpdateWithoutAppointmentInput>
 }
 
-export type UserCreateOrConnectWithoutAppointmentsInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutAppointmentsInput, Prisma.UserUncheckedCreateWithoutAppointmentsInput>
+export type UserCreateNestedOneWithoutReminderInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReminderInput, Prisma.UserUncheckedCreateWithoutReminderInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReminderInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpsertWithoutAppointmentsInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutAppointmentsInput, Prisma.UserUncheckedUpdateWithoutAppointmentsInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutAppointmentsInput, Prisma.UserUncheckedCreateWithoutAppointmentsInput>
-  where?: Prisma.UserWhereInput
+export type UserUpdateOneRequiredWithoutReminderNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReminderInput, Prisma.UserUncheckedCreateWithoutReminderInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReminderInput
+  upsert?: Prisma.UserUpsertWithoutReminderInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReminderInput, Prisma.UserUpdateWithoutReminderInput>, Prisma.UserUncheckedUpdateWithoutReminderInput>
 }
 
-export type UserUpdateToOneWithWhereWithoutAppointmentsInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutAppointmentsInput, Prisma.UserUncheckedUpdateWithoutAppointmentsInput>
+export type UserCreateNestedOneWithoutServiceInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutServiceInput, Prisma.UserUncheckedCreateWithoutServiceInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServiceInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateWithoutAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+export type UserUpdateOneRequiredWithoutServiceNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutServiceInput, Prisma.UserUncheckedCreateWithoutServiceInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutServiceInput
+  upsert?: Prisma.UserUpsertWithoutServiceInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutServiceInput, Prisma.UserUpdateWithoutServiceInput>, Prisma.UserUncheckedUpdateWithoutServiceInput>
 }
 
-export type UserUncheckedUpdateWithoutAppointmentsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+export type UserCreateNestedOneWithoutSubscriptionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionInput
+  connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserCreateWithoutRemindersInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string | null
-  createdAt: Date | string
-  updatedAt: Date | string
-  address?: string | null
-  phone?: string | null
-  status?: boolean
-  timeZone?: string | null
-  stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: number
-  role?: $Enums.Role
-  latitude?: number | null
-  longitude?: number | null
-  slug?: string | null
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutRemindersInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string | null
-  createdAt: Date | string
-  updatedAt: Date | string
-  address?: string | null
-  phone?: string | null
-  status?: boolean
-  timeZone?: string | null
-  stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: number
-  role?: $Enums.Role
-  latitude?: number | null
-  longitude?: number | null
-  slug?: string | null
-  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutRemindersInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutRemindersInput, Prisma.UserUncheckedCreateWithoutRemindersInput>
-}
-
-export type UserUpsertWithoutRemindersInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutRemindersInput, Prisma.UserUncheckedUpdateWithoutRemindersInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutRemindersInput, Prisma.UserUncheckedCreateWithoutRemindersInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutRemindersInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutRemindersInput, Prisma.UserUncheckedUpdateWithoutRemindersInput>
-}
-
-export type UserUpdateWithoutRemindersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutRemindersInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutServicesInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string | null
-  createdAt: Date | string
-  updatedAt: Date | string
-  address?: string | null
-  phone?: string | null
-  status?: boolean
-  timeZone?: string | null
-  stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: number
-  role?: $Enums.Role
-  latitude?: number | null
-  longitude?: number | null
-  slug?: string | null
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutServicesInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string | null
-  createdAt: Date | string
-  updatedAt: Date | string
-  address?: string | null
-  phone?: string | null
-  status?: boolean
-  timeZone?: string | null
-  stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: number
-  role?: $Enums.Role
-  latitude?: number | null
-  longitude?: number | null
-  slug?: string | null
-  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutServicesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutServicesInput, Prisma.UserUncheckedCreateWithoutServicesInput>
-}
-
-export type UserUpsertWithoutServicesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutServicesInput, Prisma.UserUncheckedUpdateWithoutServicesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutServicesInput, Prisma.UserUncheckedCreateWithoutServicesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutServicesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutServicesInput, Prisma.UserUncheckedUpdateWithoutServicesInput>
-}
-
-export type UserUpdateWithoutServicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutServicesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutSubscriptionInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string | null
-  createdAt: Date | string
-  updatedAt: Date | string
-  address?: string | null
-  phone?: string | null
-  status?: boolean
-  timeZone?: string | null
-  stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: number
-  role?: $Enums.Role
-  latitude?: number | null
-  longitude?: number | null
-  slug?: string | null
-  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutSubscriptionInput = {
-  id: string
-  name: string
-  email: string
-  emailVerified: boolean
-  image?: string | null
-  createdAt: Date | string
-  updatedAt: Date | string
-  address?: string | null
-  phone?: string | null
-  status?: boolean
-  timeZone?: string | null
-  stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: number
-  role?: $Enums.Role
-  latitude?: number | null
-  longitude?: number | null
-  slug?: string | null
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
-  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutSubscriptionInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
-}
-
-export type UserUpsertWithoutSubscriptionInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionInput, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutSubscriptionInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionInput, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
-}
-
-export type UserUpdateWithoutSubscriptionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutSubscriptionInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
-  rating?: Prisma.IntFieldUpdateOperationsInput | number
-  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
-  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
-  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
-  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSubscriptionInput
+  upsert?: Prisma.UserUpsertWithoutSubscriptionInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionInput, Prisma.UserUpdateWithoutSubscriptionInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
 }
 
 export type UserCreateWithoutStaffInput = {
@@ -1321,18 +849,18 @@ export type UserCreateWithoutStaffInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
-  services?: Prisma.ServiceCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutStaffInput = {
@@ -1348,18 +876,18 @@ export type UserUncheckedCreateWithoutStaffInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
-  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
-  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
-  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderUncheckedCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutStaffInput = {
@@ -1397,12 +925,12 @@ export type UserUpdateWithoutStaffInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
-  services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutStaffInput = {
@@ -1424,12 +952,12 @@ export type UserUncheckedUpdateWithoutStaffInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-  services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
-  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUncheckedUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUncheckedUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -1445,18 +973,18 @@ export type UserCreateWithoutSessionsInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -1472,18 +1000,18 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
-  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
   accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderUncheckedCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceUncheckedCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -1521,12 +1049,12 @@ export type UserUpdateWithoutSessionsInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -1548,12 +1076,12 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUncheckedUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUncheckedUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUncheckedUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUncheckedUpdateOneWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAccountsInput = {
@@ -1569,18 +1097,18 @@ export type UserCreateWithoutAccountsInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
-  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionCreateNestedOneWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -1596,18 +1124,18 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
-  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
-  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
-  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
-  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderUncheckedCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionUncheckedCreateNestedOneWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -1645,12 +1173,12 @@ export type UserUpdateWithoutAccountsInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUpdateOneWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -1672,12 +1200,508 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
-  services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
-  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
-  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUncheckedUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUncheckedUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAppointmentInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutAppointmentInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderUncheckedCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutAppointmentInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAppointmentInput, Prisma.UserUncheckedCreateWithoutAppointmentInput>
+}
+
+export type UserUpsertWithoutAppointmentInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAppointmentInput, Prisma.UserUncheckedUpdateWithoutAppointmentInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAppointmentInput, Prisma.UserUncheckedCreateWithoutAppointmentInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAppointmentInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAppointmentInput, Prisma.UserUncheckedUpdateWithoutAppointmentInput>
+}
+
+export type UserUpdateWithoutAppointmentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAppointmentInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUncheckedUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutReminderInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutReminderInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutReminderInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutReminderInput, Prisma.UserUncheckedCreateWithoutReminderInput>
+}
+
+export type UserUpsertWithoutReminderInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReminderInput, Prisma.UserUncheckedUpdateWithoutReminderInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReminderInput, Prisma.UserUncheckedCreateWithoutReminderInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReminderInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReminderInput, Prisma.UserUncheckedUpdateWithoutReminderInput>
+}
+
+export type UserUpdateWithoutReminderInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReminderInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUncheckedUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutServiceInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionCreateNestedOneWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutServiceInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
+  subscription?: Prisma.subscriptionUncheckedCreateNestedOneWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutServiceInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutServiceInput, Prisma.UserUncheckedCreateWithoutServiceInput>
+}
+
+export type UserUpsertWithoutServiceInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutServiceInput, Prisma.UserUncheckedUpdateWithoutServiceInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutServiceInput, Prisma.UserUncheckedCreateWithoutServiceInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutServiceInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutServiceInput, Prisma.UserUncheckedUpdateWithoutServiceInput>
+}
+
+export type UserUpdateWithoutServiceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUpdateOneWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutServiceInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUncheckedUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
+  subscription?: Prisma.subscriptionUncheckedUpdateOneWithoutUserNestedInput
+}
+
+export type UserCreateWithoutSubscriptionInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutSubscriptionInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutUserInput
+  reminder?: Prisma.reminderUncheckedCreateNestedManyWithoutUserInput
+  service?: Prisma.serviceUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutSubscriptionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+}
+
+export type UserUpsertWithoutSubscriptionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionInput, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSubscriptionInput, Prisma.UserUncheckedCreateWithoutSubscriptionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSubscriptionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSubscriptionInput, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
+}
+
+export type UserUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSubscriptionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  appointment?: Prisma.appointmentUncheckedUpdateManyWithoutUserNestedInput
+  reminder?: Prisma.reminderUncheckedUpdateManyWithoutUserNestedInput
+  service?: Prisma.serviceUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1686,21 +1710,21 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
  */
 
 export type UserCountOutputType = {
-  staff: number
-  services: number
-  reminders: number
-  appointments: number
-  sessions: number
   accounts: number
+  appointment: number
+  reminder: number
+  service: number
+  sessions: number
+  staff: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  staff?: boolean | UserCountOutputTypeCountStaffArgs
-  services?: boolean | UserCountOutputTypeCountServicesArgs
-  reminders?: boolean | UserCountOutputTypeCountRemindersArgs
-  appointments?: boolean | UserCountOutputTypeCountAppointmentsArgs
-  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
   accounts?: boolean | UserCountOutputTypeCountAccountsArgs
+  appointment?: boolean | UserCountOutputTypeCountAppointmentArgs
+  reminder?: boolean | UserCountOutputTypeCountReminderArgs
+  service?: boolean | UserCountOutputTypeCountServiceArgs
+  sessions?: boolean | UserCountOutputTypeCountSessionsArgs
+  staff?: boolean | UserCountOutputTypeCountStaffArgs
 }
 
 /**
@@ -1716,29 +1740,29 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountStaffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.StaffWhereInput
+export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccountWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountServicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ServiceWhereInput
+export type UserCountOutputTypeCountAppointmentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.appointmentWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountRemindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.ReminderWhereInput
+export type UserCountOutputTypeCountReminderArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.reminderWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountAppointmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AppointmentWhereInput
+export type UserCountOutputTypeCountServiceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.serviceWhereInput
 }
 
 /**
@@ -1751,8 +1775,8 @@ export type UserCountOutputTypeCountSessionsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountAccountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AccountWhereInput
+export type UserCountOutputTypeCountStaffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StaffWhereInput
 }
 
 
@@ -1775,13 +1799,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   latitude?: boolean
   longitude?: boolean
   slug?: boolean
-  subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
-  staff?: boolean | Prisma.User$staffArgs<ExtArgs>
-  services?: boolean | Prisma.User$servicesArgs<ExtArgs>
-  reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
-  appointments?: boolean | Prisma.User$appointmentsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  appointment?: boolean | Prisma.User$appointmentArgs<ExtArgs>
+  reminder?: boolean | Prisma.User$reminderArgs<ExtArgs>
+  service?: boolean | Prisma.User$serviceArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  staff?: boolean | Prisma.User$staffArgs<ExtArgs>
+  subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1810,26 +1834,26 @@ export type UserSelectScalar = {
 
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "address" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "times" | "rating" | "role" | "latitude" | "longitude" | "slug", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
-  staff?: boolean | Prisma.User$staffArgs<ExtArgs>
-  services?: boolean | Prisma.User$servicesArgs<ExtArgs>
-  reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
-  appointments?: boolean | Prisma.User$appointmentsArgs<ExtArgs>
-  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
   accounts?: boolean | Prisma.User$accountsArgs<ExtArgs>
+  appointment?: boolean | Prisma.User$appointmentArgs<ExtArgs>
+  reminder?: boolean | Prisma.User$reminderArgs<ExtArgs>
+  service?: boolean | Prisma.User$serviceArgs<ExtArgs>
+  sessions?: boolean | Prisma.User$sessionsArgs<ExtArgs>
+  staff?: boolean | Prisma.User$staffArgs<ExtArgs>
+  subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
-    staff: Prisma.$StaffPayload<ExtArgs>[]
-    services: Prisma.$ServicePayload<ExtArgs>[]
-    reminders: Prisma.$ReminderPayload<ExtArgs>[]
-    appointments: Prisma.$AppointmentPayload<ExtArgs>[]
-    sessions: Prisma.$SessionPayload<ExtArgs>[]
     accounts: Prisma.$AccountPayload<ExtArgs>[]
+    appointment: Prisma.$appointmentPayload<ExtArgs>[]
+    reminder: Prisma.$reminderPayload<ExtArgs>[]
+    service: Prisma.$servicePayload<ExtArgs>[]
+    sessions: Prisma.$SessionPayload<ExtArgs>[]
+    staff: Prisma.$StaffPayload<ExtArgs>[]
+    subscription: Prisma.$subscriptionPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2190,13 +2214,13 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  subscription<T extends Prisma.User$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  staff<T extends Prisma.User$staffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$staffArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  services<T extends Prisma.User$servicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  reminders<T extends Prisma.User$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  appointments<T extends Prisma.User$appointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   accounts<T extends Prisma.User$accountsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$accountsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  appointment<T extends Prisma.User$appointmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$appointmentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$appointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  reminder<T extends Prisma.User$reminderArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reminderArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$reminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  service<T extends Prisma.User$serviceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$serviceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$servicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sessions<T extends Prisma.User$sessionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  staff<T extends Prisma.User$staffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$staffArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  subscription<T extends Prisma.User$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionArgs<ExtArgs>>): Prisma.Prisma__subscriptionClient<runtime.Types.Result.GetResult<Prisma.$subscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2592,118 +2616,99 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.subscription
+ * User.accounts
  */
-export type User$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Subscription
+   * Select specific fields to fetch from the Account
    */
-  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  select?: Prisma.AccountSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Subscription
+   * Omit specific fields from the Account
    */
-  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  omit?: Prisma.AccountOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SubscriptionInclude<ExtArgs> | null
-  where?: Prisma.SubscriptionWhereInput
-}
-
-/**
- * User.staff
- */
-export type User$staffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Staff
-   */
-  select?: Prisma.StaffSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Staff
-   */
-  omit?: Prisma.StaffOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.StaffInclude<ExtArgs> | null
-  where?: Prisma.StaffWhereInput
-  orderBy?: Prisma.StaffOrderByWithRelationInput | Prisma.StaffOrderByWithRelationInput[]
-  cursor?: Prisma.StaffWhereUniqueInput
+  include?: Prisma.AccountInclude<ExtArgs> | null
+  where?: Prisma.AccountWhereInput
+  orderBy?: Prisma.AccountOrderByWithRelationInput | Prisma.AccountOrderByWithRelationInput[]
+  cursor?: Prisma.AccountWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.StaffScalarFieldEnum | Prisma.StaffScalarFieldEnum[]
+  distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
 }
 
 /**
- * User.services
+ * User.appointment
  */
-export type User$servicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$appointmentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Service
+   * Select specific fields to fetch from the appointment
    */
-  select?: Prisma.ServiceSelect<ExtArgs> | null
+  select?: Prisma.appointmentSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Service
+   * Omit specific fields from the appointment
    */
-  omit?: Prisma.ServiceOmit<ExtArgs> | null
+  omit?: Prisma.appointmentOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ServiceInclude<ExtArgs> | null
-  where?: Prisma.ServiceWhereInput
-  orderBy?: Prisma.ServiceOrderByWithRelationInput | Prisma.ServiceOrderByWithRelationInput[]
-  cursor?: Prisma.ServiceWhereUniqueInput
+  include?: Prisma.appointmentInclude<ExtArgs> | null
+  where?: Prisma.appointmentWhereInput
+  orderBy?: Prisma.appointmentOrderByWithRelationInput | Prisma.appointmentOrderByWithRelationInput[]
+  cursor?: Prisma.appointmentWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ServiceScalarFieldEnum | Prisma.ServiceScalarFieldEnum[]
+  distinct?: Prisma.AppointmentScalarFieldEnum | Prisma.AppointmentScalarFieldEnum[]
 }
 
 /**
- * User.reminders
+ * User.reminder
  */
-export type User$remindersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$reminderArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Reminder
+   * Select specific fields to fetch from the reminder
    */
-  select?: Prisma.ReminderSelect<ExtArgs> | null
+  select?: Prisma.reminderSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Reminder
+   * Omit specific fields from the reminder
    */
-  omit?: Prisma.ReminderOmit<ExtArgs> | null
+  omit?: Prisma.reminderOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.ReminderInclude<ExtArgs> | null
-  where?: Prisma.ReminderWhereInput
-  orderBy?: Prisma.ReminderOrderByWithRelationInput | Prisma.ReminderOrderByWithRelationInput[]
-  cursor?: Prisma.ReminderWhereUniqueInput
+  include?: Prisma.reminderInclude<ExtArgs> | null
+  where?: Prisma.reminderWhereInput
+  orderBy?: Prisma.reminderOrderByWithRelationInput | Prisma.reminderOrderByWithRelationInput[]
+  cursor?: Prisma.reminderWhereUniqueInput
   take?: number
   skip?: number
   distinct?: Prisma.ReminderScalarFieldEnum | Prisma.ReminderScalarFieldEnum[]
 }
 
 /**
- * User.appointments
+ * User.service
  */
-export type User$appointmentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$serviceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Appointment
+   * Select specific fields to fetch from the service
    */
-  select?: Prisma.AppointmentSelect<ExtArgs> | null
+  select?: Prisma.serviceSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Appointment
+   * Omit specific fields from the service
    */
-  omit?: Prisma.AppointmentOmit<ExtArgs> | null
+  omit?: Prisma.serviceOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AppointmentInclude<ExtArgs> | null
-  where?: Prisma.AppointmentWhereInput
-  orderBy?: Prisma.AppointmentOrderByWithRelationInput | Prisma.AppointmentOrderByWithRelationInput[]
-  cursor?: Prisma.AppointmentWhereUniqueInput
+  include?: Prisma.serviceInclude<ExtArgs> | null
+  where?: Prisma.serviceWhereInput
+  orderBy?: Prisma.serviceOrderByWithRelationInput | Prisma.serviceOrderByWithRelationInput[]
+  cursor?: Prisma.serviceWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.AppointmentScalarFieldEnum | Prisma.AppointmentScalarFieldEnum[]
+  distinct?: Prisma.ServiceScalarFieldEnum | Prisma.ServiceScalarFieldEnum[]
 }
 
 /**
@@ -2731,27 +2736,46 @@ export type User$sessionsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * User.accounts
+ * User.staff
  */
-export type User$accountsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$staffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Account
+   * Select specific fields to fetch from the Staff
    */
-  select?: Prisma.AccountSelect<ExtArgs> | null
+  select?: Prisma.StaffSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Account
+   * Omit specific fields from the Staff
    */
-  omit?: Prisma.AccountOmit<ExtArgs> | null
+  omit?: Prisma.StaffOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.AccountInclude<ExtArgs> | null
-  where?: Prisma.AccountWhereInput
-  orderBy?: Prisma.AccountOrderByWithRelationInput | Prisma.AccountOrderByWithRelationInput[]
-  cursor?: Prisma.AccountWhereUniqueInput
+  include?: Prisma.StaffInclude<ExtArgs> | null
+  where?: Prisma.StaffWhereInput
+  orderBy?: Prisma.StaffOrderByWithRelationInput | Prisma.StaffOrderByWithRelationInput[]
+  cursor?: Prisma.StaffWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+  distinct?: Prisma.StaffScalarFieldEnum | Prisma.StaffScalarFieldEnum[]
+}
+
+/**
+ * User.subscription
+ */
+export type User$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the subscription
+   */
+  select?: Prisma.subscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the subscription
+   */
+  omit?: Prisma.subscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.subscriptionInclude<ExtArgs> | null
+  where?: Prisma.subscriptionWhereInput
 }
 
 /**

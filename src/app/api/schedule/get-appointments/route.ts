@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server'
+import type { Prisma } from '@/generated/client/client'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
@@ -21,9 +22,9 @@ export async function GET(request: NextRequest) {
     const [year, month, day] = dateParam.split('-').map(Number)
     const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0))
     const endDate = new Date(Date.UTC(year, month - 1, day, 23, 59, 59, 999))
-    
+
     let availableTimes: string[] = []
-    let appointmentsWhere: any = {
+    const appointmentsWhere: Prisma.AppointmentWhereInput = {
       appointmentDate: {
         gte: startDate,
         lte: endDate,
@@ -34,16 +35,20 @@ export async function GET(request: NextRequest) {
       const staff = await prisma.staff.findUnique({
         where: { id: staffId },
       })
-      if (!staff) return NextResponse.json([], { status: 404 })
+      if (!staff) {
+        return NextResponse.json([], { status: 404 })
+      }
       availableTimes = staff.times as string[]
-      appointmentsWhere.staffId = staffId
+      appointmentsWhere.staffId = staffId as string
     } else {
       const user = await prisma.user.findFirst({
         where: { id: userId! },
       })
-      if (!user) return NextResponse.json([], { status: 404 })
+      if (!user) {
+        return NextResponse.json([], { status: 404 })
+      }
       availableTimes = user.times as string[]
-      appointmentsWhere.userId = userId
+      appointmentsWhere.userId = userId as string
     }
 
     const appointments = await prisma.appointment.findMany({

@@ -33,7 +33,7 @@ type StaffFormData = z.infer<typeof staffSchema>
 interface DialogStaffProps {
   closeModal: () => void
   services: Service[]
-  initialValues?: Staff & { services: Service[] }
+  initialValues?: Staff & { service: Service[] }
   staffId?: string
 }
 
@@ -48,7 +48,7 @@ export function DialogStaff({ closeModal, services, initialValues, staffId }: Di
     defaultValues: {
       name: initialValues?.name ?? '',
       phone: initialValues?.phone ?? '',
-      services: initialValues?.services.map(s => s.id) ?? [],
+      services: initialValues?.service.map(s => s.id) ?? [],
       status: initialValues?.status ?? true,
     },
   })

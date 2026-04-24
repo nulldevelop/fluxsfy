@@ -9,7 +9,7 @@ export function ButtonCopyLink({ userId, slug }: { userId: string, slug?: string
     const baseUrl = process.env.NEXT_PUBLIC_URL || window.location.origin
     const identifier = slug || userId
     await navigator.clipboard.writeText(
-      `${baseUrl}/clinica/${identifier}`
+      `${baseUrl}/barbearia/${identifier}`
     )
     toast.success('Link copiado com sucesso!')
   }

@@ -64,12 +64,12 @@ export async function updateProfile(formData: FormSchema) {
 
     revalidatePath('/dashboard/profile')
     return {
-      data: 'Clinica atualizada com sucesso!',
+      data: 'Barbearia atualizada com sucesso!',
     }
   } catch (err) {
     console.warn(err)
     return {
-      error: 'Falha ao atualizar a clinica!',
+      error: 'Falha ao atualizar a barbearia!',
     }
   }
 }

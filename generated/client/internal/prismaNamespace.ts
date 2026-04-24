@@ -384,15 +384,15 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 
 export const ModelName = {
-  Appointment: 'Appointment',
-  Reminder: 'Reminder',
-  Service: 'Service',
-  Subscription: 'Subscription',
   User: 'User',
   Staff: 'Staff',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  appointment: 'appointment',
+  reminder: 'reminder',
+  service: 'service',
+  subscription: 'subscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,274 +408,10 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "appointment" | "reminder" | "service" | "subscription" | "user" | "staff" | "session" | "account" | "verification"
+    modelProps: "user" | "staff" | "session" | "account" | "verification" | "appointment" | "reminder" | "service" | "subscription"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
-    Appointment: {
-      payload: Prisma.$AppointmentPayload<ExtArgs>
-      fields: Prisma.AppointmentFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.AppointmentFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppointmentPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.AppointmentFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppointmentPayload>
-        }
-        findFirst: {
-          args: Prisma.AppointmentFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppointmentPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.AppointmentFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppointmentPayload>
-        }
-        findMany: {
-          args: Prisma.AppointmentFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppointmentPayload>[]
-        }
-        create: {
-          args: Prisma.AppointmentCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppointmentPayload>
-        }
-        createMany: {
-          args: Prisma.AppointmentCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.AppointmentDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppointmentPayload>
-        }
-        update: {
-          args: Prisma.AppointmentUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppointmentPayload>
-        }
-        deleteMany: {
-          args: Prisma.AppointmentDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.AppointmentUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.AppointmentUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AppointmentPayload>
-        }
-        aggregate: {
-          args: Prisma.AppointmentAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAppointment>
-        }
-        groupBy: {
-          args: Prisma.AppointmentGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AppointmentGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.AppointmentCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AppointmentCountAggregateOutputType> | number
-        }
-      }
-    }
-    Reminder: {
-      payload: Prisma.$ReminderPayload<ExtArgs>
-      fields: Prisma.ReminderFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ReminderFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReminderPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ReminderFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReminderPayload>
-        }
-        findFirst: {
-          args: Prisma.ReminderFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReminderPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ReminderFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReminderPayload>
-        }
-        findMany: {
-          args: Prisma.ReminderFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReminderPayload>[]
-        }
-        create: {
-          args: Prisma.ReminderCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReminderPayload>
-        }
-        createMany: {
-          args: Prisma.ReminderCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.ReminderDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReminderPayload>
-        }
-        update: {
-          args: Prisma.ReminderUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReminderPayload>
-        }
-        deleteMany: {
-          args: Prisma.ReminderDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ReminderUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.ReminderUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ReminderPayload>
-        }
-        aggregate: {
-          args: Prisma.ReminderAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateReminder>
-        }
-        groupBy: {
-          args: Prisma.ReminderGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ReminderGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ReminderCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ReminderCountAggregateOutputType> | number
-        }
-      }
-    }
-    Service: {
-      payload: Prisma.$ServicePayload<ExtArgs>
-      fields: Prisma.ServiceFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.ServiceFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServicePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.ServiceFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServicePayload>
-        }
-        findFirst: {
-          args: Prisma.ServiceFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServicePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.ServiceFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServicePayload>
-        }
-        findMany: {
-          args: Prisma.ServiceFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServicePayload>[]
-        }
-        create: {
-          args: Prisma.ServiceCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServicePayload>
-        }
-        createMany: {
-          args: Prisma.ServiceCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.ServiceDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServicePayload>
-        }
-        update: {
-          args: Prisma.ServiceUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServicePayload>
-        }
-        deleteMany: {
-          args: Prisma.ServiceDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.ServiceUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.ServiceUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$ServicePayload>
-        }
-        aggregate: {
-          args: Prisma.ServiceAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateService>
-        }
-        groupBy: {
-          args: Prisma.ServiceGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ServiceGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.ServiceCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.ServiceCountAggregateOutputType> | number
-        }
-      }
-    }
-    Subscription: {
-      payload: Prisma.$SubscriptionPayload<ExtArgs>
-      fields: Prisma.SubscriptionFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.SubscriptionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.SubscriptionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-        }
-        findFirst: {
-          args: Prisma.SubscriptionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.SubscriptionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-        }
-        findMany: {
-          args: Prisma.SubscriptionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>[]
-        }
-        create: {
-          args: Prisma.SubscriptionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-        }
-        createMany: {
-          args: Prisma.SubscriptionCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        delete: {
-          args: Prisma.SubscriptionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-        }
-        update: {
-          args: Prisma.SubscriptionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-        }
-        deleteMany: {
-          args: Prisma.SubscriptionDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.SubscriptionUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        upsert: {
-          args: Prisma.SubscriptionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$SubscriptionPayload>
-        }
-        aggregate: {
-          args: Prisma.SubscriptionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateSubscription>
-        }
-        groupBy: {
-          args: Prisma.SubscriptionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SubscriptionGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.SubscriptionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.SubscriptionCountAggregateOutputType> | number
-        }
-      }
-    }
     User: {
       payload: Prisma.$UserPayload<ExtArgs>
       fields: Prisma.UserFieldRefs
@@ -1006,6 +742,270 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    appointment: {
+      payload: Prisma.$appointmentPayload<ExtArgs>
+      fields: Prisma.appointmentFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.appointmentFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$appointmentPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.appointmentFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$appointmentPayload>
+        }
+        findFirst: {
+          args: Prisma.appointmentFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$appointmentPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.appointmentFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$appointmentPayload>
+        }
+        findMany: {
+          args: Prisma.appointmentFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$appointmentPayload>[]
+        }
+        create: {
+          args: Prisma.appointmentCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$appointmentPayload>
+        }
+        createMany: {
+          args: Prisma.appointmentCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.appointmentDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$appointmentPayload>
+        }
+        update: {
+          args: Prisma.appointmentUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$appointmentPayload>
+        }
+        deleteMany: {
+          args: Prisma.appointmentDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.appointmentUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.appointmentUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$appointmentPayload>
+        }
+        aggregate: {
+          args: Prisma.AppointmentAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAppointment>
+        }
+        groupBy: {
+          args: Prisma.appointmentGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AppointmentGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.appointmentCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AppointmentCountAggregateOutputType> | number
+        }
+      }
+    }
+    reminder: {
+      payload: Prisma.$reminderPayload<ExtArgs>
+      fields: Prisma.reminderFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.reminderFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$reminderPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.reminderFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$reminderPayload>
+        }
+        findFirst: {
+          args: Prisma.reminderFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$reminderPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.reminderFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$reminderPayload>
+        }
+        findMany: {
+          args: Prisma.reminderFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$reminderPayload>[]
+        }
+        create: {
+          args: Prisma.reminderCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$reminderPayload>
+        }
+        createMany: {
+          args: Prisma.reminderCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.reminderDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$reminderPayload>
+        }
+        update: {
+          args: Prisma.reminderUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$reminderPayload>
+        }
+        deleteMany: {
+          args: Prisma.reminderDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.reminderUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.reminderUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$reminderPayload>
+        }
+        aggregate: {
+          args: Prisma.ReminderAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateReminder>
+        }
+        groupBy: {
+          args: Prisma.reminderGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReminderGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.reminderCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ReminderCountAggregateOutputType> | number
+        }
+      }
+    }
+    service: {
+      payload: Prisma.$servicePayload<ExtArgs>
+      fields: Prisma.serviceFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.serviceFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$servicePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.serviceFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$servicePayload>
+        }
+        findFirst: {
+          args: Prisma.serviceFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$servicePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.serviceFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$servicePayload>
+        }
+        findMany: {
+          args: Prisma.serviceFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$servicePayload>[]
+        }
+        create: {
+          args: Prisma.serviceCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$servicePayload>
+        }
+        createMany: {
+          args: Prisma.serviceCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.serviceDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$servicePayload>
+        }
+        update: {
+          args: Prisma.serviceUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$servicePayload>
+        }
+        deleteMany: {
+          args: Prisma.serviceDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.serviceUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.serviceUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$servicePayload>
+        }
+        aggregate: {
+          args: Prisma.ServiceAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateService>
+        }
+        groupBy: {
+          args: Prisma.serviceGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.serviceCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ServiceCountAggregateOutputType> | number
+        }
+      }
+    }
+    subscription: {
+      payload: Prisma.$subscriptionPayload<ExtArgs>
+      fields: Prisma.subscriptionFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.subscriptionFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$subscriptionPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.subscriptionFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$subscriptionPayload>
+        }
+        findFirst: {
+          args: Prisma.subscriptionFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$subscriptionPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.subscriptionFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$subscriptionPayload>
+        }
+        findMany: {
+          args: Prisma.subscriptionFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$subscriptionPayload>[]
+        }
+        create: {
+          args: Prisma.subscriptionCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$subscriptionPayload>
+        }
+        createMany: {
+          args: Prisma.subscriptionCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        delete: {
+          args: Prisma.subscriptionDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$subscriptionPayload>
+        }
+        update: {
+          args: Prisma.subscriptionUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$subscriptionPayload>
+        }
+        deleteMany: {
+          args: Prisma.subscriptionDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.subscriptionUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        upsert: {
+          args: Prisma.subscriptionUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$subscriptionPayload>
+        }
+        aggregate: {
+          args: Prisma.SubscriptionAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSubscription>
+        }
+        groupBy: {
+          args: Prisma.subscriptionGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubscriptionGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.subscriptionCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SubscriptionCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1043,61 +1043,6 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-export const AppointmentScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  appointmentDate: 'appointmentDate',
-  time: 'time',
-  serviceId: 'serviceId',
-  userId: 'userId',
-  staffId: 'staffId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type AppointmentScalarFieldEnum = (typeof AppointmentScalarFieldEnum)[keyof typeof AppointmentScalarFieldEnum]
-
-
-export const ReminderScalarFieldEnum = {
-  id: 'id',
-  description: 'description',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ReminderScalarFieldEnum = (typeof ReminderScalarFieldEnum)[keyof typeof ReminderScalarFieldEnum]
-
-
-export const ServiceScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  price: 'price',
-  duration: 'duration',
-  status: 'status',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
-
-
-export const SubscriptionScalarFieldEnum = {
-  id: 'id',
-  status: 'status',
-  plan: 'plan',
-  priceId: 'priceId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
-} as const
-
-export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -1184,6 +1129,61 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const AppointmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  appointmentDate: 'appointmentDate',
+  time: 'time',
+  serviceId: 'serviceId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  staffId: 'staffId'
+} as const
+
+export type AppointmentScalarFieldEnum = (typeof AppointmentScalarFieldEnum)[keyof typeof AppointmentScalarFieldEnum]
+
+
+export const ReminderScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReminderScalarFieldEnum = (typeof ReminderScalarFieldEnum)[keyof typeof ReminderScalarFieldEnum]
+
+
+export const ServiceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  duration: 'duration',
+  status: 'status',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
+
+
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  plan: 'plan',
+  priceId: 'priceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1197,56 +1197,6 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const AppointmentOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  time: 'time',
-  serviceId: 'serviceId',
-  userId: 'userId',
-  staffId: 'staffId'
-} as const
-
-export type AppointmentOrderByRelevanceFieldEnum = (typeof AppointmentOrderByRelevanceFieldEnum)[keyof typeof AppointmentOrderByRelevanceFieldEnum]
-
-
-export const ReminderOrderByRelevanceFieldEnum = {
-  id: 'id',
-  description: 'description',
-  userId: 'userId'
-} as const
-
-export type ReminderOrderByRelevanceFieldEnum = (typeof ReminderOrderByRelevanceFieldEnum)[keyof typeof ReminderOrderByRelevanceFieldEnum]
-
-
-export const ServiceOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  userId: 'userId'
-} as const
-
-export type ServiceOrderByRelevanceFieldEnum = (typeof ServiceOrderByRelevanceFieldEnum)[keyof typeof ServiceOrderByRelevanceFieldEnum]
-
-
-export const SubscriptionOrderByRelevanceFieldEnum = {
-  id: 'id',
-  status: 'status',
-  priceId: 'priceId',
-  userId: 'userId'
-} as const
-
-export type SubscriptionOrderByRelevanceFieldEnum = (typeof SubscriptionOrderByRelevanceFieldEnum)[keyof typeof SubscriptionOrderByRelevanceFieldEnum]
 
 
 export const JsonNullValueFilter = {
@@ -1264,6 +1214,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const UserOrderByRelevanceFieldEnum = {
@@ -1327,6 +1285,48 @@ export const VerificationOrderByRelevanceFieldEnum = {
 export type VerificationOrderByRelevanceFieldEnum = (typeof VerificationOrderByRelevanceFieldEnum)[keyof typeof VerificationOrderByRelevanceFieldEnum]
 
 
+export const appointmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  time: 'time',
+  serviceId: 'serviceId',
+  userId: 'userId',
+  staffId: 'staffId'
+} as const
+
+export type appointmentOrderByRelevanceFieldEnum = (typeof appointmentOrderByRelevanceFieldEnum)[keyof typeof appointmentOrderByRelevanceFieldEnum]
+
+
+export const reminderOrderByRelevanceFieldEnum = {
+  id: 'id',
+  description: 'description',
+  userId: 'userId'
+} as const
+
+export type reminderOrderByRelevanceFieldEnum = (typeof reminderOrderByRelevanceFieldEnum)[keyof typeof reminderOrderByRelevanceFieldEnum]
+
+
+export const serviceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId'
+} as const
+
+export type serviceOrderByRelevanceFieldEnum = (typeof serviceOrderByRelevanceFieldEnum)[keyof typeof serviceOrderByRelevanceFieldEnum]
+
+
+export const subscriptionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  status: 'status',
+  priceId: 'priceId',
+  userId: 'userId'
+} as const
+
+export type subscriptionOrderByRelevanceFieldEnum = (typeof subscriptionOrderByRelevanceFieldEnum)[keyof typeof subscriptionOrderByRelevanceFieldEnum]
+
+
 
 /**
  * Field references
@@ -1341,20 +1341,6 @@ export type StringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 
 
 
 /**
- * Reference to a field of type 'DateTime'
- */
-export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
-    
-
-
-/**
- * Reference to a field of type 'Int'
- */
-export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
-    
-
-
-/**
  * Reference to a field of type 'Boolean'
  */
 export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
@@ -1362,9 +1348,9 @@ export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
- * Reference to a field of type 'Plan'
+ * Reference to a field of type 'DateTime'
  */
-export type EnumPlanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Plan'>
+export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
@@ -1383,6 +1369,13 @@ export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
 
 
 /**
+ * Reference to a field of type 'Int'
+ */
+export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
+    
+
+
+/**
  * Reference to a field of type 'Role'
  */
 export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
@@ -1393,6 +1386,13 @@ export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel
  * Reference to a field of type 'Float'
  */
 export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+/**
+ * Reference to a field of type 'subscription_plan'
+ */
+export type Enumsubscription_planFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'subscription_plan'>
     
 
 /**
@@ -1505,15 +1505,15 @@ export type PrismaClientOptions = ({
   queryPlanCacheMaxSize?: number
 }
 export type GlobalOmitConfig = {
-  appointment?: Prisma.AppointmentOmit
-  reminder?: Prisma.ReminderOmit
-  service?: Prisma.ServiceOmit
-  subscription?: Prisma.SubscriptionOmit
   user?: Prisma.UserOmit
   staff?: Prisma.StaffOmit
   session?: Prisma.SessionOmit
   account?: Prisma.AccountOmit
   verification?: Prisma.VerificationOmit
+  appointment?: Prisma.appointmentOmit
+  reminder?: Prisma.reminderOmit
+  service?: Prisma.serviceOmit
+  subscription?: Prisma.subscriptionOmit
 }
 
 /* Types for Logging */

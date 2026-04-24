@@ -7,68 +7,6 @@ datasource db {
   provider = "mysql"
 }
 
-enum Role {
-  USER
-  ADMIN
-}
-
-model Appointment {
-  id              String   @id @default(uuid())
-  name            String
-  email           String
-  phone           String
-  appointmentDate DateTime
-  time            String
-  serviceId       String
-  service         Service  @relation(fields: [serviceId], references: [id])
-  userId          String
-  user            User     @relation(fields: [userId], references: [id])
-  staffId         String?
-  staff           Staff?    @relation(fields: [staffId], references: [id])
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
-}
-
-model Reminder {
-  id          String   @id @default(uuid())
-  description String
-  userId      String
-  user        User     @relation(fields: [userId], references: [id])
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-
-model Service {
-  id          String        @id @default(uuid())
-  name        String
-  price       Int
-  duration    Int
-  status      Boolean       @default(true)
-  userId      String
-  user        User          @relation(fields: [userId], references: [id])
-  staff       Staff[]       @relation("StaffServices")
-  appointment Appointment[]
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
-}
-
-enum Plan {
-  BASIC
-  PLUS
-  PROFESSIONAL
-}
-
-model Subscription {
-  id        String   @id @default(uuid())
-  status    String
-  plan      Plan
-  priceId   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  userId    String   @unique
-  user      User     @relation(fields: [userId], references: [id])
-}
-
 model User {
   id                 String        @id
   name               String
@@ -82,37 +20,38 @@ model User {
   status             Boolean       @default(false)
   timeZone           String?
   stripe_customer_id String?
-  times              Json          @default("[]")
+  times              Json
   rating             Int           @default(0)
   role               Role          @default(USER)
   latitude           Float?
   longitude          Float?
   slug               String?       @unique
-  subscription       Subscription?
-  staff              Staff[]
-  services           Service[]
-  reminders          Reminder[]
-  appointments       Appointment[]
-  sessions           Session[]
   accounts           Account[]
+  appointment        appointment[]
+  reminder           reminder[]
+  service            service[]
+  sessions           Session[]
+  staff              Staff[]
+  subscription       subscription?
 
   @@map("user")
 }
 
 model Staff {
-  id           String        @id @default(uuid())
-  name         String
-  phone        String?
-  image        String?
-  times        Json          @default("[]")
-  status       Boolean       @default(true)
-  userId       String
-  user         User          @relation(fields: [userId], references: [id])
-  services     Service[]     @relation("StaffServices")
-  appointments Appointment[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id          String        @id @default(uuid())
+  name        String
+  phone       String?
+  image       String?
+  times       Json
+  status      Boolean       @default(true)
+  userId      String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  appointment appointment[]
+  user        User          @relation(fields: [userId], references: [id])
+  service     service[]     @relation("staffservices")
 
+  @@index([userId], map: "staff_userId_fkey")
   @@map("staff")
 }
 
@@ -127,7 +66,7 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // @@index([userId(length: 191)])
+  @@index([userId], map: "session_userId_fkey")
   @@map("session")
 }
 
@@ -136,7 +75,6 @@ model Account {
   accountId             String
   providerId            String
   userId                String
-  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   accessToken           String?   @db.Text
   refreshToken          String?   @db.Text
   idToken               String?   @db.Text
@@ -146,8 +84,9 @@ model Account {
   password              String?
   createdAt             DateTime
   updatedAt             DateTime
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  // @@index([userId(length: 191)])
+  @@index([userId], map: "account_userId_fkey")
   @@map("account")
 }
 
@@ -159,6 +98,75 @@ model Verification {
   createdAt  DateTime?
   updatedAt  DateTime?
 
-  // @@index([identifier(length: 191)])
   @@map("verification")
+}
+
+model appointment {
+  id              String   @id
+  name            String
+  email           String
+  phone           String
+  appointmentDate DateTime
+  time            String
+  serviceId       String
+  userId          String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+  staffId         String?
+  service         service  @relation(fields: [serviceId], references: [id], map: "Appointment_serviceId_fkey")
+  staff           Staff?   @relation(fields: [staffId], references: [id], map: "Appointment_staffId_fkey")
+  user            User     @relation(fields: [userId], references: [id], map: "Appointment_userId_fkey")
+
+  @@index([serviceId], map: "Appointment_serviceId_fkey")
+  @@index([staffId], map: "Appointment_staffId_fkey")
+  @@index([userId], map: "Appointment_userId_fkey")
+}
+
+model reminder {
+  id          String   @id
+  description String
+  userId      String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+  user        User     @relation(fields: [userId], references: [id], map: "Reminder_userId_fkey")
+
+  @@index([userId], map: "Reminder_userId_fkey")
+}
+
+model service {
+  id          String        @id
+  name        String
+  price       Int
+  duration    Int
+  status      Boolean       @default(true)
+  userId      String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime
+  appointment appointment[]
+  user        User          @relation(fields: [userId], references: [id], map: "Service_userId_fkey")
+  staff       Staff[]       @relation("staffservices")
+
+  @@index([userId], map: "Service_userId_fkey")
+}
+
+model subscription {
+  id        String            @id
+  status    String
+  plan      subscription_plan
+  priceId   String
+  createdAt DateTime          @default(now())
+  updatedAt DateTime
+  userId    String            @unique(map: "Subscription_userId_key")
+  user      User              @relation(fields: [userId], references: [id], map: "Subscription_userId_fkey")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum subscription_plan {
+  BASIC
+  PLUS
+  PROFESSIONAL
 }

@@ -18,26 +18,6 @@ export { Prisma }
 export * as $Enums from './enums'
 export * from './enums';
 /**
- * Model Appointment
- * 
- */
-export type Appointment = Prisma.AppointmentModel
-/**
- * Model Reminder
- * 
- */
-export type Reminder = Prisma.ReminderModel
-/**
- * Model Service
- * 
- */
-export type Service = Prisma.ServiceModel
-/**
- * Model Subscription
- * 
- */
-export type Subscription = Prisma.SubscriptionModel
-/**
  * Model User
  * 
  */
@@ -62,3 +42,23 @@ export type Account = Prisma.AccountModel
  * 
  */
 export type Verification = Prisma.VerificationModel
+/**
+ * Model appointment
+ * 
+ */
+export type appointment = Prisma.appointmentModel
+/**
+ * Model reminder
+ * 
+ */
+export type reminder = Prisma.reminderModel
+/**
+ * Model service
+ * 
+ */
+export type service = Prisma.serviceModel
+/**
+ * Model subscription
+ * 
+ */
+export type subscription = Prisma.subscriptionModel

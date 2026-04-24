@@ -147,7 +147,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder='Digite o nome da clinica...'
+                          placeholder='Digite o nome da barbearia...'
                         />
                       </FormControl>
                       <FormMessage />
@@ -166,7 +166,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder='Digite o endereço da clinica...'
+                          placeholder='Digite o endereço da barbearia...'
                         />
                       </FormControl>
                       <FormMessage />
@@ -206,7 +206,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder='ex: minha-clinica'
+                          placeholder='ex: minha-barbearia'
                         />
                       </FormControl>
                       <FormMessage />
@@ -220,7 +220,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className='font-semibold'>
-                        Status da clinica
+                        Status da barbearia
                       </FormLabel>
                       <FormControl>
                         <Select
@@ -228,14 +228,14 @@ export function ProfileContent({ user }: ProfileContentProps) {
                           onValueChange={field.onChange}
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder='Selecione o status da clincia' />
+                            <SelectValue placeholder='Selecione o status da barbearia' />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value='active'>
-                              ATIVO (clinica aberta)
+                              ATIVO (barbearia aberta)
                             </SelectItem>
                             <SelectItem value='inactive'>
-                              INATIVO (clinica fechada)
+                              INATIVO (barbearia fechada)
                             </SelectItem>
                           </SelectContent>
                         </Select>
@@ -246,7 +246,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
 
                 <div className='space-y-2'>
                   <Label className='font-semibold'>
-                    Configurar horários da clinica
+                    Configurar horários da barbearia
                   </Label>
 
                   <Dialog onOpenChange={setDialogIsOpen} open={dialogIsOpen}>
@@ -262,10 +262,10 @@ export function ProfileContent({ user }: ProfileContentProps) {
 
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>Horários da clinica</DialogTitle>
+                        <DialogTitle>Horários da barbearia</DialogTitle>
                         <DialogDescription>
                           Selecione abaixo os horários de funcionamento da
-                          clinica:
+                          barbearia:
                         </DialogDescription>
                       </DialogHeader>
 

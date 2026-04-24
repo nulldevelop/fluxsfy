@@ -7,7 +7,7 @@ export async function getUsersWithSubscription() {
     orderBy: { createdAt: 'desc' },
     include: {
       subscription: true,
-      _count: { select: { services: true, appointments: true } },
+      _count: { select: { service: true, appointment: true } },
     },
   })
 
@@ -20,7 +20,7 @@ export async function getUsersWithSubscription() {
     createdAt: u.createdAt,
     plan: u.subscription?.plan ?? null,
     subscriptionStatus: u.subscription?.status ?? null,
-    servicesCount: u._count.services,
-    appointmentsCount: u._count.appointments,
+    servicesCount: u._count.service,
+    appointmentsCount: u._count.appointment,
   }))
 }

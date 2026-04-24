@@ -10,11 +10,20 @@ export async function getProfessionals() {
       },
       include: {
         subscription: true,
+        staff: {
+          where: {
+            status: true,
+          },
+          include: {
+            service: true,
+          },
+        },
       },
     })
 
     return professionals
-  } catch {
+  } catch (error) {
+    console.error('Error fetching professionals:', error)
     return []
   }
 }

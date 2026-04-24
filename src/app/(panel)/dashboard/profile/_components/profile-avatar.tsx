@@ -96,7 +96,7 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
 
       {previewImage ? (
         <Image
-          alt='Foto de perfil da clinica'
+          alt='Foto de perfil da barbearia'
           className='h-48 w-full rounded-full bg-slate-200 object-cover'
           fill
           priority
@@ -106,7 +106,7 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
         />
       ) : (
         <Image
-          alt='Foto de perfil da clinica'
+          alt='Foto de perfil da barbearia'
           className='h-48 w-full rounded-full bg-slate-200 object-cover'
           fill
           priority

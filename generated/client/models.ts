@@ -8,13 +8,13 @@
  *
  * 🟢 You can import this file directly.
  */
-export type * from './models/Appointment'
-export type * from './models/Reminder'
-export type * from './models/Service'
-export type * from './models/Subscription'
 export type * from './models/User'
 export type * from './models/Staff'
 export type * from './models/Session'
 export type * from './models/Account'
 export type * from './models/Verification'
+export type * from './models/appointment'
+export type * from './models/reminder'
+export type * from './models/service'
+export type * from './models/subscription'
 export type * from './commonInputTypes'

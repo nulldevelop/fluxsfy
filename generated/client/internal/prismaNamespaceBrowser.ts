@@ -51,15 +51,15 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Appointment: 'Appointment',
-  Reminder: 'Reminder',
-  Service: 'Service',
-  Subscription: 'Subscription',
   User: 'User',
   Staff: 'Staff',
   Session: 'Session',
   Account: 'Account',
-  Verification: 'Verification'
+  Verification: 'Verification',
+  appointment: 'appointment',
+  reminder: 'reminder',
+  service: 'service',
+  subscription: 'subscription'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -76,61 +76,6 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 } as const)
 
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
-
-
-export const AppointmentScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  appointmentDate: 'appointmentDate',
-  time: 'time',
-  serviceId: 'serviceId',
-  userId: 'userId',
-  staffId: 'staffId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type AppointmentScalarFieldEnum = (typeof AppointmentScalarFieldEnum)[keyof typeof AppointmentScalarFieldEnum]
-
-
-export const ReminderScalarFieldEnum = {
-  id: 'id',
-  description: 'description',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ReminderScalarFieldEnum = (typeof ReminderScalarFieldEnum)[keyof typeof ReminderScalarFieldEnum]
-
-
-export const ServiceScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  price: 'price',
-  duration: 'duration',
-  status: 'status',
-  userId: 'userId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
-
-
-export const SubscriptionScalarFieldEnum = {
-  id: 'id',
-  status: 'status',
-  plan: 'plan',
-  priceId: 'priceId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  userId: 'userId'
-} as const
-
-export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
 
 
 export const UserScalarFieldEnum = {
@@ -217,6 +162,61 @@ export const VerificationScalarFieldEnum = {
 export type VerificationScalarFieldEnum = (typeof VerificationScalarFieldEnum)[keyof typeof VerificationScalarFieldEnum]
 
 
+export const AppointmentScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  appointmentDate: 'appointmentDate',
+  time: 'time',
+  serviceId: 'serviceId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  staffId: 'staffId'
+} as const
+
+export type AppointmentScalarFieldEnum = (typeof AppointmentScalarFieldEnum)[keyof typeof AppointmentScalarFieldEnum]
+
+
+export const ReminderScalarFieldEnum = {
+  id: 'id',
+  description: 'description',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ReminderScalarFieldEnum = (typeof ReminderScalarFieldEnum)[keyof typeof ReminderScalarFieldEnum]
+
+
+export const ServiceScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  price: 'price',
+  duration: 'duration',
+  status: 'status',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
+
+
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  status: 'status',
+  plan: 'plan',
+  priceId: 'priceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  userId: 'userId'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -230,56 +230,6 @@ export const JsonNullValueInput = {
 } as const
 
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-export const AppointmentOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  time: 'time',
-  serviceId: 'serviceId',
-  userId: 'userId',
-  staffId: 'staffId'
-} as const
-
-export type AppointmentOrderByRelevanceFieldEnum = (typeof AppointmentOrderByRelevanceFieldEnum)[keyof typeof AppointmentOrderByRelevanceFieldEnum]
-
-
-export const ReminderOrderByRelevanceFieldEnum = {
-  id: 'id',
-  description: 'description',
-  userId: 'userId'
-} as const
-
-export type ReminderOrderByRelevanceFieldEnum = (typeof ReminderOrderByRelevanceFieldEnum)[keyof typeof ReminderOrderByRelevanceFieldEnum]
-
-
-export const ServiceOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  userId: 'userId'
-} as const
-
-export type ServiceOrderByRelevanceFieldEnum = (typeof ServiceOrderByRelevanceFieldEnum)[keyof typeof ServiceOrderByRelevanceFieldEnum]
-
-
-export const SubscriptionOrderByRelevanceFieldEnum = {
-  id: 'id',
-  status: 'status',
-  priceId: 'priceId',
-  userId: 'userId'
-} as const
-
-export type SubscriptionOrderByRelevanceFieldEnum = (typeof SubscriptionOrderByRelevanceFieldEnum)[keyof typeof SubscriptionOrderByRelevanceFieldEnum]
 
 
 export const JsonNullValueFilter = {
@@ -297,6 +247,14 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
 export const UserOrderByRelevanceFieldEnum = {
@@ -358,4 +316,46 @@ export const VerificationOrderByRelevanceFieldEnum = {
 } as const
 
 export type VerificationOrderByRelevanceFieldEnum = (typeof VerificationOrderByRelevanceFieldEnum)[keyof typeof VerificationOrderByRelevanceFieldEnum]
+
+
+export const appointmentOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  time: 'time',
+  serviceId: 'serviceId',
+  userId: 'userId',
+  staffId: 'staffId'
+} as const
+
+export type appointmentOrderByRelevanceFieldEnum = (typeof appointmentOrderByRelevanceFieldEnum)[keyof typeof appointmentOrderByRelevanceFieldEnum]
+
+
+export const reminderOrderByRelevanceFieldEnum = {
+  id: 'id',
+  description: 'description',
+  userId: 'userId'
+} as const
+
+export type reminderOrderByRelevanceFieldEnum = (typeof reminderOrderByRelevanceFieldEnum)[keyof typeof reminderOrderByRelevanceFieldEnum]
+
+
+export const serviceOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  userId: 'userId'
+} as const
+
+export type serviceOrderByRelevanceFieldEnum = (typeof serviceOrderByRelevanceFieldEnum)[keyof typeof serviceOrderByRelevanceFieldEnum]
+
+
+export const subscriptionOrderByRelevanceFieldEnum = {
+  id: 'id',
+  status: 'status',
+  priceId: 'priceId',
+  userId: 'userId'
+} as const
+
+export type subscriptionOrderByRelevanceFieldEnum = (typeof subscriptionOrderByRelevanceFieldEnum)[keyof typeof subscriptionOrderByRelevanceFieldEnum]
 

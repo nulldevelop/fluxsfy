@@ -126,7 +126,7 @@ export default async function Page({
             </a>
             <a
               className='rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 font-medium text-white transition-colors hover:border-zinc-600 hover:bg-zinc-700'
-              href={`/clinica/${appointment.userId}`}
+              href={`/barbearia/${appointment.userId}`}
               target='_blank'
             >
               Ver página da barbearia

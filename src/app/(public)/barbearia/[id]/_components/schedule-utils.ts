@@ -36,7 +36,7 @@ export function isSlotInThePast(slotTime: string) {
 export function isSlotSequenceAvailable(
   startSlot: string, //> Primeiro horario disponivel
   requiredSlots: number, //> Quantidade de slots necessários
-  allSlots: string[], //> Todos horarios da clinica
+  allSlots: string[], //> Todos horarios da barbearia
   blockedSlots: string[] //> Horarios bloqueados
 ) {
   const startIndex = allSlots.indexOf(startSlot)

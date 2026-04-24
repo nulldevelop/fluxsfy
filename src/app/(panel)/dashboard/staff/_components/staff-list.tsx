@@ -1,6 +1,6 @@
 'use client'
-import type { Staff, Service } from '@prisma/client'
-import { Pencil, Plus, X, User } from 'lucide-react'
+import type { Service, Staff } from '@prisma/client'
+import { Pencil, Plus, User, X } from 'lucide-react'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -11,7 +11,7 @@ import { deleteStaff } from '../_actions/staff-actions'
 import { DialogStaff } from './dialog-staff'
 
 interface StaffWithServices extends Staff {
-  services: Service[]
+  service: Service[]
 }
 
 interface StaffListProps {
@@ -22,7 +22,9 @@ interface StaffListProps {
 
 export function StaffList({ staff, services, permissions }: StaffListProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false)
-  const [editingStaff, setEditingStaff] = useState<null | StaffWithServices>(null)
+  const [editingStaff, setEditingStaff] = useState<null | StaffWithServices>(
+    null
+  )
 
   async function handleDeleteStaff(id: string) {
     if (!confirm('Tem certeza que deseja remover este funcionário?')) return
@@ -57,65 +59,80 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
             </CardTitle>
             <DialogTrigger asChild>
               <Button>
-                <Plus className='h-4 w-4 mr-2' />
+                <Plus className='mr-2 h-4 w-4' />
                 Novo Funcionário
               </Button>
             </DialogTrigger>
 
-            <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogContent className='max-h-[90vh] max-w-2xl overflow-y-auto'>
               <DialogStaff
                 closeModal={() => {
                   setIsDialogOpen(false)
                   setEditingStaff(null)
                 }}
-                services={services}
                 initialValues={editingStaff || undefined}
+                services={services}
                 staffId={editingStaff?.id}
               />
             </DialogContent>
           </CardHeader>
 
           <CardContent>
-            <section className='mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
+            <section className='mt-4 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3'>
               {staff.map((member) => (
                 <article
-                  className='flex flex-col p-4 border rounded-lg bg-card text-card-foreground shadow-sm'
+                  className='flex flex-col rounded-lg border bg-card p-4 text-card-foreground shadow-sm'
                   key={member.id}
                 >
-                  <div className='flex items-center space-x-4 mb-4'>
-                    <div className='h-12 w-12 rounded-full bg-secondary flex items-center justify-center overflow-hidden'>
+                  <div className='mb-4 flex items-center space-x-4'>
+                    <div className='flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-secondary'>
                       {member.image ? (
-                        <img src={member.image} alt={member.name} className="h-full w-full object-cover" />
+                        <img
+                          alt={member.name}
+                          className='h-full w-full object-cover'
+                          src={member.image}
+                        />
                       ) : (
                         <User className='h-6 w-6 text-muted-foreground' />
                       )}
                     </div>
                     <div>
                       <h3 className='font-bold'>{member.name}</h3>
-                      <p className='text-sm text-muted-foreground'>{member.phone || 'Sem telefone'}</p>
+                      <p className='text-muted-foreground text-sm'>
+                        {member.phone || 'Sem telefone'}
+                      </p>
                     </div>
                   </div>
 
                   <div className='mb-4'>
-                    <p className='text-xs font-semibold uppercase text-muted-foreground mb-1'>Serviços</p>
+                    <p className='mb-1 font-semibold text-muted-foreground text-xs uppercase'>
+                      Serviços
+                    </p>
                     <div className='flex flex-wrap gap-1'>
-                      {member.services.map(s => (
-                        <span key={s.id} className='px-2 py-0.5 bg-emerald-100 text-emerald-800 text-[10px] rounded-full font-medium'>
+                      {member.service.map((s) => (
+                        <span
+                          className='rounded-full bg-emerald-100 px-2 py-0.5 font-medium text-[10px] text-emerald-800'
+                          key={s.id}
+                        >
                           {s.name}
                         </span>
                       ))}
-                      {member.services.length === 0 && <span className='text-xs text-muted-foreground italic'>Nenhum serviço vinculado</span>}
+                      {member.service.length === 0 && (
+                        <span className='text-muted-foreground text-xs italic'>
+                          Nenhum serviço vinculado
+                        </span>
+                      )}
                     </div>
                   </div>
 
-                  <div className='flex gap-2 mt-auto pt-4 border-t'>
+                  <div className='mt-auto flex gap-2 border-t pt-4'>
                     <Button
+                      className='flex-1'
                       onClick={() => handleEditStaff(member)}
                       size='sm'
                       variant='outline'
-                      className='flex-1'
                     >
-                      <Pencil className='h-4 w-4 mr-2' />
+                      <Pencil className='mr-2 h-4 w-4' />
                       Editar
                     </Button>
                     <Button

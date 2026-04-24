@@ -19,18 +19,26 @@ export default async function Dashboard() {
   const subscription = await checkSubscription(session?.user?.id!)
 
   return (
-    <main className="p-4 space-y-6">
-      <div className='flex flex-col md:flex-row md:items-center justify-between gap-4'>
-        <h1 className='font-bebas text-5xl text-primary tracking-widest'>PAINEL DE CONTROLE</h1>
+    <main className='space-y-6 p-4'>
+      <div className='flex flex-col justify-between gap-4 md:flex-row md:items-center'>
+        <h1 className='font-bebas text-5xl text-primary tracking-widest'>
+          PAINEL DE CONTROLE
+        </h1>
         {subscription?.subscriptionStatus !== 'EXPIRED' && (
           <div className='flex items-center justify-end space-x-2'>
-            <Link href={`/clinica/${session.user?.slug || session.user?.id}`} target='_blank'>
+            <Link
+              href={`/barbearia/${session.user?.slug || session.user?.id}`}
+              target='_blank'
+            >
               <Button className='flex-1 bg-emerald-500 hover:bg-emerald-400 md:flex-[0]'>
                 <Calendar className='h-5 w-5' />
                 <span>Minha Barbearia</span>
               </Button>
             </Link>
-            <ButtonCopyLink userId={session.user?.id} slug={session.user?.slug} />
+            <ButtonCopyLink
+              slug={session.user?.slug}
+              userId={session.user?.id}
+            />
           </div>
         )}
       </div>

@@ -7,14 +7,14 @@ export async function StaffContent({ userId }: { userId: string }) {
   const [staffData, servicesData, permissions] = await Promise.all([
     getStaff({ userId }),
     getAllServices({ userId }),
-    canPermission(),
+    canPermission({ type: 'service' }),
   ])
 
   return (
     <StaffList
-      staff={staffData.data || []}
-      services={servicesData.data || []}
       permissions={permissions}
+      services={servicesData.data || []}
+      staff={staffData.data || []}
     />
   )
 }
