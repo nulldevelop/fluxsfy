@@ -2,9 +2,8 @@
 
 import { useQuery } from '@tanstack/react-query'
 import { format } from 'date-fns'
-import { Calendar, Clock, Phone, Scissors, User } from 'lucide-react'
+import { Calendar, Clock, Phone, User } from 'lucide-react'
 import { useSearchParams } from 'next/navigation'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 interface Appointment {
   id: string
@@ -41,13 +40,13 @@ export default function StaffAccessPage() {
       return res.json() as Promise<Appointment[]>
     },
     enabled: !!staffData?.id,
-    refetchInterval: 30_000,
+    refetchInterval: 20_000,
   })
 
   if (!token || isLoading) {
     return (
       <div className='flex min-h-screen items-center justify-center bg-zinc-950'>
-        <div className='animate-pulse text-gold'>Carregando...</div>
+        <div className='h-12 w-12 animate-spin rounded-full border-4 border-gold border-t-transparent' />
       </div>
     )
   }
@@ -55,16 +54,15 @@ export default function StaffAccessPage() {
   if (!staffData) {
     return (
       <div className='flex min-h-screen items-center justify-center bg-zinc-950 p-4'>
-        <Card className='max-w-md border-red-900 bg-zinc-900'>
-          <CardHeader>
-            <CardTitle className='text-red-500'>Link inválido</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className='text-zinc-400'>
-              Este link de acesso expirou ou é inválido.
-            </p>
-          </CardContent>
-        </Card>
+        <div className='rounded-2xl bg-zinc-900 p-8 text-center'>
+          <div className='mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-red-500/20'>
+            <User className='h-8 w-8 text-red-500' />
+          </div>
+          <h1 className='mb-2 font-bold text-white text-xl'>Link inválido</h1>
+          <p className='text-sm text-zinc-400'>
+            Este link expirou ou é inválido.
+          </p>
+        </div>
       </div>
     )
   }
@@ -92,77 +90,72 @@ export default function StaffAccessPage() {
     .replace('December', 'Dezembro')
 
   return (
-    <main className='min-h-screen bg-zinc-950 p-4'>
-      <div className='mx-auto max-w-md space-y-6'>
-        <Card className='border-gold bg-zinc-900'>
-          <CardHeader className='border-zinc-800 border-b'>
-            <div className='flex items-center gap-3'>
-              <div className='flex h-12 w-12 items-center justify-center rounded-full bg-gold/20'>
-                <User className='h-6 w-6 text-gold' />
-              </div>
-              <div>
-                <CardTitle className='text-white text-xl'>
-                  Olá, {staffData.name}!
-                </CardTitle>
-                <p className='text-sm text-zinc-400'>{staffData.clinicName}</p>
-              </div>
-            </div>
-          </CardHeader>
-          <CardContent className='pt-4'>
-            <div className='mb-4 flex items-center gap-2 text-zinc-400'>
-              <Calendar className='h-4 w-4' />
-              <span className='text-sm capitalize'>{dateStr}</span>
-            </div>
-
-            <h3 className='mb-3 font-bold text-white'>Agenda de hoje</h3>
-
-            {loadingAppts ? (
-              <div className='py-8 text-center text-zinc-500'>
-                Carregando...
-              </div>
-            ) : appointments?.length === 0 ? (
-              <div className='rounded-lg border border-zinc-800 border-dashed py-8 text-center'>
-                <p className='text-zinc-500'>Nenhum agendamento hoje.</p>
-                <p className='mt-1 text-sm text-zinc-600'>Bom trabalho! 🎉</p>
-              </div>
-            ) : (
-              <div className='space-y-3'>
-                {appointments?.map((apt) => (
-                  <div
-                    className='rounded-lg border border-zinc-800 bg-zinc-800/50 p-4 transition-colors hover:border-gold/50'
-                    key={apt.id}
-                  >
-                    <div className='mb-2 flex items-start justify-between'>
-                      <div className='flex items-center gap-2'>
-                        <Clock className='h-4 w-4 text-gold' />
-                        <span className='font-bold text-lg text-white'>
-                          {apt.time}
-                        </span>
-                      </div>
-                      <div className='flex items-center gap-1 rounded border border-gold/50 bg-gold/20 px-2 py-1 text-gold text-xs'>
-                        <Scissors className='h-3 w-3' />
-                        {apt.service.name}
-                      </div>
-                    </div>
-
-                    <div className='space-y-1'>
-                      <p className='font-semibold text-white'>{apt.name}</p>
-                      <div className='flex items-center gap-1 text-sm text-zinc-400'>
-                        <Phone className='h-3 w-3' />
-                        <span>{apt.phone}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        <p className='text-center text-xs text-zinc-600'>
-          Atualiza automaticamente a cada 30s
-        </p>
+    <main className='min-h-screen bg-zinc-950 text-white'>
+      <div className='sticky top-0 z-10 border-zinc-800 border-b bg-zinc-950 p-4'>
+        <div className='flex items-center gap-3'>
+          <div className='flex h-10 w-10 items-center justify-center rounded-full bg-gold'>
+            <User className='h-5 w-5 text-black' />
+          </div>
+          <div>
+            <p className='text-xs text-zinc-400'>Olá,</p>
+            <p className='font-bold'>{staffData.name}</p>
+          </div>
+        </div>
       </div>
+
+      <div className='flex items-center gap-2 px-4 py-3 text-zinc-400'>
+        <Calendar className='h-4 w-4' />
+        <span className='text-sm capitalize'>{dateStr}</span>
+      </div>
+
+      <div className='p-4 pb-24'>
+        {loadingAppts ? (
+          <div className='py-12 text-center text-zinc-500'>Carregando...</div>
+        ) : appointments?.length === 0 ? (
+          <div className='py-12 text-center'>
+            <div className='mb-4 text-5xl'>😊</div>
+            <p className='font-bold text-white'>Sem agenda hoje</p>
+            <p className='text-sm text-zinc-400'> Aproveite!</p>
+          </div>
+        ) : (
+          <div>
+            <p className='mb-3 text-sm text-zinc-400'>
+              {appointments?.length} agendamento(s)
+            </p>
+
+            {appointments?.map((apt) => (
+              <div
+                className='mb-3 rounded-xl border border-zinc-800 bg-zinc-900 p-4'
+                key={apt.id}
+              >
+                <div className='flex items-center gap-3'>
+                  <div className='flex h-10 w-10 items-center justify-center rounded-full bg-gold/20'>
+                    <Clock className='h-5 w-5 text-gold' />
+                  </div>
+                  <div>
+                    <p className='font-bold text-lg'>{apt.time}</p>
+                    <p className='text-gold text-xs'>{apt.service.name}</p>
+                  </div>
+                </div>
+
+                <div className='mt-3 pl-13'>
+                  <p className='font-semibold'>{apt.name}</p>
+                  <p className='flex items-center gap-1 text-sm text-zinc-400'>
+                    <Phone className='h-3 w-3' />
+                    {apt.phone}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <style jsx>{`
+        .pl-13 {
+          padding-left: 3.25rem;
+        }
+      `}</style>
     </main>
   )
 }

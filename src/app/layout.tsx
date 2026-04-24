@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
-import { Bebas_Neue, Barlow_Condensed } from 'next/font/google'
+import { Barlow_Condensed, Bebas_Neue } from 'next/font/google'
 import '@/styles/globals.css'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Toaster } from 'sonner'
+import { PwaInstaller } from '@/components/pwa-installer'
 import { SessionAuthProvider } from '@/components/session-auth'
 import { QueryProvider } from '@/providers/queryclient'
 
@@ -69,6 +70,11 @@ export const metadata: Metadata = {
       'Fluxsfy é a plataforma para profissionais e barbearias: organize seus atendimentos e ganhe mais tempo para o que importa.',
     images: ['/logofluxsfy.png'],
   },
+  manifest: '/manifest.json',
+  appleWebApp: {
+    capable: true,
+    title: 'Fluxsfy',
+  },
 }
 
 export default function RootLayout({
@@ -101,6 +107,7 @@ export default function RootLayout({
           <QueryProvider>
             <Toaster duration={2500} />
             {children}
+            <PwaInstaller />
             <Analytics />
             <SpeedInsights />
           </QueryProvider>
