@@ -30,6 +30,7 @@ export type StaffMinAggregateOutputType = {
   phone: string | null
   image: string | null
   status: boolean | null
+  token: string | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -41,6 +42,7 @@ export type StaffMaxAggregateOutputType = {
   phone: string | null
   image: string | null
   status: boolean | null
+  token: string | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -53,6 +55,7 @@ export type StaffCountAggregateOutputType = {
   image: number
   times: number
   status: number
+  token: number
   userId: number
   createdAt: number
   updatedAt: number
@@ -66,6 +69,7 @@ export type StaffMinAggregateInputType = {
   phone?: true
   image?: true
   status?: true
+  token?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -77,6 +81,7 @@ export type StaffMaxAggregateInputType = {
   phone?: true
   image?: true
   status?: true
+  token?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -89,6 +94,7 @@ export type StaffCountAggregateInputType = {
   image?: true
   times?: true
   status?: true
+  token?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -174,6 +180,7 @@ export type StaffGroupByOutputType = {
   image: string | null
   times: runtime.JsonValue
   status: boolean
+  token: string | null
   userId: string
   createdAt: Date
   updatedAt: Date
@@ -207,6 +214,7 @@ export type StaffWhereInput = {
   image?: Prisma.StringNullableFilter<"Staff"> | string | null
   times?: Prisma.JsonFilter<"Staff">
   status?: Prisma.BoolFilter<"Staff"> | boolean
+  token?: Prisma.StringNullableFilter<"Staff"> | string | null
   userId?: Prisma.StringFilter<"Staff"> | string
   createdAt?: Prisma.DateTimeFilter<"Staff"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Staff"> | Date | string
@@ -222,6 +230,7 @@ export type StaffOrderByWithRelationInput = {
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   times?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  token?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -233,6 +242,7 @@ export type StaffOrderByWithRelationInput = {
 
 export type StaffWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  token?: string
   AND?: Prisma.StaffWhereInput | Prisma.StaffWhereInput[]
   OR?: Prisma.StaffWhereInput[]
   NOT?: Prisma.StaffWhereInput | Prisma.StaffWhereInput[]
@@ -247,7 +257,7 @@ export type StaffWhereUniqueInput = Prisma.AtLeast<{
   appointment?: Prisma.AppointmentListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   services?: Prisma.ServiceListRelationFilter
-}, "id">
+}, "id" | "token">
 
 export type StaffOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -256,6 +266,7 @@ export type StaffOrderByWithAggregationInput = {
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   times?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  token?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -274,6 +285,7 @@ export type StaffScalarWhereWithAggregatesInput = {
   image?: Prisma.StringNullableWithAggregatesFilter<"Staff"> | string | null
   times?: Prisma.JsonWithAggregatesFilter<"Staff">
   status?: Prisma.BoolWithAggregatesFilter<"Staff"> | boolean
+  token?: Prisma.StringNullableWithAggregatesFilter<"Staff"> | string | null
   userId?: Prisma.StringWithAggregatesFilter<"Staff"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Staff"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Staff"> | Date | string
@@ -286,6 +298,7 @@ export type StaffCreateInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment?: Prisma.appointmentCreateNestedManyWithoutStaffInput
@@ -300,6 +313,7 @@ export type StaffUncheckedCreateInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -314,6 +328,7 @@ export type StaffUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUpdateManyWithoutStaffNestedInput
@@ -328,6 +343,7 @@ export type StaffUncheckedUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -342,6 +358,7 @@ export type StaffCreateManyInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -354,6 +371,7 @@ export type StaffUpdateManyMutationInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -365,6 +383,7 @@ export type StaffUncheckedUpdateManyInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -393,6 +412,7 @@ export type StaffCountOrderByAggregateInput = {
   image?: Prisma.SortOrder
   times?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  token?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -404,6 +424,7 @@ export type StaffMaxOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   image?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  token?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -415,6 +436,7 @@ export type StaffMinOrderByAggregateInput = {
   phone?: Prisma.SortOrder
   image?: Prisma.SortOrder
   status?: Prisma.SortOrder
+  token?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -528,6 +550,7 @@ export type StaffCreateWithoutUserInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment?: Prisma.appointmentCreateNestedManyWithoutStaffInput
@@ -541,6 +564,7 @@ export type StaffUncheckedCreateWithoutUserInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutStaffInput
@@ -583,6 +607,7 @@ export type StaffScalarWhereInput = {
   image?: Prisma.StringNullableFilter<"Staff"> | string | null
   times?: Prisma.JsonFilter<"Staff">
   status?: Prisma.BoolFilter<"Staff"> | boolean
+  token?: Prisma.StringNullableFilter<"Staff"> | string | null
   userId?: Prisma.StringFilter<"Staff"> | string
   createdAt?: Prisma.DateTimeFilter<"Staff"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Staff"> | Date | string
@@ -595,6 +620,7 @@ export type StaffCreateWithoutAppointmentInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutStaffInput
@@ -608,6 +634,7 @@ export type StaffUncheckedCreateWithoutAppointmentInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -637,6 +664,7 @@ export type StaffUpdateWithoutAppointmentInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutStaffNestedInput
@@ -650,6 +678,7 @@ export type StaffUncheckedUpdateWithoutAppointmentInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -663,6 +692,7 @@ export type StaffCreateWithoutServicesInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment?: Prisma.appointmentCreateNestedManyWithoutStaffInput
@@ -676,6 +706,7 @@ export type StaffUncheckedCreateWithoutServicesInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -710,6 +741,7 @@ export type StaffCreateManyUserInput = {
   image?: string | null
   times: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: boolean
+  token?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -721,6 +753,7 @@ export type StaffUpdateWithoutUserInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUpdateManyWithoutStaffNestedInput
@@ -734,6 +767,7 @@ export type StaffUncheckedUpdateWithoutUserInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUncheckedUpdateManyWithoutStaffNestedInput
@@ -747,6 +781,7 @@ export type StaffUncheckedUpdateManyWithoutUserInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -758,6 +793,7 @@ export type StaffUpdateWithoutServicesInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUpdateManyWithoutStaffNestedInput
@@ -771,6 +807,7 @@ export type StaffUncheckedUpdateWithoutServicesInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -784,6 +821,7 @@ export type StaffUncheckedUpdateManyWithoutServicesInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  token?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -836,6 +874,7 @@ export type StaffSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   image?: boolean
   times?: boolean
   status?: boolean
+  token?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -854,12 +893,13 @@ export type StaffSelectScalar = {
   image?: boolean
   times?: boolean
   status?: boolean
+  token?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type StaffOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "phone" | "image" | "times" | "status" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["staff"]>
+export type StaffOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "phone" | "image" | "times" | "status" | "token" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["staff"]>
 export type StaffInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appointment?: boolean | Prisma.Staff$appointmentArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -881,6 +921,7 @@ export type $StaffPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     image: string | null
     times: runtime.JsonValue
     status: boolean
+    token: string | null
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -1262,6 +1303,7 @@ export interface StaffFieldRefs {
   readonly image: Prisma.FieldRef<"Staff", 'String'>
   readonly times: Prisma.FieldRef<"Staff", 'Json'>
   readonly status: Prisma.FieldRef<"Staff", 'Boolean'>
+  readonly token: Prisma.FieldRef<"Staff", 'String'>
   readonly userId: Prisma.FieldRef<"Staff", 'String'>
   readonly createdAt: Prisma.FieldRef<"Staff", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Staff", 'DateTime'>

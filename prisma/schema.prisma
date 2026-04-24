@@ -43,13 +43,14 @@ model Staff {
   phone       String?
   image       String?
   times       Json
-  status      Boolean       @default(true)
+  status      Boolean      @default(true)
+  token       String?      @unique
   userId      String
-  createdAt   DateTime      @default(now())
-  updatedAt   DateTime      @updatedAt
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   appointment appointment[]
-  user        User          @relation(fields: [userId], references: [id])
-  services     service[]     @relation("staffservices")
+  user        User        @relation(fields: [userId], references: [id])
+  services    service[]   @relation("staffservices")
 
   @@index([userId], map: "staff_userId_fkey")
   @@map("staff")

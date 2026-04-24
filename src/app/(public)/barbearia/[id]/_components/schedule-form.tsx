@@ -8,7 +8,7 @@ export const appointmentSchema = z.object({
   name: z.string().min(1, 'O nome é obrigatório'),
   email: z.string().email('O email é obrigatório'),
   phone: z.string().min(1, 'O telefone é obrigatório'),
-  date: z.date(),
+  date: z.string(),
   serviceId: z.string().min(1, 'O serviço é obrigatório'),
   staffId: z.string().min(1, 'O profissional é obrigatório'),
 })
@@ -24,7 +24,7 @@ export function useAppointmentForm() {
       phone: '',
       serviceId: '',
       staffId: '',
-      date: new Date(),
+      date: new Date().toISOString().split('T')[0],
     },
   })
 }

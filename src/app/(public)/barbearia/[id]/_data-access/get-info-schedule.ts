@@ -3,6 +3,8 @@
 import { prisma } from '@/lib/prisma'
 
 export async function getInfoSchedule({ userId }: { userId: string }) {
+  // Always fetch fresh data
+  await new Promise((resolve) => setTimeout(resolve, 100))
   try {
     if (!userId) {
       return null
@@ -12,7 +14,14 @@ export async function getInfoSchedule({ userId }: { userId: string }) {
       where: {
         OR: [{ id: userId }, { slug: userId }],
       },
-      include: {
+      select: {
+        id: true,
+        name: true,
+        image: true,
+        address: true,
+        phone: true,
+        status: true,
+        times: true,
         subscription: true,
         services: {
           where: {
@@ -23,10 +32,22 @@ export async function getInfoSchedule({ userId }: { userId: string }) {
           where: {
             status: true,
           },
-          include: {
-            services: true,
+          select: {
+            id: true,
+            name: true,
+            times: true,
+            services: {
+              select: {
+                id: true,
+                name: true,
+                duration: true,
+              },
+            },
           },
         },
+      },
+      orderBy: {
+        createdAt: 'desc',
       },
     })
 

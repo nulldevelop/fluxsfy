@@ -1076,6 +1076,7 @@ export const StaffScalarFieldEnum = {
   image: 'image',
   times: 'times',
   status: 'status',
+  token: 'token',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1244,6 +1245,7 @@ export const StaffOrderByRelevanceFieldEnum = {
   name: 'name',
   phone: 'phone',
   image: 'image',
+  token: 'token',
   userId: 'userId'
 } as const
 

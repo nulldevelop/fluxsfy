@@ -1,5 +1,5 @@
 'use client'
-import { Pencil, Plus, User, X } from 'lucide-react'
+import { Pencil, Plus, Share2, User, X } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -45,6 +45,25 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
       toast.error(response.error)
     } else {
       toast.success(response.data)
+    }
+  }
+
+  async function handleGenerateLink(id: string) {
+    try {
+      const res = await fetch('/api/staff/token', {
+        method: 'POST',
+        body: JSON.stringify({ staffId: id }),
+      })
+      const data = await res.json()
+
+      if (data.error) {
+        toast.error(data.error)
+      } else {
+        await navigator.clipboard.writeText(data.link)
+        toast.success('Link copiado!')
+      }
+    } catch {
+      toast.error('Erro ao gerar link')
     }
   }
 
@@ -162,6 +181,13 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
                     >
                       <Pencil className='mr-2 h-4 w-4' />
                       Editar
+                    </Button>
+                    <Button
+                      onClick={() => handleGenerateLink(member.id)}
+                      size='sm'
+                      variant='outline'
+                    >
+                      <Share2 className='h-4 w-4' />
                     </Button>
                     <Button
                       onClick={() => handleDeleteStaff(member.id)}

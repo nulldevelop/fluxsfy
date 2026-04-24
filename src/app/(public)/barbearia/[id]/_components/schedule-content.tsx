@@ -58,6 +58,11 @@ export interface TimeSlot {
   available: boolean
 }
 
+function toLocalDate(dateStr: string): Date {
+  const [year, month, day] = dateStr.split('-').map(Number)
+  return new Date(year, month - 1, day, 12, 0, 0)
+}
+
 export function ScheduleContent({ clinic }: ScheduleContentProps) {
   const form = useAppointmentForm()
   const { watch } = form
@@ -99,7 +104,8 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
   useEffect(() => {
     if (selectedDate && selectedStaffId) {
-      fetchBlockedTimes(selectedDate, selectedStaffId).then((blocked) => {
+      const dateObj = new Date(selectedDate)
+      fetchBlockedTimes(dateObj, selectedStaffId).then((blocked) => {
         setBlockedTimes(blocked)
 
         const staffMember = clinic.staff.find((s) => s.id === selectedStaffId)
@@ -316,7 +322,17 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                             initialDate={new Date()}
                             onChange={(date) => {
                               if (date) {
-                                field.onChange(date)
+                                const y = date.getFullYear()
+                                const m = String(date.getMonth() + 1).padStart(
+                                  2,
+                                  '0'
+                                )
+                                const d = String(date.getDate()).padStart(
+                                  2,
+                                  '0'
+                                )
+                                const dateString = `${y}-${m}-${d}`
+                                field.onChange(dateString)
                                 setSelectedTime('')
                               }
                             }}
@@ -417,23 +433,9 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                       ) : (
                         <ScheduleTimeList
                           availableTimeSlots={availableTimeSlots}
-                          blockedTimes={blockedTimes}
-                          clinicTimes={clinic.times}
+                          clinicOpen={clinic.status}
                           onSelectTime={(time) => setSelectedTime(time)}
-                          requiredSlots={
-                            clinic.services.find(
-                              (service) => service.id === selectedServiceId
-                            )
-                              ? Math.ceil(
-                                  clinic.services.find(
-                                    (service) =>
-                                      service.id === selectedServiceId
-                                  )!.duration / 30
-                                )
-                              : 1
-                          }
-                          selectedDate={selectedDate}
-                          selectedTime={selectedTime}
+                          selectedDate={toLocalDate(selectedDate)}
                         />
                       )}
                     </div>

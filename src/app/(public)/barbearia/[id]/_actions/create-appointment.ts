@@ -7,7 +7,7 @@ const formSchema = z.object({
   name: z.string().min(1, 'O nome é obrigatório'),
   email: z.string().email('O email é obrigatório'),
   phone: z.string().min(1, 'O telefone é obrigatório'),
-  date: z.date(),
+  date: z.string(),
   serviceId: z.string().min(1, 'O serviço é obrigatório'),
   staffId: z.string().min(1, 'O profissional é obrigatório'),
   time: z.string().min(1, 'O horário é obrigatório'),
@@ -26,16 +26,13 @@ export async function createNewAppointment(formData: FormSchema) {
   }
 
   try {
-    const selectedDate = new Date(formData.date)
-
-    const year = selectedDate.getFullYear()
-    const month = selectedDate.getMonth()
-    const day = selectedDate.getDate()
-
-    const appointmentDate = new Date(Date.UTC(year, month, day, 0, 0, 0, 0))
+    const dateOnly = formData.date.split('T')[0]
+    const [year, month, day] = dateOnly.split('-').map(Number)
+    const appointmentDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0))
 
     const newAppointment = await prisma.appointment.create({
       data: {
+        id: crypto.randomUUID(),
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
@@ -44,13 +41,14 @@ export async function createNewAppointment(formData: FormSchema) {
         serviceId: formData.serviceId,
         staffId: formData.staffId,
         userId: formData.clinicId,
+        updatedAt: new Date(),
       },
     })
 
     return {
       data: newAppointment,
     }
-  } catch {
+  } catch (err) {
     return {
       error: 'Erro ao cadastrar agendamento',
     }

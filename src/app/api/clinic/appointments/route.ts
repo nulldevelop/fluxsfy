@@ -1,9 +1,12 @@
+import { headers } from 'next/headers'
 import { type NextRequest, NextResponse } from 'next/server'
-import { authClient } from '@/lib/auth-client'
+import { auth } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
-  const { data: session } = await authClient.getSession()
+  const session = await auth.api.getSession({
+    headers: await headers(),
+  })
 
   if (!session) {
     return NextResponse.json(
@@ -14,6 +17,7 @@ export async function GET(request: NextRequest) {
 
   const searchParams = request.nextUrl.searchParams
   const dateString = searchParams.get('date') as string
+  const staffId = searchParams.get('staffId') as string
   const clinicId = session.user.id
 
   if (!dateString) {
@@ -28,7 +32,6 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Criar uma data formatada
     const [year, month, day] = dateString.split('-').map(Number)
 
     const startDate = new Date(Date.UTC(year, month - 1, day, 0, 0, 0, 0))
@@ -37,18 +40,26 @@ export async function GET(request: NextRequest) {
     const appointments = await prisma.appointment.findMany({
       where: {
         userId: clinicId,
-        appointmentDate: {
-          gte: startDate,
-          lte: endDate,
-        },
       },
       include: {
         service: true,
         staff: true,
       },
+      orderBy: {
+        appointmentDate: 'asc',
+      },
     })
 
-    return NextResponse.json(appointments)
+    const filtered = appointments.filter((apt) => {
+      if (staffId && staffId !== 'all' && apt.staffId !== staffId) {
+        return false
+      }
+      const aptDate = new Date(apt.appointmentDate)
+      const aptDay = `${aptDate.getUTCFullYear()}-${String(aptDate.getUTCMonth() + 1).padStart(2, '0')}-${String(aptDate.getUTCDate()).padStart(2, '0')}`
+      return aptDay === dateString
+    })
+
+    return NextResponse.json(filtered)
   } catch (err) {
     console.warn(err)
     return NextResponse.json(
@@ -57,4 +68,3 @@ export async function GET(request: NextRequest) {
     )
   }
 }
-
