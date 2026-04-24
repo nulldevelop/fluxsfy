@@ -3,14 +3,14 @@ import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { LabelSubscription } from '@/components/label-subscription'
 import { Button } from '@/components/ui/button'
-import getSesion from '@/lib/getSession'
+import { getSession } from '@/lib/getSession'
 import { checkSubscription } from '@/utils/permissions/checkSubscription'
 import { Appointments } from './_components/appointments/appointments'
 import { ButtonCopyLink } from './_components/button-copy-link'
 import { Reminders } from './_components/reminder/reminders'
 
 export default async function Dashboard() {
-  const session = await getSesion()
+  const session = await getSession()
 
   if (!session) {
     redirect('/')
