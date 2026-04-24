@@ -1,5 +1,7 @@
-'use client'
+'use client';
 
-export function SessionAuth({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+import React from 'react';
+
+export function SessionAuthProvider({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }

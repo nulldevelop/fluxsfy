@@ -3,7 +3,7 @@ import { authClient } from '@/lib/auth-client'
 import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
-  const session = await authClient.getSession()
+  const { data: session } = await authClient.getSession()
 
   if (!session) {
     return NextResponse.json(
@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
 
   const searchParams = request.nextUrl.searchParams
   const dateString = searchParams.get('date') as string
-  const clinicId = session.data?.user.id
+  const clinicId = session.user.id
 
   if (!dateString) {
     return NextResponse.json({ error: 'Data não informada!' }, { status: 400 })
@@ -56,4 +56,4 @@ export async function GET(request: NextRequest) {
     )
   }
 }
-)
+

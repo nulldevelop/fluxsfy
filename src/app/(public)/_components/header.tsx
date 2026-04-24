@@ -2,7 +2,7 @@
 
 import { Loader, LogIn, Menu } from 'lucide-react'
 import Link from 'next/link'
-import { useSession } from '@/lib/auth-client'
+import { useSession, loginWithGoogle } from '@/lib/auth-client'
 import { useState } from 'react'
 import {
   Sheet,
@@ -13,7 +13,6 @@ import {
   SheetTrigger,
 } from '@/components/ui/sheet'
 import { Button } from '../../../components/ui/button'
-import { handleRegister } from '../_actions/login'
 
 export function Header() {
   const { data: session, isPending } = useSession()
@@ -22,7 +21,7 @@ export function Header() {
   const navItems = [{ href: '#professionals', label: 'Profissionais' }]
 
   async function handleLogin() {
-    await handleRegister('google')
+    await loginWithGoogle()
   }
 
   // biome-ignore lint/nursery/noNestedComponentDefinitions: dev
@@ -45,10 +44,10 @@ export function Header() {
         <Loader className='animate-spin text-white' />
       ) : session ? (
         <Button
+          asChild
           className='flex items-center justify-center gap-2 rounded-md bg-gray-500 px-4 py-1 text-white'
-          onClick={handleLogin}
         >
-          Sou Profissional
+          <Link href="/dashboard">Sou Profissional</Link>
         </Button>
       ) : (
         <Button
@@ -63,7 +62,7 @@ export function Header() {
   )
 
   return (
-    <header className='fixed top-0 right-0 left-0 z-[999] h-[80px]'>
+    <header className='fixed top-0 right-0 left-0 z-999 h-20'>
       {/* Overlay */}
       <div className='absolute inset-0 bg-black/40' />
 
@@ -89,7 +88,7 @@ export function Header() {
           </SheetTrigger>
 
           <SheetContent
-            className='z-[9999] w-[240px] border-zinc-800 border-l bg-zinc-900 text-white sm:w-[300px]'
+            className='z-9999 w-60 border-zinc-800 border-l bg-zinc-900 text-white sm:w-75'
             side='right'
           >
             <SheetTitle className='text-white'>Menu</SheetTitle>

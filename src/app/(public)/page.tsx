@@ -4,7 +4,7 @@ import { Hero } from './_components/hero'
 import { Professionals } from './_components/professionals'
 import { getProfessionals } from './_data-access/get-professionals'
 
-export const revalidate = 60 // 2 minutes
+export const revalidate = 60 
 
 export default async function Home() {
   const professionals = await getProfessionals()
@@ -12,12 +12,9 @@ export default async function Home() {
   return (
     <div className='flex min-h-screen flex-col'>
       <Header />
-
       <div>
         <Hero />
-
         <Professionals professionals={professionals || []} />
-
         <Footer />
       </div>
     </div>

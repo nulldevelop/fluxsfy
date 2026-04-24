@@ -1,11 +1,11 @@
 'use client'
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { handleRegister } from '../_actions/login'
+import { loginWithGoogle } from '@/lib/auth-client'
 
 export function Hero() {
   async function handleLogin() {
-    await handleRegister('google')
+    await loginWithGoogle()
   }
   function scrollToProfessionals() {
     const el = document.getElementById('professionals')
