@@ -20,15 +20,17 @@ export default async function Layout({
   }
   const isAdmin = session?.user?.role === 'ADMIN'
   return (
-    <SidebarProvider>
-      <AppSidebar isAdmin={isAdmin} />
-      <SidebarInset>
-        <SidebarTrigger />
-        <main className='p-1'>
-          {children}
-          <Toaster duration={2500} expand={true} richColors />
-        </main>
-      </SidebarInset>
-    </SidebarProvider>
+    <div className='dark min-h-screen bg-background text-foreground'>
+      <SidebarProvider>
+        <AppSidebar isAdmin={isAdmin} />
+        <SidebarInset>
+          <SidebarTrigger />
+          <main className='p-1'>
+            {children}
+            <Toaster duration={2500} expand={true} richColors theme='dark' />
+          </main>
+        </SidebarInset>
+      </SidebarProvider>
+    </div>
   )
 }
