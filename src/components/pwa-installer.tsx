@@ -2,13 +2,21 @@
 
 import { useEffect, useState } from 'react'
 
+import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
+
 export function PwaInstaller() {
-  const [show, setShow] = useState(false)
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    // Show after 3 seconds
     const timer = setTimeout(() => {
-      setShow(true)
+      setOpen(true)
     }, 3000)
 
     return () => clearTimeout(timer)
@@ -18,11 +26,7 @@ export function PwaInstaller() {
     alert(
       'Para instalar no iPhone:\n\n1. Toque no botão Compartilhar (+) abaixo\n2. Role até "Adicionar à Tela de Início"\n3. Toque em "Adicionar"'
     )
-    setShow(false)
-  }
-
-  function handleClose() {
-    setShow(false)
+    setOpen(false)
   }
 
   async function shareApp() {
@@ -37,128 +41,37 @@ export function PwaInstaller() {
     } catch (e) {
       // User cancelled or not supported
     }
-    setShow(false)
+    setOpen(false)
   }
 
-  if (!show) return null
-
   return (
-    <div
-      onClick={handleClose}
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 2_147_483_647,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'rgba(0,0,0,0.85)',
-        padding: '1rem',
-        cursor: 'pointer',
-      }}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        onPointerDown={(e) => e.stopPropagation()}
-        style={{
-          backgroundColor: '#18181b',
-          border: '1px solid #3f3f46',
-          borderRadius: '1rem',
-          padding: '1.5rem',
-          textAlign: 'center',
-          maxWidth: '20rem',
-          width: '100%',
-          cursor: 'default',
-        }}
-      >
-        <div
-          style={{
-            width: '4rem',
-            height: '4rem',
-            borderRadius: '9999px',
-            backgroundColor: '#f59e0b',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            margin: '0 auto 1rem',
-            fontSize: '2rem',
-          }}
-        >
-          📱
-        </div>
-
-        <h2
-          style={{
-            fontSize: '1.25rem',
-            fontWeight: 'bold',
-            color: 'white',
-            marginBottom: '0.5rem',
-          }}
-        >
-          Instalar App
-        </h2>
-        <p
-          style={{
-            color: '#a1a1aa',
-            fontSize: '0.875rem',
-            marginBottom: '1.5rem',
-          }}
-        >
-          Tenha o Fluxsfy sempre disponível no seu celular!
-        </p>
-
-        <div
-          style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}
-        >
-          <button
+    <Dialog onOpenChange={setOpen} open={open}>
+      <DialogContent className='max-w-[20rem] border-zinc-700 bg-zinc-900'>
+        <DialogHeader className='items-center'>
+          <div className='flex h-16 w-16 items-center justify-center rounded-full bg-amber-500 text-3xl'>
+            📱
+          </div>
+          <DialogTitle className='text-white'>Instalar App</DialogTitle>
+          <DialogDescription className='text-zinc-400'>
+            Tenha o Fluxsfy sempre disponível no seu celular!
+          </DialogDescription>
+        </DialogHeader>
+        <div className='flex flex-col gap-2'>
+          <Button
+            className='bg-amber-500 text-black hover:bg-amber-600'
             onClick={handleInstall}
-            onPointerDown={(e) => e.stopPropagation()}
-            style={{
-              padding: '0.75rem 1rem',
-              borderRadius: '9999px',
-              backgroundColor: '#f59e0b',
-              color: 'black',
-              fontWeight: 'bold',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '1rem',
-            }}
           >
             Instalar Agora
-          </button>
-
-          <button
+          </Button>
+          <Button
+            className='border-zinc-700 text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100'
             onClick={shareApp}
-            onPointerDown={(e) => e.stopPropagation()}
-            style={{
-              padding: '0.75rem 1rem',
-              borderRadius: '9999px',
-              border: '1px solid #3f3f46',
-              backgroundColor: 'transparent',
-              color: '#d4d4d8',
-              cursor: 'pointer',
-              fontSize: '1rem',
-            }}
+            variant='outline'
           >
             Compartilhar
-          </button>
-
-          <button
-            onClick={handleClose}
-            onPointerDown={(e) => e.stopPropagation()}
-            style={{
-              padding: '0.5rem',
-              backgroundColor: 'transparent',
-              border: 'none',
-              color: '#71717a',
-              cursor: 'pointer',
-              fontSize: '0.875rem',
-            }}
-          >
-            Agora não
-          </button>
+          </Button>
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   )
 }
