@@ -126,28 +126,28 @@ export function ProfileContent({ user }: ProfileContentProps) {
     <div className='mx-auto'>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <Card>
+          <Card className="border-l-8 border-gold">
             <CardHeader>
-              <CardTitle>Meu Perfil</CardTitle>
+              <CardTitle className="text-4xl">Meu Perfil</CardTitle>
             </CardHeader>
             <CardContent className='space-y-6'>
               <div className='flex justify-center'>
                 <AvatarProfile avatarUrl={user.image} userId={user.id} />
               </div>
 
-              <div className='space-y-4'>
+              <div className='space-y-6'>
                 <FormField
                   control={form.control}
                   name='name'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='font-semibold'>
+                      <FormLabel className='font-barlow font-bold uppercase tracking-widest text-gold'>
                         Nome completo
                       </FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder='Digite o nome da barbearia...'
+                          placeholder='Digite o nome da clinica...'
                         />
                       </FormControl>
                       <FormMessage />
@@ -160,13 +160,13 @@ export function ProfileContent({ user }: ProfileContentProps) {
                   name='address'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='font-semibold'>
+                      <FormLabel className='font-barlow font-bold uppercase tracking-widest text-gold'>
                         Endereço completo:
                       </FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder='Digite o endereço da barbearia...'
+                          placeholder='Digite o endereço da clinica...'
                         />
                       </FormControl>
                       <FormMessage />
@@ -179,10 +179,11 @@ export function ProfileContent({ user }: ProfileContentProps) {
                   name='phone'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='font-semibold'>Telefone</FormLabel>
+                      <FormLabel className='font-barlow font-bold uppercase tracking-widest text-gold'>Telefone</FormLabel>
                       <FormControl>
                         <Input
                           {...field}
+                          className="bg-zinc-900 border-zinc-800 text-cream"
                           onChange={(e) => {
                             const formattedValue = formatPhone(e.target.value)
                             field.onChange(formattedValue)
@@ -200,13 +201,13 @@ export function ProfileContent({ user }: ProfileContentProps) {
                   name='slug'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='font-semibold'>
+                      <FormLabel className='font-barlow font-bold uppercase tracking-widest text-gold'>
                         Nome amigável (URL)
                       </FormLabel>
                       <FormControl>
                         <Input
                           {...field}
-                          placeholder='ex: minha-barbearia'
+                          placeholder='ex: minha-clinica'
                         />
                       </FormControl>
                       <FormMessage />
@@ -220,7 +221,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                   render={({ field }) => (
                     <FormItem>
                       <FormLabel className='font-semibold'>
-                        Status da barbearia
+                        Status da clinica
                       </FormLabel>
                       <FormControl>
                         <Select
@@ -228,9 +229,9 @@ export function ProfileContent({ user }: ProfileContentProps) {
                           onValueChange={field.onChange}
                         >
                           <SelectTrigger>
-                            <SelectValue placeholder='Selecione o status da barbearia' />
+                            <SelectValue placeholder='Selecione o status da clincia' />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="bg-black border-gold text-cream">
                             <SelectItem value='active'>
                               ATIVO (barbearia aberta)
                             </SelectItem>
@@ -246,7 +247,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
 
                 <div className='space-y-2'>
                   <Label className='font-semibold'>
-                    Configurar horários da barbearia
+                    Configurar horários da clinica
                   </Label>
 
                   <Dialog onOpenChange={setDialogIsOpen} open={dialogIsOpen}>
@@ -260,9 +261,9 @@ export function ProfileContent({ user }: ProfileContentProps) {
                       </Button>
                     </DialogTrigger>
 
-                    <DialogContent>
+                    <DialogContent className="bg-black border-gold">
                       <DialogHeader>
-                        <DialogTitle>Horários da barbearia</DialogTitle>
+                        <DialogTitle>Horários da clinica</DialogTitle>
                         <DialogDescription>
                           Selecione abaixo os horários de funcionamento da
                           barbearia:
@@ -270,17 +271,17 @@ export function ProfileContent({ user }: ProfileContentProps) {
                       </DialogHeader>
 
                       <section className='py-4'>
-                        <p className='mb-2 text-muted-foreground text-sm'>
-                          Clique nos horários abaixo para marcar ou desmcar:
+                        <p className='mb-4 text-zinc-400 text-xs font-bold uppercase tracking-widest'>
+                          Clique nos horários abaixo para marcar ou desmarcar:
                         </p>
 
                         <div className='grid grid-cols-5 gap-2'>
                           {hours.map((hour) => (
                             <Button
                               className={cn(
-                                'h-10',
+                                'h-10 border-zinc-800',
                                 selectedHours.includes(hour) &&
-                                  'border-2 border-emerald-500 text-primary'
+                                  'border-2 border-gold text-gold bg-gold/10'
                               )}
                               key={hour}
                               onClick={() => toggleHour(hour)}
@@ -307,7 +308,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                   name='timeZone'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='font-semibold'>
+                      <FormLabel className='font-barlow font-bold uppercase tracking-widest text-gold'>
                         Selecione o fuso horário
                       </FormLabel>
                       <FormControl>
@@ -315,10 +316,10 @@ export function ProfileContent({ user }: ProfileContentProps) {
                           defaultValue={field.value}
                           onValueChange={field.onChange}
                         >
-                          <SelectTrigger>
+                          <SelectTrigger className="bg-zinc-900 border-zinc-800 text-cream">
                             <SelectValue placeholder='Selecione o seu fuso horário' />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="bg-black border-gold text-cream">
                             {timeZones.map((zone) => (
                               <SelectItem key={zone} value={zone}>
                                 {zone}
@@ -332,7 +333,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
                 />
 
                 <Button
-                  className='w-full bg-emerald-500 hover:bg-emerald-400'
+                  className='w-full'
                   type='submit'
                 >
                   Salvar alterações

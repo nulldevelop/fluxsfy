@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { Toaster } from '@/components/ui/sonner'
 import { formatPhone } from '@/utils/formatPhone'
 import { createNewAppointment } from '../_actions/create-appointment'
 import { DateTimePicker } from './date-picker'
@@ -145,7 +146,8 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
   }
 
   return (
-    <div className='min-h-screen bg-off-white text-black'>
+    <div className='dark min-h-screen bg-background text-foreground font-barlow'>
+      <Toaster duration={2500} theme='dark' richColors />
       {/* Polo Barber Top */}
       <div className='fixed top-0 left-0 right-0 z-50'>
         <div className='polo-barber' />

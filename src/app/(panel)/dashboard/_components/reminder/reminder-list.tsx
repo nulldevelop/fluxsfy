@@ -71,17 +71,17 @@ export function ReminderList({ reminder }: ReminderListProps) {
           <ScrollArea className='h-[340] w-full flex-1 pr-0 lg:max-h-[calc(100vh-15rem)]'>
             {reminder.map((reminder) => (
               <article
-                className='mb-2 flex flex-row flex-wrap items-center justify-between rounded-md bg-yellow-100 px-2 py-2'
+                className='mb-2 flex flex-row flex-wrap items-center justify-between border-l-2 border-gold bg-zinc-900 px-4 py-2'
                 key={reminder.id}
               >
-                <p className='text-sm'>{reminder.description}</p>
+                <p className='text-sm text-cream'>{reminder.description}</p>
                 <Button
-                  className='rounded-full bg-red-500 p-2 shadow-none hover:bg-red-400'
+                  className='hover:bg-destructive/20 text-destructive'
                   onClick={() => handleDeleteReminder(reminder.id)}
-                  size={'sm'}
+                  size={'icon'}
                   variant={'ghost'}
                 >
-                  <Trash className='h-4 w-4 text-white' />
+                  <Trash className='h-4 w-4' />
                 </Button>
               </article>
             ))}
