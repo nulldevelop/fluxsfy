@@ -1,5 +1,6 @@
 'use client'
 import { Pencil, Plus, User, X } from 'lucide-react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -28,7 +29,9 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
   )
 
   async function handleDeleteStaff(id: string) {
-    if (!confirm('Tem certeza que deseja remover este funcionário?')) return
+    if (!confirm('Tem certeza que deseja remover este funcionário?')) {
+      return
+    }
 
     const response = await deleteStaff(id)
 
@@ -48,7 +51,9 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
     <Dialog
       onOpenChange={(open) => {
         setIsDialogOpen(open)
-        if (!open) setEditingStaff(null)
+        if (!open) {
+          setEditingStaff(null)
+        }
       }}
       open={isDialogOpen}
     >
@@ -98,10 +103,11 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
                   <div className='mb-4 flex items-center space-x-4'>
                     <div className='flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-secondary'>
                       {member.image ? (
-                        <img
+                        <Image
                           alt={member.name}
                           className='h-full w-full object-cover'
                           src={member.image}
+                          fill
                         />
                       ) : (
                         <User className='h-6 w-6 text-muted-foreground' />

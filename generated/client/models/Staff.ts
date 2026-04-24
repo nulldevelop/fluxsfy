@@ -212,7 +212,7 @@ export type StaffWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Staff"> | Date | string
   appointment?: Prisma.AppointmentListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  service?: Prisma.ServiceListRelationFilter
+  services?: Prisma.ServiceListRelationFilter
 }
 
 export type StaffOrderByWithRelationInput = {
@@ -227,7 +227,7 @@ export type StaffOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   appointment?: Prisma.appointmentOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
-  service?: Prisma.serviceOrderByRelationAggregateInput
+  services?: Prisma.serviceOrderByRelationAggregateInput
   _relevance?: Prisma.StaffOrderByRelevanceInput
 }
 
@@ -246,7 +246,7 @@ export type StaffWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Staff"> | Date | string
   appointment?: Prisma.AppointmentListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
-  service?: Prisma.ServiceListRelationFilter
+  services?: Prisma.ServiceListRelationFilter
 }, "id">
 
 export type StaffOrderByWithAggregationInput = {
@@ -290,7 +290,7 @@ export type StaffCreateInput = {
   updatedAt?: Date | string
   appointment?: Prisma.appointmentCreateNestedManyWithoutStaffInput
   user: Prisma.UserCreateNestedOneWithoutStaffInput
-  service?: Prisma.serviceCreateNestedManyWithoutStaffInput
+  services?: Prisma.serviceCreateNestedManyWithoutStaffInput
 }
 
 export type StaffUncheckedCreateInput = {
@@ -304,7 +304,7 @@ export type StaffUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutStaffInput
-  service?: Prisma.serviceUncheckedCreateNestedManyWithoutStaffInput
+  services?: Prisma.serviceUncheckedCreateNestedManyWithoutStaffInput
 }
 
 export type StaffUpdateInput = {
@@ -318,7 +318,7 @@ export type StaffUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUpdateManyWithoutStaffNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutStaffNestedInput
-  service?: Prisma.serviceUpdateManyWithoutStaffNestedInput
+  services?: Prisma.serviceUpdateManyWithoutStaffNestedInput
 }
 
 export type StaffUncheckedUpdateInput = {
@@ -332,7 +332,7 @@ export type StaffUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUncheckedUpdateManyWithoutStaffNestedInput
-  service?: Prisma.serviceUncheckedUpdateManyWithoutStaffNestedInput
+  services?: Prisma.serviceUncheckedUpdateManyWithoutStaffNestedInput
 }
 
 export type StaffCreateManyInput = {
@@ -483,41 +483,41 @@ export type StaffUpdateOneWithoutAppointmentNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StaffUpdateToOneWithWhereWithoutAppointmentInput, Prisma.StaffUpdateWithoutAppointmentInput>, Prisma.StaffUncheckedUpdateWithoutAppointmentInput>
 }
 
-export type StaffCreateNestedManyWithoutServiceInput = {
-  create?: Prisma.XOR<Prisma.StaffCreateWithoutServiceInput, Prisma.StaffUncheckedCreateWithoutServiceInput> | Prisma.StaffCreateWithoutServiceInput[] | Prisma.StaffUncheckedCreateWithoutServiceInput[]
-  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutServiceInput | Prisma.StaffCreateOrConnectWithoutServiceInput[]
+export type StaffCreateNestedManyWithoutServicesInput = {
+  create?: Prisma.XOR<Prisma.StaffCreateWithoutServicesInput, Prisma.StaffUncheckedCreateWithoutServicesInput> | Prisma.StaffCreateWithoutServicesInput[] | Prisma.StaffUncheckedCreateWithoutServicesInput[]
+  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutServicesInput | Prisma.StaffCreateOrConnectWithoutServicesInput[]
   connect?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
 }
 
-export type StaffUncheckedCreateNestedManyWithoutServiceInput = {
-  create?: Prisma.XOR<Prisma.StaffCreateWithoutServiceInput, Prisma.StaffUncheckedCreateWithoutServiceInput> | Prisma.StaffCreateWithoutServiceInput[] | Prisma.StaffUncheckedCreateWithoutServiceInput[]
-  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutServiceInput | Prisma.StaffCreateOrConnectWithoutServiceInput[]
+export type StaffUncheckedCreateNestedManyWithoutServicesInput = {
+  create?: Prisma.XOR<Prisma.StaffCreateWithoutServicesInput, Prisma.StaffUncheckedCreateWithoutServicesInput> | Prisma.StaffCreateWithoutServicesInput[] | Prisma.StaffUncheckedCreateWithoutServicesInput[]
+  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutServicesInput | Prisma.StaffCreateOrConnectWithoutServicesInput[]
   connect?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
 }
 
-export type StaffUpdateManyWithoutServiceNestedInput = {
-  create?: Prisma.XOR<Prisma.StaffCreateWithoutServiceInput, Prisma.StaffUncheckedCreateWithoutServiceInput> | Prisma.StaffCreateWithoutServiceInput[] | Prisma.StaffUncheckedCreateWithoutServiceInput[]
-  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutServiceInput | Prisma.StaffCreateOrConnectWithoutServiceInput[]
-  upsert?: Prisma.StaffUpsertWithWhereUniqueWithoutServiceInput | Prisma.StaffUpsertWithWhereUniqueWithoutServiceInput[]
+export type StaffUpdateManyWithoutServicesNestedInput = {
+  create?: Prisma.XOR<Prisma.StaffCreateWithoutServicesInput, Prisma.StaffUncheckedCreateWithoutServicesInput> | Prisma.StaffCreateWithoutServicesInput[] | Prisma.StaffUncheckedCreateWithoutServicesInput[]
+  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutServicesInput | Prisma.StaffCreateOrConnectWithoutServicesInput[]
+  upsert?: Prisma.StaffUpsertWithWhereUniqueWithoutServicesInput | Prisma.StaffUpsertWithWhereUniqueWithoutServicesInput[]
   set?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
   disconnect?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
   delete?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
   connect?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
-  update?: Prisma.StaffUpdateWithWhereUniqueWithoutServiceInput | Prisma.StaffUpdateWithWhereUniqueWithoutServiceInput[]
-  updateMany?: Prisma.StaffUpdateManyWithWhereWithoutServiceInput | Prisma.StaffUpdateManyWithWhereWithoutServiceInput[]
+  update?: Prisma.StaffUpdateWithWhereUniqueWithoutServicesInput | Prisma.StaffUpdateWithWhereUniqueWithoutServicesInput[]
+  updateMany?: Prisma.StaffUpdateManyWithWhereWithoutServicesInput | Prisma.StaffUpdateManyWithWhereWithoutServicesInput[]
   deleteMany?: Prisma.StaffScalarWhereInput | Prisma.StaffScalarWhereInput[]
 }
 
-export type StaffUncheckedUpdateManyWithoutServiceNestedInput = {
-  create?: Prisma.XOR<Prisma.StaffCreateWithoutServiceInput, Prisma.StaffUncheckedCreateWithoutServiceInput> | Prisma.StaffCreateWithoutServiceInput[] | Prisma.StaffUncheckedCreateWithoutServiceInput[]
-  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutServiceInput | Prisma.StaffCreateOrConnectWithoutServiceInput[]
-  upsert?: Prisma.StaffUpsertWithWhereUniqueWithoutServiceInput | Prisma.StaffUpsertWithWhereUniqueWithoutServiceInput[]
+export type StaffUncheckedUpdateManyWithoutServicesNestedInput = {
+  create?: Prisma.XOR<Prisma.StaffCreateWithoutServicesInput, Prisma.StaffUncheckedCreateWithoutServicesInput> | Prisma.StaffCreateWithoutServicesInput[] | Prisma.StaffUncheckedCreateWithoutServicesInput[]
+  connectOrCreate?: Prisma.StaffCreateOrConnectWithoutServicesInput | Prisma.StaffCreateOrConnectWithoutServicesInput[]
+  upsert?: Prisma.StaffUpsertWithWhereUniqueWithoutServicesInput | Prisma.StaffUpsertWithWhereUniqueWithoutServicesInput[]
   set?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
   disconnect?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
   delete?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
   connect?: Prisma.StaffWhereUniqueInput | Prisma.StaffWhereUniqueInput[]
-  update?: Prisma.StaffUpdateWithWhereUniqueWithoutServiceInput | Prisma.StaffUpdateWithWhereUniqueWithoutServiceInput[]
-  updateMany?: Prisma.StaffUpdateManyWithWhereWithoutServiceInput | Prisma.StaffUpdateManyWithWhereWithoutServiceInput[]
+  update?: Prisma.StaffUpdateWithWhereUniqueWithoutServicesInput | Prisma.StaffUpdateWithWhereUniqueWithoutServicesInput[]
+  updateMany?: Prisma.StaffUpdateManyWithWhereWithoutServicesInput | Prisma.StaffUpdateManyWithWhereWithoutServicesInput[]
   deleteMany?: Prisma.StaffScalarWhereInput | Prisma.StaffScalarWhereInput[]
 }
 
@@ -531,7 +531,7 @@ export type StaffCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment?: Prisma.appointmentCreateNestedManyWithoutStaffInput
-  service?: Prisma.serviceCreateNestedManyWithoutStaffInput
+  services?: Prisma.serviceCreateNestedManyWithoutStaffInput
 }
 
 export type StaffUncheckedCreateWithoutUserInput = {
@@ -544,7 +544,7 @@ export type StaffUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutStaffInput
-  service?: Prisma.serviceUncheckedCreateNestedManyWithoutStaffInput
+  services?: Prisma.serviceUncheckedCreateNestedManyWithoutStaffInput
 }
 
 export type StaffCreateOrConnectWithoutUserInput = {
@@ -598,7 +598,7 @@ export type StaffCreateWithoutAppointmentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutStaffInput
-  service?: Prisma.serviceCreateNestedManyWithoutStaffInput
+  services?: Prisma.serviceCreateNestedManyWithoutStaffInput
 }
 
 export type StaffUncheckedCreateWithoutAppointmentInput = {
@@ -611,7 +611,7 @@ export type StaffUncheckedCreateWithoutAppointmentInput = {
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
-  service?: Prisma.serviceUncheckedCreateNestedManyWithoutStaffInput
+  services?: Prisma.serviceUncheckedCreateNestedManyWithoutStaffInput
 }
 
 export type StaffCreateOrConnectWithoutAppointmentInput = {
@@ -640,7 +640,7 @@ export type StaffUpdateWithoutAppointmentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutStaffNestedInput
-  service?: Prisma.serviceUpdateManyWithoutStaffNestedInput
+  services?: Prisma.serviceUpdateManyWithoutStaffNestedInput
 }
 
 export type StaffUncheckedUpdateWithoutAppointmentInput = {
@@ -653,10 +653,10 @@ export type StaffUncheckedUpdateWithoutAppointmentInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  service?: Prisma.serviceUncheckedUpdateManyWithoutStaffNestedInput
+  services?: Prisma.serviceUncheckedUpdateManyWithoutStaffNestedInput
 }
 
-export type StaffCreateWithoutServiceInput = {
+export type StaffCreateWithoutServicesInput = {
   id?: string
   name: string
   phone?: string | null
@@ -669,7 +669,7 @@ export type StaffCreateWithoutServiceInput = {
   user: Prisma.UserCreateNestedOneWithoutStaffInput
 }
 
-export type StaffUncheckedCreateWithoutServiceInput = {
+export type StaffUncheckedCreateWithoutServicesInput = {
   id?: string
   name: string
   phone?: string | null
@@ -682,25 +682,25 @@ export type StaffUncheckedCreateWithoutServiceInput = {
   appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutStaffInput
 }
 
-export type StaffCreateOrConnectWithoutServiceInput = {
+export type StaffCreateOrConnectWithoutServicesInput = {
   where: Prisma.StaffWhereUniqueInput
-  create: Prisma.XOR<Prisma.StaffCreateWithoutServiceInput, Prisma.StaffUncheckedCreateWithoutServiceInput>
+  create: Prisma.XOR<Prisma.StaffCreateWithoutServicesInput, Prisma.StaffUncheckedCreateWithoutServicesInput>
 }
 
-export type StaffUpsertWithWhereUniqueWithoutServiceInput = {
+export type StaffUpsertWithWhereUniqueWithoutServicesInput = {
   where: Prisma.StaffWhereUniqueInput
-  update: Prisma.XOR<Prisma.StaffUpdateWithoutServiceInput, Prisma.StaffUncheckedUpdateWithoutServiceInput>
-  create: Prisma.XOR<Prisma.StaffCreateWithoutServiceInput, Prisma.StaffUncheckedCreateWithoutServiceInput>
+  update: Prisma.XOR<Prisma.StaffUpdateWithoutServicesInput, Prisma.StaffUncheckedUpdateWithoutServicesInput>
+  create: Prisma.XOR<Prisma.StaffCreateWithoutServicesInput, Prisma.StaffUncheckedCreateWithoutServicesInput>
 }
 
-export type StaffUpdateWithWhereUniqueWithoutServiceInput = {
+export type StaffUpdateWithWhereUniqueWithoutServicesInput = {
   where: Prisma.StaffWhereUniqueInput
-  data: Prisma.XOR<Prisma.StaffUpdateWithoutServiceInput, Prisma.StaffUncheckedUpdateWithoutServiceInput>
+  data: Prisma.XOR<Prisma.StaffUpdateWithoutServicesInput, Prisma.StaffUncheckedUpdateWithoutServicesInput>
 }
 
-export type StaffUpdateManyWithWhereWithoutServiceInput = {
+export type StaffUpdateManyWithWhereWithoutServicesInput = {
   where: Prisma.StaffScalarWhereInput
-  data: Prisma.XOR<Prisma.StaffUpdateManyMutationInput, Prisma.StaffUncheckedUpdateManyWithoutServiceInput>
+  data: Prisma.XOR<Prisma.StaffUpdateManyMutationInput, Prisma.StaffUncheckedUpdateManyWithoutServicesInput>
 }
 
 export type StaffCreateManyUserInput = {
@@ -724,7 +724,7 @@ export type StaffUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUpdateManyWithoutStaffNestedInput
-  service?: Prisma.serviceUpdateManyWithoutStaffNestedInput
+  services?: Prisma.serviceUpdateManyWithoutStaffNestedInput
 }
 
 export type StaffUncheckedUpdateWithoutUserInput = {
@@ -737,7 +737,7 @@ export type StaffUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUncheckedUpdateManyWithoutStaffNestedInput
-  service?: Prisma.serviceUncheckedUpdateManyWithoutStaffNestedInput
+  services?: Prisma.serviceUncheckedUpdateManyWithoutStaffNestedInput
 }
 
 export type StaffUncheckedUpdateManyWithoutUserInput = {
@@ -751,7 +751,7 @@ export type StaffUncheckedUpdateManyWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
-export type StaffUpdateWithoutServiceInput = {
+export type StaffUpdateWithoutServicesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -764,7 +764,7 @@ export type StaffUpdateWithoutServiceInput = {
   user?: Prisma.UserUpdateOneRequiredWithoutStaffNestedInput
 }
 
-export type StaffUncheckedUpdateWithoutServiceInput = {
+export type StaffUncheckedUpdateWithoutServicesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -777,7 +777,7 @@ export type StaffUncheckedUpdateWithoutServiceInput = {
   appointment?: Prisma.appointmentUncheckedUpdateManyWithoutStaffNestedInput
 }
 
-export type StaffUncheckedUpdateManyWithoutServiceInput = {
+export type StaffUncheckedUpdateManyWithoutServicesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -796,12 +796,12 @@ export type StaffUncheckedUpdateManyWithoutServiceInput = {
 
 export type StaffCountOutputType = {
   appointment: number
-  service: number
+  services: number
 }
 
 export type StaffCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appointment?: boolean | StaffCountOutputTypeCountAppointmentArgs
-  service?: boolean | StaffCountOutputTypeCountServiceArgs
+  services?: boolean | StaffCountOutputTypeCountServicesArgs
 }
 
 /**
@@ -824,7 +824,7 @@ export type StaffCountOutputTypeCountAppointmentArgs<ExtArgs extends runtime.Typ
 /**
  * StaffCountOutputType without action
  */
-export type StaffCountOutputTypeCountServiceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type StaffCountOutputTypeCountServicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.serviceWhereInput
 }
 
@@ -841,7 +841,7 @@ export type StaffSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   updatedAt?: boolean
   appointment?: boolean | Prisma.Staff$appointmentArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  service?: boolean | Prisma.Staff$serviceArgs<ExtArgs>
+  services?: boolean | Prisma.Staff$servicesArgs<ExtArgs>
   _count?: boolean | Prisma.StaffCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["staff"]>
 
@@ -863,7 +863,7 @@ export type StaffOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = ru
 export type StaffInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   appointment?: boolean | Prisma.Staff$appointmentArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
-  service?: boolean | Prisma.Staff$serviceArgs<ExtArgs>
+  services?: boolean | Prisma.Staff$servicesArgs<ExtArgs>
   _count?: boolean | Prisma.StaffCountOutputTypeDefaultArgs<ExtArgs>
 }
 
@@ -872,7 +872,7 @@ export type $StaffPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   objects: {
     appointment: Prisma.$appointmentPayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs>
-    service: Prisma.$servicePayload<ExtArgs>[]
+    services: Prisma.$servicePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1226,7 +1226,7 @@ export interface Prisma__StaffClient<T, Null = never, ExtArgs extends runtime.Ty
   readonly [Symbol.toStringTag]: "PrismaPromise"
   appointment<T extends Prisma.Staff$appointmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Staff$appointmentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$appointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-  service<T extends Prisma.Staff$serviceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Staff$serviceArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$servicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  services<T extends Prisma.Staff$servicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Staff$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$servicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1637,9 +1637,9 @@ export type Staff$appointmentArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * Staff.service
+ * Staff.services
  */
-export type Staff$serviceArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type Staff$servicesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the service
    */

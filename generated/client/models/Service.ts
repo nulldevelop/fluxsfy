@@ -320,8 +320,8 @@ export type serviceCreateInput = {
   createdAt?: Date | string
   updatedAt: Date | string
   appointment?: Prisma.appointmentCreateNestedManyWithoutServiceInput
-  user: Prisma.UserCreateNestedOneWithoutServiceInput
-  staff?: Prisma.StaffCreateNestedManyWithoutServiceInput
+  user: Prisma.UserCreateNestedOneWithoutServicesInput
+  staff?: Prisma.StaffCreateNestedManyWithoutServicesInput
 }
 
 export type serviceUncheckedCreateInput = {
@@ -334,7 +334,7 @@ export type serviceUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt: Date | string
   appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutServiceInput
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutServiceInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutServicesInput
 }
 
 export type serviceUpdateInput = {
@@ -346,8 +346,8 @@ export type serviceUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUpdateManyWithoutServiceNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutServiceNestedInput
-  staff?: Prisma.StaffUpdateManyWithoutServiceNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutServicesNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutServicesNestedInput
 }
 
 export type serviceUncheckedUpdateInput = {
@@ -360,7 +360,7 @@ export type serviceUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUncheckedUpdateManyWithoutServiceNestedInput
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutServiceNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutServicesNestedInput
 }
 
 export type serviceCreateManyInput = {
@@ -562,7 +562,7 @@ export type serviceCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt: Date | string
   appointment?: Prisma.appointmentCreateNestedManyWithoutServiceInput
-  staff?: Prisma.StaffCreateNestedManyWithoutServiceInput
+  staff?: Prisma.StaffCreateNestedManyWithoutServicesInput
 }
 
 export type serviceUncheckedCreateWithoutUserInput = {
@@ -574,7 +574,7 @@ export type serviceUncheckedCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt: Date | string
   appointment?: Prisma.appointmentUncheckedCreateNestedManyWithoutServiceInput
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutServiceInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutServicesInput
 }
 
 export type serviceCreateOrConnectWithoutUserInput = {
@@ -626,7 +626,7 @@ export type serviceCreateWithoutStaffInput = {
   createdAt?: Date | string
   updatedAt: Date | string
   appointment?: Prisma.appointmentCreateNestedManyWithoutServiceInput
-  user: Prisma.UserCreateNestedOneWithoutServiceInput
+  user: Prisma.UserCreateNestedOneWithoutServicesInput
 }
 
 export type serviceUncheckedCreateWithoutStaffInput = {
@@ -670,8 +670,8 @@ export type serviceCreateWithoutAppointmentInput = {
   status?: boolean
   createdAt?: Date | string
   updatedAt: Date | string
-  user: Prisma.UserCreateNestedOneWithoutServiceInput
-  staff?: Prisma.StaffCreateNestedManyWithoutServiceInput
+  user: Prisma.UserCreateNestedOneWithoutServicesInput
+  staff?: Prisma.StaffCreateNestedManyWithoutServicesInput
 }
 
 export type serviceUncheckedCreateWithoutAppointmentInput = {
@@ -683,7 +683,7 @@ export type serviceUncheckedCreateWithoutAppointmentInput = {
   userId: string
   createdAt?: Date | string
   updatedAt: Date | string
-  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutServiceInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutServicesInput
 }
 
 export type serviceCreateOrConnectWithoutAppointmentInput = {
@@ -710,8 +710,8 @@ export type serviceUpdateWithoutAppointmentInput = {
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  user?: Prisma.UserUpdateOneRequiredWithoutServiceNestedInput
-  staff?: Prisma.StaffUpdateManyWithoutServiceNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutServicesNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutServicesNestedInput
 }
 
 export type serviceUncheckedUpdateWithoutAppointmentInput = {
@@ -723,7 +723,7 @@ export type serviceUncheckedUpdateWithoutAppointmentInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutServiceNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutServicesNestedInput
 }
 
 export type serviceCreateManyUserInput = {
@@ -745,7 +745,7 @@ export type serviceUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUpdateManyWithoutServiceNestedInput
-  staff?: Prisma.StaffUpdateManyWithoutServiceNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutServicesNestedInput
 }
 
 export type serviceUncheckedUpdateWithoutUserInput = {
@@ -757,7 +757,7 @@ export type serviceUncheckedUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUncheckedUpdateManyWithoutServiceNestedInput
-  staff?: Prisma.StaffUncheckedUpdateManyWithoutServiceNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutServicesNestedInput
 }
 
 export type serviceUncheckedUpdateManyWithoutUserInput = {
@@ -779,7 +779,7 @@ export type serviceUpdateWithoutStaffInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   appointment?: Prisma.appointmentUpdateManyWithoutServiceNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutServiceNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutServicesNestedInput
 }
 
 export type serviceUncheckedUpdateWithoutStaffInput = {
