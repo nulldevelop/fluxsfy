@@ -245,6 +245,7 @@ export type ServiceWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"Service"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Service"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  staff?: Prisma.StaffListRelationFilter
   appointment?: Prisma.AppointmentListRelationFilter
 }
 
@@ -258,6 +259,7 @@ export type ServiceOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
+  staff?: Prisma.StaffOrderByRelationAggregateInput
   appointment?: Prisma.AppointmentOrderByRelationAggregateInput
   _relevance?: Prisma.ServiceOrderByRelevanceInput
 }
@@ -275,6 +277,7 @@ export type ServiceWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"Service"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Service"> | Date | string
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  staff?: Prisma.StaffListRelationFilter
   appointment?: Prisma.AppointmentListRelationFilter
 }, "id">
 
@@ -317,6 +320,7 @@ export type ServiceCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutServicesInput
+  staff?: Prisma.StaffCreateNestedManyWithoutServicesInput
   appointment?: Prisma.AppointmentCreateNestedManyWithoutServiceInput
 }
 
@@ -329,6 +333,7 @@ export type ServiceUncheckedCreateInput = {
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutServicesInput
   appointment?: Prisma.AppointmentUncheckedCreateNestedManyWithoutServiceInput
 }
 
@@ -341,6 +346,7 @@ export type ServiceUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutServicesNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutServicesNestedInput
   appointment?: Prisma.AppointmentUpdateManyWithoutServiceNestedInput
 }
 
@@ -353,6 +359,7 @@ export type ServiceUncheckedUpdateInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutServicesNestedInput
   appointment?: Prisma.AppointmentUncheckedUpdateManyWithoutServiceNestedInput
 }
 
@@ -520,6 +527,44 @@ export type ServiceUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.ServiceScalarWhereInput | Prisma.ServiceScalarWhereInput[]
 }
 
+export type ServiceCreateNestedManyWithoutStaffInput = {
+  create?: Prisma.XOR<Prisma.ServiceCreateWithoutStaffInput, Prisma.ServiceUncheckedCreateWithoutStaffInput> | Prisma.ServiceCreateWithoutStaffInput[] | Prisma.ServiceUncheckedCreateWithoutStaffInput[]
+  connectOrCreate?: Prisma.ServiceCreateOrConnectWithoutStaffInput | Prisma.ServiceCreateOrConnectWithoutStaffInput[]
+  connect?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+}
+
+export type ServiceUncheckedCreateNestedManyWithoutStaffInput = {
+  create?: Prisma.XOR<Prisma.ServiceCreateWithoutStaffInput, Prisma.ServiceUncheckedCreateWithoutStaffInput> | Prisma.ServiceCreateWithoutStaffInput[] | Prisma.ServiceUncheckedCreateWithoutStaffInput[]
+  connectOrCreate?: Prisma.ServiceCreateOrConnectWithoutStaffInput | Prisma.ServiceCreateOrConnectWithoutStaffInput[]
+  connect?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+}
+
+export type ServiceUpdateManyWithoutStaffNestedInput = {
+  create?: Prisma.XOR<Prisma.ServiceCreateWithoutStaffInput, Prisma.ServiceUncheckedCreateWithoutStaffInput> | Prisma.ServiceCreateWithoutStaffInput[] | Prisma.ServiceUncheckedCreateWithoutStaffInput[]
+  connectOrCreate?: Prisma.ServiceCreateOrConnectWithoutStaffInput | Prisma.ServiceCreateOrConnectWithoutStaffInput[]
+  upsert?: Prisma.ServiceUpsertWithWhereUniqueWithoutStaffInput | Prisma.ServiceUpsertWithWhereUniqueWithoutStaffInput[]
+  set?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+  disconnect?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+  delete?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+  connect?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+  update?: Prisma.ServiceUpdateWithWhereUniqueWithoutStaffInput | Prisma.ServiceUpdateWithWhereUniqueWithoutStaffInput[]
+  updateMany?: Prisma.ServiceUpdateManyWithWhereWithoutStaffInput | Prisma.ServiceUpdateManyWithWhereWithoutStaffInput[]
+  deleteMany?: Prisma.ServiceScalarWhereInput | Prisma.ServiceScalarWhereInput[]
+}
+
+export type ServiceUncheckedUpdateManyWithoutStaffNestedInput = {
+  create?: Prisma.XOR<Prisma.ServiceCreateWithoutStaffInput, Prisma.ServiceUncheckedCreateWithoutStaffInput> | Prisma.ServiceCreateWithoutStaffInput[] | Prisma.ServiceUncheckedCreateWithoutStaffInput[]
+  connectOrCreate?: Prisma.ServiceCreateOrConnectWithoutStaffInput | Prisma.ServiceCreateOrConnectWithoutStaffInput[]
+  upsert?: Prisma.ServiceUpsertWithWhereUniqueWithoutStaffInput | Prisma.ServiceUpsertWithWhereUniqueWithoutStaffInput[]
+  set?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+  disconnect?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+  delete?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+  connect?: Prisma.ServiceWhereUniqueInput | Prisma.ServiceWhereUniqueInput[]
+  update?: Prisma.ServiceUpdateWithWhereUniqueWithoutStaffInput | Prisma.ServiceUpdateWithWhereUniqueWithoutStaffInput[]
+  updateMany?: Prisma.ServiceUpdateManyWithWhereWithoutStaffInput | Prisma.ServiceUpdateManyWithWhereWithoutStaffInput[]
+  deleteMany?: Prisma.ServiceScalarWhereInput | Prisma.ServiceScalarWhereInput[]
+}
+
 export type ServiceCreateWithoutAppointmentInput = {
   id?: string
   name: string
@@ -529,6 +574,7 @@ export type ServiceCreateWithoutAppointmentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutServicesInput
+  staff?: Prisma.StaffCreateNestedManyWithoutServicesInput
 }
 
 export type ServiceUncheckedCreateWithoutAppointmentInput = {
@@ -540,6 +586,7 @@ export type ServiceUncheckedCreateWithoutAppointmentInput = {
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutServicesInput
 }
 
 export type ServiceCreateOrConnectWithoutAppointmentInput = {
@@ -567,6 +614,7 @@ export type ServiceUpdateWithoutAppointmentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutServicesNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutServicesNestedInput
 }
 
 export type ServiceUncheckedUpdateWithoutAppointmentInput = {
@@ -578,6 +626,7 @@ export type ServiceUncheckedUpdateWithoutAppointmentInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutServicesNestedInput
 }
 
 export type ServiceCreateWithoutUserInput = {
@@ -588,6 +637,7 @@ export type ServiceCreateWithoutUserInput = {
   status?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  staff?: Prisma.StaffCreateNestedManyWithoutServicesInput
   appointment?: Prisma.AppointmentCreateNestedManyWithoutServiceInput
 }
 
@@ -599,6 +649,7 @@ export type ServiceUncheckedCreateWithoutUserInput = {
   status?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutServicesInput
   appointment?: Prisma.AppointmentUncheckedCreateNestedManyWithoutServiceInput
 }
 
@@ -642,6 +693,51 @@ export type ServiceScalarWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Service"> | Date | string
 }
 
+export type ServiceCreateWithoutStaffInput = {
+  id?: string
+  name: string
+  price: number
+  duration: number
+  status?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  user: Prisma.UserCreateNestedOneWithoutServicesInput
+  appointment?: Prisma.AppointmentCreateNestedManyWithoutServiceInput
+}
+
+export type ServiceUncheckedCreateWithoutStaffInput = {
+  id?: string
+  name: string
+  price: number
+  duration: number
+  status?: boolean
+  userId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  appointment?: Prisma.AppointmentUncheckedCreateNestedManyWithoutServiceInput
+}
+
+export type ServiceCreateOrConnectWithoutStaffInput = {
+  where: Prisma.ServiceWhereUniqueInput
+  create: Prisma.XOR<Prisma.ServiceCreateWithoutStaffInput, Prisma.ServiceUncheckedCreateWithoutStaffInput>
+}
+
+export type ServiceUpsertWithWhereUniqueWithoutStaffInput = {
+  where: Prisma.ServiceWhereUniqueInput
+  update: Prisma.XOR<Prisma.ServiceUpdateWithoutStaffInput, Prisma.ServiceUncheckedUpdateWithoutStaffInput>
+  create: Prisma.XOR<Prisma.ServiceCreateWithoutStaffInput, Prisma.ServiceUncheckedCreateWithoutStaffInput>
+}
+
+export type ServiceUpdateWithWhereUniqueWithoutStaffInput = {
+  where: Prisma.ServiceWhereUniqueInput
+  data: Prisma.XOR<Prisma.ServiceUpdateWithoutStaffInput, Prisma.ServiceUncheckedUpdateWithoutStaffInput>
+}
+
+export type ServiceUpdateManyWithWhereWithoutStaffInput = {
+  where: Prisma.ServiceScalarWhereInput
+  data: Prisma.XOR<Prisma.ServiceUpdateManyMutationInput, Prisma.ServiceUncheckedUpdateManyWithoutStaffInput>
+}
+
 export type ServiceCreateManyUserInput = {
   id?: string
   name: string
@@ -660,6 +756,7 @@ export type ServiceUpdateWithoutUserInput = {
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staff?: Prisma.StaffUpdateManyWithoutServicesNestedInput
   appointment?: Prisma.AppointmentUpdateManyWithoutServiceNestedInput
 }
 
@@ -671,6 +768,7 @@ export type ServiceUncheckedUpdateWithoutUserInput = {
   status?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutServicesNestedInput
   appointment?: Prisma.AppointmentUncheckedUpdateManyWithoutServiceNestedInput
 }
 
@@ -684,16 +782,53 @@ export type ServiceUncheckedUpdateManyWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type ServiceUpdateWithoutStaffInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  user?: Prisma.UserUpdateOneRequiredWithoutServicesNestedInput
+  appointment?: Prisma.AppointmentUpdateManyWithoutServiceNestedInput
+}
+
+export type ServiceUncheckedUpdateWithoutStaffInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  appointment?: Prisma.AppointmentUncheckedUpdateManyWithoutServiceNestedInput
+}
+
+export type ServiceUncheckedUpdateManyWithoutStaffInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.IntFieldUpdateOperationsInput | number
+  duration?: Prisma.IntFieldUpdateOperationsInput | number
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 /**
  * Count Type ServiceCountOutputType
  */
 
 export type ServiceCountOutputType = {
+  staff: number
   appointment: number
 }
 
 export type ServiceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  staff?: boolean | ServiceCountOutputTypeCountStaffArgs
   appointment?: boolean | ServiceCountOutputTypeCountAppointmentArgs
 }
 
@@ -705,6 +840,13 @@ export type ServiceCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
    * Select specific fields to fetch from the ServiceCountOutputType
    */
   select?: Prisma.ServiceCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ServiceCountOutputType without action
+ */
+export type ServiceCountOutputTypeCountStaffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StaffWhereInput
 }
 
 /**
@@ -725,6 +867,7 @@ export type ServiceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   createdAt?: boolean
   updatedAt?: boolean
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  staff?: boolean | Prisma.Service$staffArgs<ExtArgs>
   appointment?: boolean | Prisma.Service$appointmentArgs<ExtArgs>
   _count?: boolean | Prisma.ServiceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["service"]>
@@ -745,6 +888,7 @@ export type ServiceSelectScalar = {
 export type ServiceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "price" | "duration" | "status" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["service"]>
 export type ServiceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  staff?: boolean | Prisma.Service$staffArgs<ExtArgs>
   appointment?: boolean | Prisma.Service$appointmentArgs<ExtArgs>
   _count?: boolean | Prisma.ServiceCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -753,6 +897,7 @@ export type $ServicePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Service"
   objects: {
     user: Prisma.$UserPayload<ExtArgs>
+    staff: Prisma.$StaffPayload<ExtArgs>[]
     appointment: Prisma.$AppointmentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1105,6 +1250,7 @@ readonly fields: ServiceFieldRefs;
 export interface Prisma__ServiceClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  staff<T extends Prisma.Service$staffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Service$staffArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   appointment<T extends Prisma.Service$appointmentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Service$appointmentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1488,6 +1634,30 @@ export type ServiceDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
    * Limit how many Services to delete.
    */
   limit?: number
+}
+
+/**
+ * Service.staff
+ */
+export type Service$staffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Staff
+   */
+  select?: Prisma.StaffSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Staff
+   */
+  omit?: Prisma.StaffOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffInclude<ExtArgs> | null
+  where?: Prisma.StaffWhereInput
+  orderBy?: Prisma.StaffOrderByWithRelationInput | Prisma.StaffOrderByWithRelationInput[]
+  cursor?: Prisma.StaffWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StaffScalarFieldEnum | Prisma.StaffScalarFieldEnum[]
 }
 
 /**
