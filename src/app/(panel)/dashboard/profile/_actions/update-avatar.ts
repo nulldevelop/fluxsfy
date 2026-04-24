@@ -1,7 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/getSession'
 import { prisma } from '@/lib/prisma'
 
 export async function updateProfileAvatar({
@@ -9,7 +9,7 @@ export async function updateProfileAvatar({
 }: {
   avatarUrl: string
 }) {
-  const session = await auth()
+  const session = await getSession()
 
   if (!session?.user?.id) {
     return {

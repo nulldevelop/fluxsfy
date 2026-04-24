@@ -1,10 +1,10 @@
 'use server'
 
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/getSession'
 import { prisma } from '@/lib/prisma'
 
 export async function toggleUserStatus(userId: string) {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') {
     return { ok: false }
   }
@@ -20,7 +20,7 @@ export async function toggleUserStatus(userId: string) {
 }
 
 export async function setUserRole(userId: string, role: 'USER' | 'ADMIN') {
-  const session = await auth()
+  const session = await getSession()
   if (session?.user?.role !== 'ADMIN') {
     return { ok: false }
   }

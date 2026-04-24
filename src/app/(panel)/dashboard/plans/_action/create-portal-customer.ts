@@ -1,11 +1,11 @@
 'use server'
 
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/getSession'
 import { prisma } from '@/lib/prisma'
 import { stripe } from '@/utils/stripe'
 
 export async function createPortalCustomer() {
-  const session = await auth()
+  const session = await getSession()
 
   if (!session?.user?.id) {
     return {

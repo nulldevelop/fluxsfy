@@ -1,6 +1,6 @@
 'use server'
 
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/getSession'
 import { prisma } from '@/lib/prisma'
 import { canCreateService } from './canCreateService'
 import type { PlanDetailInfo } from './get-plans'
@@ -22,7 +22,7 @@ interface CanPermissionProps {
 export async function canPermission({
   type,
 }: CanPermissionProps): Promise<ResultPermissionProp> {
-  const session = await auth()
+  const session = await getSession()
 
   if (!session?.user?.id) {
     return {

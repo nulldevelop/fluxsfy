@@ -1,7 +1,7 @@
 'use server'
 
 import type { Plan } from '@prisma/client'
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/getSession'
 import { prisma } from '@/lib/prisma'
 import { stripe } from '@/utils/stripe'
 
@@ -10,7 +10,7 @@ interface SubscriptionProps {
 }
 
 export async function createSubscription({ type }: SubscriptionProps) {
-  const session = await auth()
+  const session = await getSession()
   const userId = session?.user?.id
 
   if (!userId) {

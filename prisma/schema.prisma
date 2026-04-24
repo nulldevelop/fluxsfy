@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider = "prisma-client"
   output   = "../generated/client"
 }
 
@@ -106,6 +106,7 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  @@index([userId(length: 191)])
   @@map("session")
 }
 
@@ -125,16 +126,18 @@ model Account {
   createdAt             DateTime
   updatedAt             DateTime
 
+  @@index([userId(length: 191)])
   @@map("account")
 }
 
 model Verification {
   id         String    @id
   identifier String
-  value      String
+  value      String    @db.Text
   expiresAt  DateTime
   createdAt  DateTime?
   updatedAt  DateTime?
 
+  @@index([identifier(length: 191)])
   @@map("verification")
 }

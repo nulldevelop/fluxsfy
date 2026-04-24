@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod/v4'
-import { auth } from '@/lib/auth'
+import { getSession } from '@/lib/getSession'
 import { prisma } from '@/lib/prisma'
 
 const formSchema = z.object({
@@ -12,7 +12,7 @@ const formSchema = z.object({
 type FormSchma = z.infer<typeof formSchema>
 
 export async function createReminder(formdata: FormSchma) {
-  const session = await auth()
+  const session = await getSession()
 
   if (!session?.user?.id) {
     return {

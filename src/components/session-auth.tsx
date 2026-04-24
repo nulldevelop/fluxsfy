@@ -1,7 +1,11 @@
-'use client';
+'use client'
 
-import React from 'react';
+import type React from 'react'
 
-export function SessionAuthProvider({ children }: { children: React.ReactNode }) {
-  return <>{children}</>;
+export function SessionAuthProvider({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return <>{children}</>
 }
