@@ -34,10 +34,10 @@ import { ScheduleTimeList } from './schedule-time-list'
 type UserWithServiceAndSubscriptionAndStaff = Prisma.UserGetPayload<{
   include: {
     subscription: true
-    service: true
+    services: true
     staff: {
       include: {
-        service: true
+        services: true
       }
     }
   }
@@ -67,7 +67,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
   // Filter staff based on selected service
   const filteredStaff = clinic.staff.filter((s) =>
-    s.service.some((service) => service.id === selectedServiceId)
+    s.services.some((service) => service.id === selectedServiceId)
   )
 
   const [blockedTimes, setBlockedTimes] = useState<string[]>([])
@@ -327,7 +327,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                                 <SelectValue placeholder='Selecione um serviço' />
                             </SelectTrigger>
                             <SelectContent className="bg-black border-gold text-cream">
-                                {clinic.service.map((service) => (
+                                {clinic.services.map((service) => (
                                 <SelectItem key={service.id} value={service.id}>
                                     {service.name} -{' '}
                                     {Math.floor(service.duration / 60)}h{' '}
@@ -360,11 +360,11 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                           clinicTimes={clinic.times}
                           onSelectTime={(time) => setSelectedTime(time)}
                           requiredSlots={
-                            clinic.service.find(
+                            clinic.services.find(
                               (service) => service.id === selectedServiceId
                             )
                               ? Math.ceil(
-                                  clinic.service.find(
+                                  clinic.services.find(
                                     (service) =>
                                       service.id === selectedServiceId
                                   )!.duration / 30

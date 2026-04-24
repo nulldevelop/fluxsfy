@@ -15,7 +15,7 @@ export async function getStaff({ userId }: { userId: string }) {
         userId,
       },
       include: {
-        service: true,
+        services: true,
       },
       orderBy: {
         createdAt: 'desc',

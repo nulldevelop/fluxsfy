@@ -1,11 +1,12 @@
 'use client'
-import type { Service, Staff } from '@prisma/client'
 import { Pencil, Plus, User, X } from 'lucide-react'
+import Link from 'next/link'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import type { service as Service, Staff } from '@/generated/client/client'
 import type { ResultPermissionProp } from '@/utils/permissions/canPermission'
 import { deleteStaff } from '../_actions/staff-actions'
 import { DialogStaff } from './dialog-staff'
@@ -57,12 +58,22 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
             <CardTitle className='font-bold text-xl md:text-2xl'>
               Funcionários
             </CardTitle>
-            <DialogTrigger asChild>
-              <Button>
-                <Plus className='mr-2 h-4 w-4' />
-                Novo Funcionário
-              </Button>
-            </DialogTrigger>
+
+            {permissions.hasPermission ? (
+              <DialogTrigger asChild>
+                <Button>
+                  <Plus className='mr-2 h-4 w-4' />
+                  Novo Funcionário
+                </Button>
+              </DialogTrigger>
+            ) : (
+              <Link
+                className='font-bold text-emerald-600 text-sm hover:underline'
+                href={'/dashboard/plans'}
+              >
+                Limite atingido - Atualize seu plano
+              </Link>
+            )}
 
             <DialogContent className='max-h-[90vh] max-w-2xl overflow-y-auto'>
               <DialogStaff

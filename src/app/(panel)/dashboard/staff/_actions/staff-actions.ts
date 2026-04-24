@@ -29,7 +29,7 @@ export async function createStaff(data: z.infer<typeof staffSchema>) {
         times: data.times,
         status: data.status,
         userId: session.user.id,
-        service: {
+        services: {
           connect: data.services.map((id) => ({ id })),
         },
       },
@@ -58,7 +58,7 @@ export async function updateStaff(id: string, data: z.infer<typeof staffSchema>)
         image: data.image,
         times: data.times,
         status: data.status,
-        service: {
+        services: {
           set: data.services.map((id) => ({ id })),
         },
       },

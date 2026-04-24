@@ -15,7 +15,7 @@ export async function getProfessionals() {
             status: true,
           },
           include: {
-            service: true,
+            services: true,
           },
         },
       },

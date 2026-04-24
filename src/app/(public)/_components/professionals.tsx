@@ -11,7 +11,7 @@ type UserWithStaffAndServices = Prisma.UserGetPayload<{
     subscription: true
     staff: {
       include: {
-        service: true
+        services: true
       }
     }
   }
@@ -97,13 +97,13 @@ export function Professionals({ professionals }: ProfessionalsProps) {
                     <div className='mt-4'>
                         <p className='font-barlow text-gray-500 text-[10px] uppercase tracking-widest font-bold mb-1'>Serviços:</p>
                         <div className='flex flex-wrap gap-1'>
-                            {member.service.slice(0, 3).map(service => (
+                            {member.services.slice(0, 3).map(service => (
                                 <span key={service.id} className='px-2 py-0.5 bg-zinc-800 text-cream text-[9px] rounded-full uppercase tracking-tighter'>
                                     {service.name}
                                 </span>
                             ))}
-                            {member.service.length > 3 && (
-                                <span className='text-[9px] text-gray-600'>+{member.service.length - 3} mais</span>
+                            {member.services.length > 3 && (
+                                <span className='text-[9px] text-gray-600'>+{member.services.length - 3} mais</span>
                             )}
                         </div>
                     </div>

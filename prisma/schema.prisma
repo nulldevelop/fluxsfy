@@ -29,7 +29,7 @@ model User {
   accounts           Account[]
   appointment        appointment[]
   reminder           reminder[]
-  service            service[]
+  services            service[]
   sessions           Session[]
   staff              Staff[]
   subscription       subscription?
@@ -49,7 +49,7 @@ model Staff {
   updatedAt   DateTime      @updatedAt
   appointment appointment[]
   user        User          @relation(fields: [userId], references: [id])
-  service     service[]     @relation("staffservices")
+  services     service[]     @relation("staffservices")
 
   @@index([userId], map: "staff_userId_fkey")
   @@map("staff")

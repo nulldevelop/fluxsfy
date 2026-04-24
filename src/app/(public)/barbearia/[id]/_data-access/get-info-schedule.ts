@@ -14,7 +14,7 @@ export async function getInfoSchedule({ userId }: { userId: string }) {
       },
       include: {
         subscription: true,
-        service: {
+        services: {
           where: {
             status: true,
           },
@@ -24,7 +24,7 @@ export async function getInfoSchedule({ userId }: { userId: string }) {
             status: true,
           },
           include: {
-            service: true,
+            services: true,
           },
         },
       },
