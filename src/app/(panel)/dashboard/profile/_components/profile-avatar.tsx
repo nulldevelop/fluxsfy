@@ -56,7 +56,7 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
       formData.append('userId', userId)
 
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_URL}/api/image/upload`,
+        '/api/image/upload',
         {
           method: 'POST',
           body: formData,

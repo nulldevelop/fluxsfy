@@ -59,6 +59,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
     phone: user.phone,
     status: user.status,
     timeZone: user.timeZone,
+    slug: user.slug,
   })
 
   function generateTimeSlots(): string[] {
@@ -105,6 +106,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
       phone: values.phone,
       timeZone: values.timeZone,
       times: selectedHours || [],
+      slug: values.slug,
     })
 
     if (response.error) {
@@ -186,6 +188,25 @@ export function ProfileContent({ user }: ProfileContentProps) {
                             field.onChange(formattedValue)
                           }}
                           placeholder='(67) 99912-3456'
+                        />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name='slug'
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className='font-semibold'>
+                        Nome amigável (URL)
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          {...field}
+                          placeholder='ex: minha-clinica'
                         />
                       </FormControl>
                       <FormMessage />

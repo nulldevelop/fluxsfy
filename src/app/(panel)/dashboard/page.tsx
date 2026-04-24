@@ -24,13 +24,13 @@ export default async function Dashboard() {
         <h1 className='justify-content-center font-bold text-2xl'>Dashboard</h1>
         {subscription?.subscriptionStatus !== 'EXPIRED' && (
           <div className='flex items-center justify-end space-x-2'>
-            <Link href={`/clinica/${session.user?.id}`} target='_blank'>
+            <Link href={`/clinica/${session.user?.slug || session.user?.id}`} target='_blank'>
               <Button className='flex-1 bg-emerald-500 hover:bg-emerald-400 md:flex-[0]'>
                 <Calendar className='h-5 w-5' />
                 <span>Novo agendamento</span>
               </Button>
             </Link>
-            <ButtonCopyLink userId={session.user?.id} />
+            <ButtonCopyLink userId={session.user?.id} slug={session.user?.slug} />
           </div>
         )}
       </div>

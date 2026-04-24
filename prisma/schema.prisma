@@ -74,7 +74,6 @@ model User {
   image              String?
   createdAt          DateTime
   updatedAt          DateTime
-  // Custom fields
   address            String?       @default("")
   phone              String?       @default("")
   status             Boolean       @default(false)
@@ -85,6 +84,7 @@ model User {
   role               Role          @default(USER)
   latitude           Float?
   longitude          Float?
+  slug               String?       @unique
   subscription       Subscription?
   services           Service[]
   reminders          Reminder[]
@@ -106,7 +106,7 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@index([userId(length: 191)])
+  // @@index([userId(length: 191)])
   @@map("session")
 }
 
@@ -126,7 +126,7 @@ model Account {
   createdAt             DateTime
   updatedAt             DateTime
 
-  @@index([userId(length: 191)])
+  // @@index([userId(length: 191)])
   @@map("account")
 }
 
@@ -138,6 +138,6 @@ model Verification {
   createdAt  DateTime?
   updatedAt  DateTime?
 
-  @@index([identifier(length: 191)])
+  // @@index([identifier(length: 191)])
   @@map("verification")
 }

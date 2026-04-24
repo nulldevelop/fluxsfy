@@ -30,6 +30,7 @@ export const auth = betterAuth({
       rating: { type: 'number' },
       latitude: { type: 'number' },
       longitude: { type: 'number' },
+      slug: { type: 'string' },
     },
   },
 })

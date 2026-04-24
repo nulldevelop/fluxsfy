@@ -1,7 +1,10 @@
 'use server'
 
-import { signOut } from '@/lib/auth'
+import { headers } from 'next/headers'
+import { auth } from '@/lib/auth'
 
 export async function handleLogoutAction() {
-  await signOut({ redirectTo: '/' })
+  await auth.api.signOut({
+    headers: await headers(),
+  })
 }

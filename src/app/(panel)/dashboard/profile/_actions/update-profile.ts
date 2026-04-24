@@ -12,6 +12,7 @@ const formSchema = z.object({
   status: z.boolean(),
   timeZone: z.string().min(1, 'O time zone é obrigatório!'),
   times: z.array(z.string()),
+  slug: z.string().optional().transform(v => v ? v.toLowerCase().replace(/ /g, '-') : undefined),
 })
 
 type FormSchema = z.infer<typeof formSchema>
@@ -34,6 +35,19 @@ export async function updateProfile(formData: FormSchema) {
   }
 
   try {
+    // Check if slug is already taken
+    if (formData.slug) {
+      const existingUser = await prisma.user.findFirst({
+        where: { slug: formData.slug }
+      })
+
+      if (existingUser && existingUser.id !== session.user.id) {
+        return {
+          error: 'Este nome amigável já está em uso!',
+        }
+      }
+    }
+
     await prisma.user.update({
       where: {
         id: session?.user?.id,
@@ -44,6 +58,7 @@ export async function updateProfile(formData: FormSchema) {
         phone: formData.phone,
         timeZone: formData.timeZone,
         times: formData.times || [],
+        slug: formData.slug || null,
       },
     })
 
