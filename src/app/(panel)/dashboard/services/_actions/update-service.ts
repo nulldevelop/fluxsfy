@@ -41,6 +41,7 @@ export async function updateService(formData: FormSchema) {
         name: formData.name,
         price: formData.price,
         duration: formData.duration < 30 ? 30 : formData.duration,
+        updatedAt: new Date(),
       },
     })
     revalidatePath('/dashboard/services')

@@ -1,6 +1,5 @@
 'use client'
 
-import type { Prisma } from '@prisma/client'
 import { MapPin } from 'lucide-react'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
@@ -31,20 +30,27 @@ import { DateTimePicker } from './date-picker'
 import { type AppointmentFormData, useAppointmentForm } from './schedule-form'
 import { ScheduleTimeList } from './schedule-time-list'
 
-type UserWithServiceAndSubscriptionAndStaff = Prisma.UserGetPayload<{
-  include: {
-    subscription: true
-    services: true
-    staff: {
-      include: {
-        services: true
-      }
-    }
-  }
-}>
+interface StaffMember {
+  id: string
+  name: string
+  times: string[]
+  services: Array<{ id: string; name: string; duration: number }>
+}
+
+interface ClinicData {
+  id: string
+  name: string
+  image: string | null
+  address: string | null
+  phone: string | null
+  status: boolean
+  times: string[]
+  services: Array<{ id: string; name: string; duration: number }>
+  staff: StaffMember[]
+}
 
 interface ScheduleContentProps {
-  clinic: UserWithServiceAndSubscriptionAndStaff
+  clinic: ClinicData
 }
 
 export interface TimeSlot {
@@ -54,7 +60,7 @@ export interface TimeSlot {
 
 export function ScheduleContent({ clinic }: ScheduleContentProps) {
   const form = useAppointmentForm()
-  const { watch, setValue } = form
+  const { watch } = form
   const router = useRouter()
 
   const selectedDate = watch('date')
@@ -65,8 +71,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
   const [availableTimeSlots, setAvailableTimeSlots] = useState<TimeSlot[]>([])
   const [loadingSlots, setLoadingSlots] = useState(false)
 
-  // Filter staff based on selected service
-  const filteredStaff = clinic.staff.filter((s) =>
+  const staffForSelectedService = clinic.staff.filter((s) =>
     s.services.some((service) => service.id === selectedServiceId)
   )
 
@@ -97,7 +102,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
       fetchBlockedTimes(selectedDate, selectedStaffId).then((blocked) => {
         setBlockedTimes(blocked)
 
-        const staffMember = clinic.staff.find(s => s.id === selectedStaffId)
+        const staffMember = clinic.staff.find((s) => s.id === selectedStaffId)
         const times = (staffMember?.times as string[]) || []
 
         const finalSlots = times.map((time) => ({
@@ -119,7 +124,13 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
       setAvailableTimeSlots([])
       setBlockedTimes([])
     }
-  }, [selectedDate, selectedStaffId, clinic.staff, fetchBlockedTimes, selectedTime])
+  }, [
+    selectedDate,
+    selectedStaffId,
+    clinic.staff,
+    fetchBlockedTimes,
+    selectedTime,
+  ])
 
   async function handleRegisterAppointmnent(formData: AppointmentFormData) {
     if (!selectedTime) {
@@ -146,10 +157,10 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
   }
 
   return (
-    <div className='dark min-h-screen bg-background text-foreground font-barlow'>
-      <Toaster duration={2500} theme='dark' richColors />
+    <div className='dark min-h-screen bg-background font-barlow text-foreground'>
+      <Toaster duration={2500} richColors theme='dark' />
       {/* Polo Barber Top */}
-      <div className='fixed top-0 left-0 right-0 z-50'>
+      <div className='fixed top-0 right-0 left-0 z-50'>
         <div className='polo-barber' />
       </div>
 
@@ -157,22 +168,24 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
       <div className='relative h-48 w-full overflow-hidden md:h-64'>
         <Image
           alt='Banner'
-          className='object-cover grayscale brightness-50'
+          className='object-cover brightness-50 grayscale'
           fill
           priority
           src='/banner.png'
         />
         <div className='absolute inset-0 bg-black/40' />
         <div className='absolute inset-0 flex items-center justify-center px-4'>
-            <h1 className='font-bebas text-4xl md:text-7xl text-cream tracking-[0.2em] text-center'>AGENDAMENTO</h1>
+          <h1 className='text-center font-bebas text-4xl text-cream tracking-[0.2em] md:text-7xl'>
+            AGENDAMENTO
+          </h1>
         </div>
       </div>
 
       <section className='container relative z-10 mx-auto w-full max-w-6xl px-4 py-6 md:py-10'>
-        <div className='grid grid-cols-1 items-start gap-8 md:gap-12 md:grid-cols-2'>
+        <div className='grid grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-12'>
           {/* Coluna esquerda: foto e detalhes */}
-          <article className='flex flex-col items-center text-center bg-black p-6 md:p-8 border-l-4 md:border-l-8 border-gold'>
-            <div className='relative mb-4 md:mb-6 h-48 w-48 md:h-64 md:w-64 overflow-hidden border-2 md:border-4 border-gold'>
+          <article className='flex flex-col items-center border-gold border-l-4 bg-black p-6 text-center md:border-l-8 md:p-8'>
+            <div className='relative mb-4 h-48 w-48 overflow-hidden border-2 border-gold md:mb-6 md:h-64 md:w-64 md:border-4'>
               <Image
                 alt='Foto da barbearia'
                 className='object-cover grayscale'
@@ -181,24 +194,26 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
               />
             </div>
 
-            <h1 className='mb-2 font-bebas text-3xl md:text-5xl text-cream tracking-widest leading-none'>
-                {clinic.name}
-                <span className='block text-gold text-lg md:text-2xl tracking-[0.22em] mt-1 md:mt-2'>Barbearia</span>
+            <h1 className='mb-2 font-bebas text-3xl text-cream leading-none tracking-widest md:text-5xl'>
+              {clinic.name}
+              <span className='mt-1 block text-gold text-lg tracking-[0.22em] md:mt-2 md:text-2xl'>
+                Barbearia
+              </span>
             </h1>
-            <div className='polo-barber w-24 md:w-32 my-4 md:my-6 mx-auto' />
-            
+            <div className='polo-barber mx-auto my-4 w-24 md:my-6 md:w-32' />
+
             <div className='space-y-3 md:space-y-4'>
-                <div className='flex items-center justify-center gap-2'>
-                  <MapPin className='h-4 w-4 md:h-5 md:w-5 text-gold' />
-                  <span className='font-barlow text-xs md:text-sm text-gray-400 uppercase tracking-widest font-bold'>
-                    {clinic.address ? clinic.address : 'Endereço não informado'}
-                  </span>
-                </div>
-                <div className='font-barlow text-cream uppercase tracking-[0.2em] md:tracking-[0.3em] text-base md:text-lg'>
-                  {clinic.phone && clinic.phone.length > 0
-                    ? clinic.phone
-                    : 'Telefone não informado'}
-                </div>
+              <div className='flex items-center justify-center gap-2'>
+                <MapPin className='h-4 w-4 text-gold md:h-5 md:w-5' />
+                <span className='font-barlow font-bold text-gray-400 text-xs uppercase tracking-widest md:text-sm'>
+                  {clinic.address ? clinic.address : 'Endereço não informado'}
+                </span>
+              </div>
+              <div className='font-barlow text-base text-cream uppercase tracking-[0.2em] md:text-lg md:tracking-[0.3em]'>
+                {clinic.phone && clinic.phone.length > 0
+                  ? clinic.phone
+                  : 'Telefone não informado'}
+              </div>
             </div>
           </article>
 
@@ -206,22 +221,24 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
           <div className='w-full'>
             <Form {...form}>
               <form
-                className='space-y-4 md:space-y-6 bg-black p-6 md:p-10 border-l-4 border-gold shadow-2xl'
+                className='space-y-4 border-gold border-l-4 bg-black p-6 shadow-2xl md:space-y-6 md:p-10'
                 onSubmit={form.handleSubmit(handleRegisterAppointmnent)}
               >
-                <div className='label !text-gold !mb-4 md:!mb-6'>01 — Seus Dados</div>
-                
+                <div className='label !text-gold !mb-4 md:!mb-6'>
+                  01 — Seus Dados
+                </div>
+
                 <FormField
                   control={form.control}
                   name='name'
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className='font-bebas text-lg tracking-widest text-gold'>
+                      <FormLabel className='font-bebas text-gold text-lg tracking-widest'>
                         Nome completo:
                       </FormLabel>
                       <FormControl>
                         <Input
-                          className="bg-zinc-900 border-zinc-800 text-cream placeholder:text-zinc-600"
+                          className='border-zinc-800 bg-zinc-900 text-cream placeholder:text-zinc-600'
                           id='name'
                           placeholder='Digite seu nome completo...'
                           {...field}
@@ -232,127 +249,171 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                   )}
                 />
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <FormField
                     control={form.control}
                     name='email'
                     render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className='font-bebas text-lg tracking-widest text-gold'>
-                            Email:
+                      <FormItem>
+                        <FormLabel className='font-bebas text-gold text-lg tracking-widest'>
+                          Email:
                         </FormLabel>
                         <FormControl>
-                            <Input
-                            className="bg-zinc-900 border-zinc-800 text-cream placeholder:text-zinc-600"
+                          <Input
+                            className='border-zinc-800 bg-zinc-900 text-cream placeholder:text-zinc-600'
                             id='email'
                             placeholder='Digite seu email...'
                             {...field}
-                            />
+                          />
                         </FormControl>
                         <FormMessage />
-                        </FormItem>
+                      </FormItem>
                     )}
-                    />
+                  />
 
-                    <FormField
+                  <FormField
                     control={form.control}
                     name='phone'
                     render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className='font-bebas text-lg tracking-widest text-gold'>
-                            Telefone:
+                      <FormItem>
+                        <FormLabel className='font-bebas text-gold text-lg tracking-widest'>
+                          Telefone:
                         </FormLabel>
                         <FormControl>
-                            <Input
-                            className="bg-zinc-900 border-zinc-800 text-cream placeholder:text-zinc-600"
+                          <Input
+                            className='border-zinc-800 bg-zinc-900 text-cream placeholder:text-zinc-600'
                             {...field}
                             id='phone'
                             onChange={(e) => {
-                                const formattedValue = formatPhone(e.target.value)
-                                field.onChange(formattedValue)
+                              const formattedValue = formatPhone(e.target.value)
+                              field.onChange(formattedValue)
                             }}
                             placeholder='(XX) XXXXX-XXXX'
-                            />
+                          />
                         </FormControl>
                         <FormMessage />
-                        </FormItem>
+                      </FormItem>
                     )}
-                    />
+                  />
                 </div>
 
-                <div className='label !color-gold !mb-6 !mt-10'>02 — Horário e Serviço</div>
+                <div className='label !color-gold !mb-6 !mt-10'>
+                  02 — Horário e Serviço
+                </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <FormField
+                <div className='grid grid-cols-1 gap-4 md:grid-cols-2'>
+                  <FormField
                     control={form.control}
                     name='date'
                     render={({ field }) => (
-                        <FormItem className='flex flex-col gap-2'>
-                        <FormLabel className='font-bebas text-lg tracking-widest text-gold'>
-                            Data do agendamento:
+                      <FormItem className='flex flex-col gap-2'>
+                        <FormLabel className='font-bebas text-gold text-lg tracking-widest'>
+                          Data do agendamento:
                         </FormLabel>
                         <FormControl>
-                            <DateTimePicker
-                            className='w-full rounded-none border-b-2 border-gold bg-zinc-900 p-2 text-cream'
-                            inicitalDate={new Date()}
+                          <DateTimePicker
+                            className='w-full rounded-none border-gold border-b-2 bg-zinc-900 p-2 text-cream'
+                            initialDate={new Date()}
                             onChange={(date) => {
-                                if (date) {
+                              if (date) {
                                 field.onChange(date)
                                 setSelectedTime('')
-                                }
+                              }
                             }}
-                            />
+                          />
                         </FormControl>
                         <FormMessage />
-                        </FormItem>
+                      </FormItem>
                     )}
-                    />
+                  />
 
-                    <FormField
+                  <FormField
                     control={form.control}
                     name='serviceId'
                     render={({ field }) => (
-                        <FormItem>
-                        <FormLabel className='font-bebas text-lg tracking-widest text-gold'>
-                            Selecione o serviço:
+                      <FormItem>
+                        <FormLabel className='font-bebas text-gold text-lg tracking-widest'>
+                          Selecione o serviço:
                         </FormLabel>
                         <FormControl>
-                            <Select
+                          <Select
                             onValueChange={(value) => {
-                                field.onChange(value)
-                                setSelectedTime('')
+                              field.onChange(value)
+                              setSelectedTime('')
                             }}
-                            >
-                            <SelectTrigger className='w-full bg-zinc-900 border-zinc-800 text-cream'>
-                                <SelectValue placeholder='Selecione um serviço' />
+                          >
+                            <SelectTrigger className='w-full border-zinc-800 bg-zinc-900 text-cream'>
+                              <SelectValue placeholder='Selecione um serviço' />
                             </SelectTrigger>
-                            <SelectContent className="bg-black border-gold text-cream">
-                                {clinic.services.map((service) => (
+                            <SelectContent className='border-gold bg-black text-cream'>
+                              {clinic.services.map((service) => (
                                 <SelectItem key={service.id} value={service.id}>
-                                    {service.name} -{' '}
-                                    {Math.floor(service.duration / 60)}h{' '}
-                                    {service.duration % 60}min
+                                  {service.name} -{' '}
+                                  {Math.floor(service.duration / 60)}h{' '}
+                                  {service.duration % 60}min
                                 </SelectItem>
-                                ))}
+                              ))}
                             </SelectContent>
-                            </Select>
+                          </Select>
                         </FormControl>
                         <FormMessage />
-                        </FormItem>
+                      </FormItem>
                     )}
-                    />
+                  />
+
+                  <FormField
+                    control={form.control}
+                    name='staffId'
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className='font-bebas text-gold text-lg tracking-widest'>
+                          Selecione o profissional:
+                        </FormLabel>
+                        <FormControl>
+                          <Select
+                            onValueChange={(value) => {
+                              field.onChange(value)
+                              setSelectedTime('')
+                            }}
+                          >
+                            <SelectTrigger className='w-full border-zinc-800 bg-zinc-900 text-cream'>
+                              <SelectValue placeholder='Selecione um profissional' />
+                            </SelectTrigger>
+                            <SelectContent className='border-gold bg-black text-cream'>
+                              {(selectedServiceId
+                                ? staffForSelectedService
+                                : clinic.staff
+                              ).map((staffMember) => (
+                                <SelectItem
+                                  key={staffMember.id}
+                                  value={staffMember.id}
+                                >
+                                  {staffMember.name}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
                 </div>
 
                 {selectedServiceId && (
-                  <div className='space-y-2 mt-6'>
-                    <Label className='font-bebas text-lg tracking-widest text-gold'>
+                  <div className='mt-6 space-y-2'>
+                    <Label className='font-bebas text-gold text-lg tracking-widest'>
                       Horários disponíveis:
                     </Label>
-                    <div className='bg-zinc-900 p-6 border border-zinc-800'>
+                    <div className='border border-zinc-800 bg-zinc-900 p-6'>
                       {loadingSlots ? (
-                        <p className="font-barlow text-gold tracking-widest uppercase">Carregando horários...</p>
+                        <p className='font-barlow text-gold uppercase tracking-widest'>
+                          Carregando horários...
+                        </p>
                       ) : availableTimeSlots.length === 0 ? (
-                        <p className="font-barlow text-gray-500 tracking-widest uppercase">Nenhum horário disponível</p>
+                        <p className='font-barlow text-gray-500 uppercase tracking-widest'>
+                          Nenhum horário disponível
+                        </p>
                       ) : (
                         <ScheduleTimeList
                           availableTimeSlots={availableTimeSlots}
@@ -381,8 +442,7 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
 
                 {clinic.status ? (
                   <Button
-                    variant="default"
-                    className='w-full mt-8'
+                    className='mt-8 w-full'
                     disabled={
                       !(
                         watch('name') &&
@@ -392,11 +452,12 @@ export function ScheduleContent({ clinic }: ScheduleContentProps) {
                       )
                     }
                     type='submit'
+                    variant='default'
                   >
                     Confirmar Agendamento
                   </Button>
                 ) : (
-                  <p className='font-barlow font-bold tracking-widest uppercase bg-barber-red px-4 py-3 text-center text-white mt-8'>
+                  <p className='mt-8 bg-barber-red px-4 py-3 text-center font-barlow font-bold text-white uppercase tracking-widest'>
                     A barbearia está fechada nesse momento.
                   </p>
                 )}

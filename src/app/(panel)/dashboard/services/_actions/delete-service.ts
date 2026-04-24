@@ -36,6 +36,7 @@ export async function deleteService(formData: FormSchema) {
       },
       data: {
         status: false,
+        updatedAt: new Date(),
       },
     })
     revalidatePath('/dashboard/services')

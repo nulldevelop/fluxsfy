@@ -456,7 +456,7 @@ export type UserCreateInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -484,7 +484,7 @@ export type UserUncheckedCreateInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -568,7 +568,7 @@ export type UserCreateManyInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -849,7 +849,7 @@ export type UserCreateWithoutStaffInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -876,7 +876,7 @@ export type UserUncheckedCreateWithoutStaffInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -973,7 +973,7 @@ export type UserCreateWithoutSessionsInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1000,7 +1000,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1097,7 +1097,7 @@ export type UserCreateWithoutAccountsInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1124,7 +1124,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1221,7 +1221,7 @@ export type UserCreateWithoutAppointmentInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1248,7 +1248,7 @@ export type UserUncheckedCreateWithoutAppointmentInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1345,7 +1345,7 @@ export type UserCreateWithoutReminderInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1372,7 +1372,7 @@ export type UserUncheckedCreateWithoutReminderInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1469,7 +1469,7 @@ export type UserCreateWithoutServicesInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1496,7 +1496,7 @@ export type UserUncheckedCreateWithoutServicesInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1593,7 +1593,7 @@ export type UserCreateWithoutSubscriptionInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null
@@ -1620,7 +1620,7 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   status?: boolean
   timeZone?: string | null
   stripe_customer_id?: string | null
-  times: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   rating?: number
   role?: $Enums.Role
   latitude?: number | null

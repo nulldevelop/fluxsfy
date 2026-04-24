@@ -1,7 +1,6 @@
 'use client'
 
 import type { Prisma } from '@prisma/client'
-
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { format } from 'date-fns'
 import { Eye, X } from 'lucide-react'
@@ -12,31 +11,44 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Dialog, DialogTrigger } from '@/components/ui/dialog'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import type { appointment } from '@/generated/client/client'
 import { cancelAppointment } from '../../_actions/cancel-appointment'
-import { DialogAppointment } from './dialog-appointments'
 import { ButtonDatePicker } from './button-date'
+import { DialogAppointment } from './dialog-appointments'
 
-export type AppointmentWithService = Prisma.appointmentGetPayload<{
-  include: {
-    service: true
-    staff: true
-  }
-}>
+export interface AppointmentWithService extends appointment {
+  service: { id: string; name: string; duration: number }
+  staff: { id: string; name: string } | null
+}
+
+interface Staff {
+  id: string
+  name: string
+}
 
 interface AppointmentsListProps {
   times: string[]
+  staff: Staff[]
 }
 
-export function AppointmentsList({ times }: AppointmentsListProps) {
+export function AppointmentsList({ times, staff }: AppointmentsListProps) {
   const searchParams = useSearchParams()
   const date = searchParams.get('date')
   const queryClient = useQueryClient()
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [selectedStaff, setSelectedStaff] = useState<string>('all')
   const [detailAppointment, setDetailAppointment] =
     useState<AppointmentWithService | null>(null)
 
   const { data, isLoading, refetch } = useQuery({
-    queryKey: ['get-appointments', date],
+    queryKey: ['get-appointments', date, selectedStaff],
     queryFn: async () => {
       let activeDate = date
 
@@ -45,7 +57,7 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
         activeDate = today
       }
 
-      const url = `/api/clinic/appointments?date=${activeDate}`
+      const url = `/api/clinic/appointments?date=${activeDate}&staffId=${selectedStaff}`
 
       const response = await fetch(url)
 
@@ -121,7 +133,8 @@ export function AppointmentsList({ times }: AppointmentsListProps) {
                       <div className='flex-1 text-sm'>
                         <div className='font-semibold'>{occupant.name}</div>
                         <div className='text-gray-500 text-xs'>
-                          {occupant.service.name} {occupant.staff && `- ${occupant.staff.name}`}
+                          {occupant.service.name}{' '}
+                          {occupant.staff && `- ${occupant.staff.name}`}
                         </div>
                         <div className='text-gray-400 text-xs italic'>
                           {occupant.phone}

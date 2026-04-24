@@ -1,9 +1,9 @@
 'use client'
 import { Loader, Upload } from 'lucide-react'
 import Image from 'next/image'
-import { useSession } from '@/lib/auth-client'
 import { type ChangeEvent, useState } from 'react'
 import { toast } from 'sonner'
+import { useSession } from '@/lib/auth-client'
 import semFoto from '../../../../../../public/banner.png'
 import { updateProfileAvatar } from '../_actions/update-avatar'
 
@@ -55,13 +55,10 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
       formData.append('file', image)
       formData.append('userId', userId)
 
-      const response = await fetch(
-        '/api/image/upload',
-        {
-          method: 'POST',
-          body: formData,
-        }
-      )
+      const response = await fetch('/api/image/upload', {
+        method: 'POST',
+        body: formData,
+      })
 
       const data = await response.json()
 
@@ -88,6 +85,7 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
         </span>
 
         <input
+          accept='image/jpeg, image/png'
           className='relative z-50 h-48 w-48 cursor-pointer opacity-0'
           onChange={handleChange}
           type='file'

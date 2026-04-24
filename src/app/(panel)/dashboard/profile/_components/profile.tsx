@@ -128,7 +128,7 @@ export function ProfileContent({ user }: ProfileContentProps) {
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <Card className='border-gold border-l-8'>
             <CardHeader>
-              <CardTitle className='text-4xl'>Meu Perfil</CardTitle>
+              <CardTitle className='text-4xl'>Barbearia</CardTitle>
             </CardHeader>
             <CardContent className='space-y-6'>
               <div className='flex justify-center'>

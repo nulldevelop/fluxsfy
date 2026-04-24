@@ -47,10 +47,10 @@ export default async function Page({
   )
 
   return (
-    <main className='dark min-h-screen bg-background text-foreground font-barlow'>
-      <Toaster duration={2500} theme='dark' richColors />
+    <main className='dark min-h-screen bg-background font-barlow text-foreground'>
+      <Toaster duration={2500} richColors theme='dark' />
       {/* Polo Barber Top */}
-      <div className='fixed top-0 left-0 right-0 z-50'>
+      <div className='fixed top-0 right-0 left-0 z-50'>
         <div className='polo-barber' />
       </div>
 
@@ -58,7 +58,7 @@ export default async function Page({
       <section className='relative h-[45vh] w-full overflow-hidden'>
         <Image
           alt='Banner de confirmação'
-          className='object-cover grayscale brightness-50'
+          className='object-cover brightness-50 grayscale'
           fill
           priority
           quality={100}
@@ -68,11 +68,11 @@ export default async function Page({
 
         <div className='relative z-10 flex h-full items-center justify-center px-4'>
           <div className='text-center'>
-            <h1 className='font-bebas text-5xl md:text-7xl text-cream tracking-[0.2em] uppercase'>
+            <h1 className='font-bebas text-5xl text-cream uppercase tracking-[0.2em] md:text-7xl'>
               Agendamento confirmado
             </h1>
-            <div className='polo-barber w-32 mx-auto my-6' />
-            <p className='font-barlow text-gold text-sm md:text-lg tracking-[0.3em] uppercase font-bold'>
+            <div className='polo-barber mx-auto my-6 w-32' />
+            <p className='font-barlow font-bold text-gold text-sm uppercase tracking-[0.3em] md:text-lg'>
               Veja abaixo os detalhes do seu atendimento
             </p>
           </div>
@@ -81,10 +81,10 @@ export default async function Page({
 
       {/* Card de comprovante */}
       <section className='container mx-auto max-w-2xl px-4 pb-16'>
-        <Card className='-mt-16 md:-mt-20 border-l-8 border-gold bg-black p-8 md:p-10 shadow-2xl backdrop-blur relative z-10'>
+        <Card className='-mt-16 md:-mt-20 relative z-10 border-gold border-l-8 bg-black p-8 shadow-2xl backdrop-blur md:p-10'>
           <div className='mb-8 flex flex-col items-center justify-center gap-3'>
             <CheckCircle2 className='h-12 w-12 text-gold' />
-            <span className='font-bebas text-3xl text-cream tracking-widest uppercase mt-2'>
+            <span className='mt-2 font-bebas text-3xl text-cream uppercase tracking-widest'>
               Comprovante
             </span>
             <div className='h-1 w-20 bg-gold' />
@@ -93,65 +93,48 @@ export default async function Page({
           <div className='grid grid-cols-1 gap-8 md:grid-cols-2'>
             <div className='space-y-4'>
               <div>
-                <span className='text-zinc-500 text-xs font-bold uppercase tracking-widest'>Nome</span>
-                <p className='font-bebas text-xl text-gold tracking-wider'>{appointment.name}</p>
+                <span className='font-bold text-xs text-zinc-500 uppercase tracking-widest'>Nome</span>
+                <p className='font-bebas text-gold text-xl tracking-wider'>{appointment.name}</p>
               </div>
               <div>
-                <span className='text-zinc-500 text-xs font-bold uppercase tracking-widest'>Email</span>
+                <span className='font-bold text-xs text-zinc-500 uppercase tracking-widest'>Email</span>
                 <p className='font-barlow text-cream tracking-wider'>{appointment.email}</p>
               </div>
               <div>
-                <span className='text-zinc-500 text-xs font-bold uppercase tracking-widest'>Telefone</span>
+                <span className='font-bold text-xs text-zinc-500 uppercase tracking-widest'>Telefone</span>
                 <p className='font-barlow text-cream tracking-wider'>{appointment.phone}</p>
               </div>
             </div>
 
             <div className='space-y-4'>
               <div>
-                <span className='text-zinc-500 text-xs font-bold uppercase tracking-widest'>Barbearia</span>
-                <p className='font-bebas text-xl text-gold tracking-wider'>
+                <span className='font-bold text-xs text-zinc-500 uppercase tracking-widest'>Barbearia</span>
+                <p className='font-bebas text-gold text-xl tracking-wider'>
                   {appointment.user?.name}
                 </p>
               </div>
               <div>
-                <span className='text-zinc-500 text-xs font-bold uppercase tracking-widest'>Serviço</span>
+                <span className='font-bold text-xs text-zinc-500 uppercase tracking-widest'>Serviço</span>
                 <p className='font-barlow text-cream tracking-wider'>
                   {appointment.service?.name}
                 </p>
               </div>
               <div>
-                <span className='text-zinc-500 text-xs font-bold uppercase tracking-widest'>Data e hora</span>
+                <span className='font-bold text-xs text-zinc-500 uppercase tracking-widest'>Data e hora</span>
                 <p className='font-barlow text-cream tracking-wider'>{localDateTime}</p>
               </div>
             </div>
           </div>
 
-<<<<<<< HEAD
-          <div className='mt-8 flex items-center justify-center gap-3'>
-            <a
-              className='rounded-md bg-emerald-500 px-4 py-2 font-medium text-white transition-colors hover:bg-emerald-400'
-              href='/'
-            >
-              Voltar ao início
-            </a>
-            <a
-              className='rounded-md border border-zinc-700 bg-zinc-800 px-4 py-2 font-medium text-white transition-colors hover:border-zinc-600 hover:bg-zinc-700'
-              href={`/barbearia/${appointment.userId}`}
-              target='_blank'
-            >
-              Ver página da barbearia
-            </a>
-=======
-          <div className='mt-12 flex flex-col md:flex-row items-center justify-center gap-4'>
-            <Button variant="default" asChild className="w-full md:w-auto">
+          <div className='mt-12 flex flex-col items-center justify-center gap-4 md:flex-row'>
+            <Button asChild className="w-full md:w-auto" variant="default">
               <Link href="/">Voltar ao início</Link>
             </Button>
-            <Button variant="outline" asChild className="w-full md:w-auto">
+            <Button asChild className="w-full md:w-auto" variant="outline">
               <Link href={`/clinica/${appointment.userId}`} target='_blank'>
                 Ver página da barbearia
               </Link>
             </Button>
->>>>>>> f4f66b1eca0c3cf2ea27fc55f09d9ee13ac98a1b
           </div>
         </Card>
       </section>

@@ -1,9 +1,9 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import z from 'zod/v4'
 import { getSession } from '@/lib/getSession'
 import { prisma } from '@/lib/prisma'
-import z from 'zod/v4'
 
 const staffSchema = z.object({
   name: z.string().min(2, 'O nome é obrigatório'),
@@ -43,7 +43,10 @@ export async function createStaff(data: z.infer<typeof staffSchema>) {
   }
 }
 
-export async function updateStaff(id: string, data: z.infer<typeof staffSchema>) {
+export async function updateStaff(
+  id: string,
+  data: z.infer<typeof staffSchema>
+) {
   const session = await getSession()
   if (!session?.user?.id) {
     return { error: 'Não autorizado' }

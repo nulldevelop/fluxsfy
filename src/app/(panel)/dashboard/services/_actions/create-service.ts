@@ -37,6 +37,7 @@ export async function createNewService(formData: FormSchma) {
         price: formData.price,
         duration: formData.duration,
         userId: session?.user?.id,
+        updatedAt: new Date(),
       },
     })
     revalidatePath('/dashboard/services')

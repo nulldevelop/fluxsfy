@@ -20,7 +20,7 @@ model User {
   status             Boolean       @default(false)
   timeZone           String?
   stripe_customer_id String?
-  times              Json
+  times              Json          @default("[]")
   rating             Int           @default(0)
   role               Role          @default(USER)
   latitude           Float?
@@ -134,7 +134,7 @@ model reminder {
 }
 
 model service {
-  id          String        @id
+  id          String        @id @default(uuid())
   name        String
   price       Int
   duration    Int

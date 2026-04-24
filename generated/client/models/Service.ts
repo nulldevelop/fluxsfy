@@ -312,7 +312,7 @@ export type serviceScalarWhereWithAggregatesInput = {
 }
 
 export type serviceCreateInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number
@@ -325,7 +325,7 @@ export type serviceCreateInput = {
 }
 
 export type serviceUncheckedCreateInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number
@@ -364,7 +364,7 @@ export type serviceUncheckedUpdateInput = {
 }
 
 export type serviceCreateManyInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number
@@ -554,7 +554,7 @@ export type serviceUpdateOneRequiredWithoutAppointmentNestedInput = {
 }
 
 export type serviceCreateWithoutUserInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number
@@ -566,7 +566,7 @@ export type serviceCreateWithoutUserInput = {
 }
 
 export type serviceUncheckedCreateWithoutUserInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number
@@ -618,7 +618,7 @@ export type serviceScalarWhereInput = {
 }
 
 export type serviceCreateWithoutStaffInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number
@@ -630,7 +630,7 @@ export type serviceCreateWithoutStaffInput = {
 }
 
 export type serviceUncheckedCreateWithoutStaffInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number
@@ -663,7 +663,7 @@ export type serviceUpdateManyWithWhereWithoutStaffInput = {
 }
 
 export type serviceCreateWithoutAppointmentInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number
@@ -675,7 +675,7 @@ export type serviceCreateWithoutAppointmentInput = {
 }
 
 export type serviceUncheckedCreateWithoutAppointmentInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number
@@ -727,7 +727,7 @@ export type serviceUncheckedUpdateWithoutAppointmentInput = {
 }
 
 export type serviceCreateManyUserInput = {
-  id: string
+  id?: string
   name: string
   price: number
   duration: number

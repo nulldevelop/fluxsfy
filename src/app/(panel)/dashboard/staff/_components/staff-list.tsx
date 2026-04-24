@@ -6,14 +6,20 @@ import { useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
 import type { service as Service, Staff } from '@/generated/client/client'
 import type { ResultPermissionProp } from '@/utils/permissions/canPermission'
 import { deleteStaff } from '../_actions/staff-actions'
 import { DialogStaff } from './dialog-staff'
 
 interface StaffWithServices extends Staff {
-  service: Service[]
+  services: Service[]
 }
 
 interface StaffListProps {
@@ -81,6 +87,11 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
             )}
 
             <DialogContent className='max-h-[90vh] max-w-2xl overflow-y-auto'>
+              <DialogHeader>
+                <DialogTitle>
+                  {editingStaff ? 'Editar Funcionário' : 'Novo Funcionário'}
+                </DialogTitle>
+              </DialogHeader>
               <DialogStaff
                 closeModal={() => {
                   setIsDialogOpen(false)
@@ -101,13 +112,13 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
                   key={member.id}
                 >
                   <div className='mb-4 flex items-center space-x-4'>
-                    <div className='flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-secondary'>
+                    <div className='relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-secondary'>
                       {member.image ? (
                         <Image
                           alt={member.name}
                           className='h-full w-full object-cover'
-                          src={member.image}
                           fill
+                          src={member.image}
                         />
                       ) : (
                         <User className='h-6 w-6 text-muted-foreground' />
@@ -126,7 +137,7 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
                       Serviços
                     </p>
                     <div className='flex flex-wrap gap-1'>
-                      {member.service.map((s) => (
+                      {member.services.map((s) => (
                         <span
                           className='rounded-full bg-emerald-100 px-2 py-0.5 font-medium text-[10px] text-emerald-800'
                           key={s.id}
@@ -134,7 +145,7 @@ export function StaffList({ staff, services, permissions }: StaffListProps) {
                           {s.name}
                         </span>
                       ))}
-                      {member.service.length === 0 && (
+                      {member.services.length === 0 && (
                         <span className='text-muted-foreground text-xs italic'>
                           Nenhum serviço vinculado
                         </span>

@@ -10,17 +10,17 @@ registerLocale('pt-BR', ptBR)
 interface DateTimePickerProps {
   minDate?: Date
   className?: string
-  inicitalDate?: Date
+  initialDate?: Date
   onChange: (date: Date) => void
 }
 
 export function DateTimePicker({
   className,
   minDate,
-  inicitalDate,
+  initialDate,
   onChange,
 }: DateTimePickerProps) {
-  const [startDate, setStartDate] = useState(inicitalDate || new Date())
+  const [startDate, setStartDate] = useState(initialDate || new Date())
 
   function handleChange(date: Date | null) {
     if (date) {

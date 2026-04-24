@@ -12,7 +12,10 @@ const formSchema = z.object({
   status: z.boolean(),
   timeZone: z.string().min(1, 'O time zone é obrigatório!'),
   times: z.array(z.string()),
-  slug: z.string().optional().transform(v => v ? v.toLowerCase().replace(/ /g, '-') : undefined),
+  slug: z
+    .string()
+    .optional()
+    .transform((v) => (v ? v.toLowerCase().replace(/ /g, '-') : undefined)),
 })
 
 type FormSchema = z.infer<typeof formSchema>
@@ -38,7 +41,7 @@ export async function updateProfile(formData: FormSchema) {
     // Check if slug is already taken
     if (formData.slug) {
       const existingUser = await prisma.user.findFirst({
-        where: { slug: formData.slug }
+        where: { slug: formData.slug },
       })
 
       if (existingUser && existingUser.id !== session.user.id) {
@@ -56,6 +59,7 @@ export async function updateProfile(formData: FormSchema) {
         name: formData.name,
         address: formData.address,
         phone: formData.phone,
+        status: formData.status,
         timeZone: formData.timeZone,
         times: formData.times || [],
         slug: formData.slug || null,
@@ -63,6 +67,10 @@ export async function updateProfile(formData: FormSchema) {
     })
 
     revalidatePath('/dashboard/profile')
+    revalidatePath('/barbearia/' + session.user.id)
+    if (formData.slug) {
+      revalidatePath('/barbearia/' + formData.slug)
+    }
     return {
       data: 'Barbearia atualizada com sucesso!',
     }
