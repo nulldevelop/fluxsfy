@@ -30,7 +30,7 @@ export function Header() {
       {navItems.map((item) => (
         <Button
           asChild
-          className='bg-transparent text-white shadow-none hover:bg-transparent'
+          className='bg-transparent text-white font-barlow font-bold shadow-none hover:bg-transparent'
           key={item.href}
           onClick={() => setIsOpen(false)}
         >
@@ -45,63 +45,65 @@ export function Header() {
       ) : session ? (
         <Button
           asChild
-          className='flex items-center justify-center gap-2 rounded-md bg-gray-500 px-4 py-1 text-white'
+          variant="default"
+          className="px-6"
         >
-          <Link href="/dashboard">Sou Profissional</Link>
+          <Link href="/dashboard">Dashboard</Link>
         </Button>
       ) : (
         <Button
-          className='bg-emerald-500 px-4 text-white hover:bg-emerald-400'
+          variant="default"
+          className='px-6'
           onClick={handleLogin}
         >
           <LogIn />
-          Acessar Dashboard
+          Acessar
         </Button>
       )}
     </>
   )
 
   return (
-    <header className='fixed top-0 right-0 left-0 z-999 h-20'>
-      {/* Overlay */}
-      <div className='absolute inset-0 bg-black/40' />
+    <header className='fixed top-0 right-0 left-0 z-999'>
+      <div className='polo-barber' />
+      <div className='bg-black/90 h-20'>
+        <div className='container relative z-10 mx-auto flex h-full items-center justify-between px-6'>
+          <Link className='font-bebas text-2xl md:text-4xl text-cream tracking-widest flex flex-col leading-none' href='/'>
+            LA ELE
+            <span className='text-gold text-sm md:text-xl tracking-[0.22em] mt-0.5 md:mt-0'>Barbearia</span>
+          </Link>
 
-      {/* Conteúdo */}
-      <div className='container relative z-10 mx-auto flex h-full items-center justify-between px-6'>
-        <Link className='font-bold text-3xl text-white' href='/'>
-          Fluxs<span className='text-emerald-500'>Fy</span>
-        </Link>
+          <nav className='hidden items-center space-x-4 md:flex'>
+            <NavLinks />
+          </nav>
 
-        <nav className='hidden items-center space-x-4 md:flex'>
-          <NavLinks />
-        </nav>
+          <Sheet onOpenChange={setIsOpen} open={isOpen}>
+            <SheetTrigger asChild className='md:hidden'>
+              <Button
+                className='text-white hover:bg-transparent'
+                size='icon'
+                variant='ghost'
+              >
+                <Menu className='h-6 w-6' />
+              </Button>
+            </SheetTrigger>
 
-        <Sheet onOpenChange={setIsOpen} open={isOpen}>
-          <SheetTrigger asChild className='md:hidden'>
-            <Button
-              className='text-white hover:bg-transparent'
-              size='icon'
-              variant='ghost'
+            <SheetContent
+              className='z-9999 w-60 border-primary border-l bg-black text-white sm:w-75'
+              side='right'
             >
-              <Menu className='h-6 w-6' />
-            </Button>
-          </SheetTrigger>
+              <SheetTitle className='text-gold font-bebas'>Menu</SheetTitle>
+              <SheetHeader />
+              <SheetDescription className='text-muted-foreground font-barlow'>
+                Veja nossos links
+              </SheetDescription>
 
-          <SheetContent
-            className='z-9999 w-60 border-zinc-800 border-l bg-zinc-900 text-white sm:w-75'
-            side='right'
-          >
-            <SheetTitle className='text-white'>Menu</SheetTitle>
-            <SheetHeader />
-            <SheetDescription className='text-gray-400'>
-              Veja nossos links
-            </SheetDescription>
-
-            <nav className='mt-6 flex flex-col space-y-4'>
-              <NavLinks />
-            </nav>
-          </SheetContent>
-        </Sheet>
+              <nav className='mt-6 flex flex-col space-y-4'>
+                <NavLinks />
+              </nav>
+            </SheetContent>
+          </Sheet>
+        </div>
       </div>
     </header>
   )

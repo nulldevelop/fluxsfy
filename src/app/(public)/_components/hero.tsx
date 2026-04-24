@@ -18,7 +18,7 @@ export function Hero() {
       {/* Imagem de fundo */}
       <Image
         alt='Foto ilustrativa de barbearia'
-        className='object-cover'
+        className='object-cover grayscale brightness-50'
         fill
         priority
         quality={100}
@@ -30,28 +30,30 @@ export function Hero() {
 
       {/* Conteúdo */}
       <div className='relative z-10 flex h-full items-center justify-center'>
-        <article className='max-w-3xl space-y-8 px-4 text-center'>
-          <h1 className='animate-fadeIn font-bold text-4xl text-white tracking-tight lg:text-5xl'>
-            Encontre os melhores profissionais em um único local!
+        <article className='max-w-3xl space-y-6 md:space-y-8 px-4 text-center'>
+          <h1 className='animate-fadeIn font-bebas text-5xl md:text-7xl lg:text-9xl text-cream tracking-widest leading-tight md:leading-none'>
+            LA ELE <br className="md:hidden" /> <span className='text-gold'>BARBEARIA</span>
           </h1>
-          <p className='animate-slideUp text-base text-gray-200 [animation-delay:200ms] md:text-lg'>
-            A plataforma completa para profissionais e barbearias: organize seus
-            atendimentos e ganhe mais tempo para o que importa.
+          <div className='polo-barber mx-auto w-24 md:w-32 my-3 md:my-4' />
+          <p className='animate-slideUp font-barlow text-base md:text-lg lg:text-xl text-gray-200 tracking-[.2em] md:tracking-[.4em] uppercase [animation-delay:200ms] font-bold'>
+            Est. 2021 · Campina Grande do Sul
           </p>
 
-          <div className='flex items-center justify-center gap-4'>
+          <div className='flex flex-col sm:flex-row items-center justify-center gap-3 md:gap-4 pt-2 md:pt-4'>
             <Button
-              className='w-fit animate-zoomIn bg-emerald-500 px-6 py-3 font-semibold [animation-delay:500ms] hover:bg-emerald-400'
+              variant="default"
+              className='w-full sm:w-fit animate-zoomIn [animation-delay:500ms]'
               onClick={scrollToProfessionals}
             >
-              Encontre um Profissional
+              Agendar Agora
             </Button>
 
             <Button
-              className='w-fit animate-zoomIn bg-emerald-500 px-6 py-3 font-semibold [animation-delay:500ms] hover:bg-emerald-400'
+              variant="outline"
+              className='w-full sm:w-fit animate-zoomIn [animation-delay:500ms]'
               onClick={handleLogin}
             >
-              Sou Profissional
+              Ver Serviços
             </Button>
           </div>
         </article>

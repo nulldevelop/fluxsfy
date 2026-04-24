@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Bebas_Neue, Barlow_Condensed } from 'next/font/google'
 import '@/styles/globals.css'
 import { Analytics } from '@vercel/analytics/next'
 import { SpeedInsights } from '@vercel/speed-insights/next'
@@ -7,13 +7,15 @@ import { Toaster } from 'sonner'
 import { SessionAuthProvider } from '@/components/session-auth'
 import { QueryProvider } from '@/providers/queryclient'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+const bebasNeue = Bebas_Neue({
+  weight: '400',
+  variable: '--font-bebas-neue',
   subsets: ['latin'],
 })
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const barlowCondensed = Barlow_Condensed({
+  weight: ['300', '400', '600', '700', '800', '900'],
+  variable: '--font-barlow-condensed',
   subsets: ['latin'],
 })
 
@@ -93,7 +95,7 @@ export default function RootLayout({
         />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${bebasNeue.variable} ${barlowCondensed.variable} font-barlow antialiased`}
       >
         <SessionAuthProvider>
           <QueryProvider>
