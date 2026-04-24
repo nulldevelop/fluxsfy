@@ -5,6 +5,7 @@ import {
   Folder,
   LogOut,
   Settings,
+  Users,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import {
@@ -42,6 +43,11 @@ const data: { navMain: NavItem[]; navSecondary: NavItem[] } = {
       title: 'Serviços',
       url: '/dashboard/services',
       icon: Folder,
+    },
+    {
+      title: 'Funcionários',
+      url: '/dashboard/staff',
+      icon: Users,
     },
     {
       title: 'Admin',

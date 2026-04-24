@@ -56,6 +56,7 @@ export const ModelName = {
   Service: 'Service',
   Subscription: 'Subscription',
   User: 'User',
+  Staff: 'Staff',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'
@@ -86,6 +87,7 @@ export const AppointmentScalarFieldEnum = {
   time: 'time',
   serviceId: 'serviceId',
   userId: 'userId',
+  staffId: 'staffId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -155,6 +157,21 @@ export const UserScalarFieldEnum = {
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
+export const StaffScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  image: 'image',
+  times: 'times',
+  status: 'status',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type StaffScalarFieldEnum = (typeof StaffScalarFieldEnum)[keyof typeof StaffScalarFieldEnum]
+
+
 export const SessionScalarFieldEnum = {
   id: 'id',
   expiresAt: 'expiresAt',
@@ -215,6 +232,14 @@ export const JsonNullValueInput = {
 export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
 export const AppointmentOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
@@ -222,7 +247,8 @@ export const AppointmentOrderByRelevanceFieldEnum = {
   phone: 'phone',
   time: 'time',
   serviceId: 'serviceId',
-  userId: 'userId'
+  userId: 'userId',
+  staffId: 'staffId'
 } as const
 
 export type AppointmentOrderByRelevanceFieldEnum = (typeof AppointmentOrderByRelevanceFieldEnum)[keyof typeof AppointmentOrderByRelevanceFieldEnum]
@@ -273,14 +299,6 @@ export const QueryMode = {
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
 
 
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
 export const UserOrderByRelevanceFieldEnum = {
   id: 'id',
   name: 'name',
@@ -294,6 +312,17 @@ export const UserOrderByRelevanceFieldEnum = {
 } as const
 
 export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
+
+
+export const StaffOrderByRelevanceFieldEnum = {
+  id: 'id',
+  name: 'name',
+  phone: 'phone',
+  image: 'image',
+  userId: 'userId'
+} as const
+
+export type StaffOrderByRelevanceFieldEnum = (typeof StaffOrderByRelevanceFieldEnum)[keyof typeof StaffOrderByRelevanceFieldEnum]
 
 
 export const SessionOrderByRelevanceFieldEnum = {

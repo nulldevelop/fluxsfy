@@ -67,6 +67,11 @@ export type Subscription = Prisma.SubscriptionModel
  */
 export type User = Prisma.UserModel
 /**
+ * Model Staff
+ * 
+ */
+export type Staff = Prisma.StaffModel
+/**
  * Model Session
  * 
  */

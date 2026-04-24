@@ -325,6 +325,7 @@ export type UserWhereInput = {
   longitude?: Prisma.FloatNullableFilter<"User"> | number | null
   slug?: Prisma.StringNullableFilter<"User"> | string | null
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
+  staff?: Prisma.StaffListRelationFilter
   services?: Prisma.ServiceListRelationFilter
   reminders?: Prisma.ReminderListRelationFilter
   appointments?: Prisma.AppointmentListRelationFilter
@@ -352,6 +353,7 @@ export type UserOrderByWithRelationInput = {
   longitude?: Prisma.SortOrderInput | Prisma.SortOrder
   slug?: Prisma.SortOrderInput | Prisma.SortOrder
   subscription?: Prisma.SubscriptionOrderByWithRelationInput
+  staff?: Prisma.StaffOrderByRelationAggregateInput
   services?: Prisma.ServiceOrderByRelationAggregateInput
   reminders?: Prisma.ReminderOrderByRelationAggregateInput
   appointments?: Prisma.AppointmentOrderByRelationAggregateInput
@@ -383,6 +385,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   latitude?: Prisma.FloatNullableFilter<"User"> | number | null
   longitude?: Prisma.FloatNullableFilter<"User"> | number | null
   subscription?: Prisma.XOR<Prisma.SubscriptionNullableScalarRelationFilter, Prisma.SubscriptionWhereInput> | null
+  staff?: Prisma.StaffListRelationFilter
   services?: Prisma.ServiceListRelationFilter
   reminders?: Prisma.ReminderListRelationFilter
   appointments?: Prisma.AppointmentListRelationFilter
@@ -460,6 +463,7 @@ export type UserCreateInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
@@ -487,6 +491,7 @@ export type UserUncheckedCreateInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -514,6 +519,7 @@ export type UserUpdateInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
@@ -541,6 +547,7 @@ export type UserUncheckedUpdateInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -751,10 +758,6 @@ export type UserUpdateOneRequiredWithoutSubscriptionNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSubscriptionInput, Prisma.UserUpdateWithoutSubscriptionInput>, Prisma.UserUncheckedUpdateWithoutSubscriptionInput>
 }
 
-export type NullableStringFieldUpdateOperationsInput = {
-  set?: string | null
-}
-
 export type EnumRoleFieldUpdateOperationsInput = {
   set?: $Enums.Role
 }
@@ -765,6 +768,20 @@ export type NullableFloatFieldUpdateOperationsInput = {
   decrement?: number
   multiply?: number
   divide?: number
+}
+
+export type UserCreateNestedOneWithoutStaffInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffInput, Prisma.UserUncheckedCreateWithoutStaffInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutStaffNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutStaffInput, Prisma.UserUncheckedCreateWithoutStaffInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutStaffInput
+  upsert?: Prisma.UserUpsertWithoutStaffInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutStaffInput, Prisma.UserUpdateWithoutStaffInput>, Prisma.UserUncheckedUpdateWithoutStaffInput>
 }
 
 export type UserCreateNestedOneWithoutSessionsInput = {
@@ -815,6 +832,7 @@ export type UserCreateWithoutAppointmentsInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -841,6 +859,7 @@ export type UserUncheckedCreateWithoutAppointmentsInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -883,6 +902,7 @@ export type UserUpdateWithoutAppointmentsInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -909,6 +929,7 @@ export type UserUncheckedUpdateWithoutAppointmentsInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -935,6 +956,7 @@ export type UserCreateWithoutRemindersInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -961,6 +983,7 @@ export type UserUncheckedCreateWithoutRemindersInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1003,6 +1026,7 @@ export type UserUpdateWithoutRemindersInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1029,6 +1053,7 @@ export type UserUncheckedUpdateWithoutRemindersInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1055,6 +1080,7 @@ export type UserCreateWithoutServicesInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
@@ -1081,6 +1107,7 @@ export type UserUncheckedCreateWithoutServicesInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
@@ -1123,6 +1150,7 @@ export type UserUpdateWithoutServicesInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
@@ -1149,6 +1177,7 @@ export type UserUncheckedUpdateWithoutServicesInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
@@ -1174,6 +1203,7 @@ export type UserCreateWithoutSubscriptionInput = {
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
@@ -1200,6 +1230,7 @@ export type UserUncheckedCreateWithoutSubscriptionInput = {
   latitude?: number | null
   longitude?: number | null
   slug?: string | null
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -1242,6 +1273,7 @@ export type UserUpdateWithoutSubscriptionInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
@@ -1268,6 +1300,131 @@ export type UserUncheckedUpdateWithoutSubscriptionInput = {
   latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
+  appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutStaffInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  services?: Prisma.ServiceCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
+  appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutStaffInput = {
+  id: string
+  name: string
+  email: string
+  emailVerified: boolean
+  image?: string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+  address?: string | null
+  phone?: string | null
+  status?: boolean
+  timeZone?: string | null
+  stripe_customer_id?: string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: number
+  role?: $Enums.Role
+  latitude?: number | null
+  longitude?: number | null
+  slug?: string | null
+  subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
+  reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
+  appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutStaffInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffInput, Prisma.UserUncheckedCreateWithoutStaffInput>
+}
+
+export type UserUpsertWithoutStaffInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutStaffInput, Prisma.UserUncheckedUpdateWithoutStaffInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutStaffInput, Prisma.UserUncheckedCreateWithoutStaffInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutStaffInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutStaffInput, Prisma.UserUncheckedUpdateWithoutStaffInput>
+}
+
+export type UserUpdateWithoutStaffInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
+  reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
+  appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutStaffInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  address?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  timeZone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripe_customer_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  times?: Prisma.JsonNullValueInput | runtime.InputJsonValue
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  role?: Prisma.EnumRoleFieldUpdateOperationsInput | $Enums.Role
+  latitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -1295,6 +1452,7 @@ export type UserCreateWithoutSessionsInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
@@ -1321,6 +1479,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -1363,6 +1522,7 @@ export type UserUpdateWithoutSessionsInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
@@ -1389,6 +1549,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -1415,6 +1576,7 @@ export type UserCreateWithoutAccountsInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentCreateNestedManyWithoutUserInput
@@ -1441,6 +1603,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   longitude?: number | null
   slug?: string | null
   subscription?: Prisma.SubscriptionUncheckedCreateNestedOneWithoutUserInput
+  staff?: Prisma.StaffUncheckedCreateNestedManyWithoutUserInput
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutUserInput
   reminders?: Prisma.ReminderUncheckedCreateNestedManyWithoutUserInput
   appointments?: Prisma.AppointmentUncheckedCreateNestedManyWithoutUserInput
@@ -1483,6 +1646,7 @@ export type UserUpdateWithoutAccountsInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUpdateManyWithoutUserNestedInput
@@ -1509,6 +1673,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   longitude?: Prisma.NullableFloatFieldUpdateOperationsInput | number | null
   slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   subscription?: Prisma.SubscriptionUncheckedUpdateOneWithoutUserNestedInput
+  staff?: Prisma.StaffUncheckedUpdateManyWithoutUserNestedInput
   services?: Prisma.ServiceUncheckedUpdateManyWithoutUserNestedInput
   reminders?: Prisma.ReminderUncheckedUpdateManyWithoutUserNestedInput
   appointments?: Prisma.AppointmentUncheckedUpdateManyWithoutUserNestedInput
@@ -1521,6 +1686,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
  */
 
 export type UserCountOutputType = {
+  staff: number
   services: number
   reminders: number
   appointments: number
@@ -1529,6 +1695,7 @@ export type UserCountOutputType = {
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  staff?: boolean | UserCountOutputTypeCountStaffArgs
   services?: boolean | UserCountOutputTypeCountServicesArgs
   reminders?: boolean | UserCountOutputTypeCountRemindersArgs
   appointments?: boolean | UserCountOutputTypeCountAppointmentsArgs
@@ -1544,6 +1711,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
    * Select specific fields to fetch from the UserCountOutputType
    */
   select?: Prisma.UserCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountStaffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.StaffWhereInput
 }
 
 /**
@@ -1602,6 +1776,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   longitude?: boolean
   slug?: boolean
   subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
+  staff?: boolean | Prisma.User$staffArgs<ExtArgs>
   services?: boolean | Prisma.User$servicesArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
   appointments?: boolean | Prisma.User$appointmentsArgs<ExtArgs>
@@ -1636,6 +1811,7 @@ export type UserSelectScalar = {
 export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "emailVerified" | "image" | "createdAt" | "updatedAt" | "address" | "phone" | "status" | "timeZone" | "stripe_customer_id" | "times" | "rating" | "role" | "latitude" | "longitude" | "slug", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscription?: boolean | Prisma.User$subscriptionArgs<ExtArgs>
+  staff?: boolean | Prisma.User$staffArgs<ExtArgs>
   services?: boolean | Prisma.User$servicesArgs<ExtArgs>
   reminders?: boolean | Prisma.User$remindersArgs<ExtArgs>
   appointments?: boolean | Prisma.User$appointmentsArgs<ExtArgs>
@@ -1648,6 +1824,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     subscription: Prisma.$SubscriptionPayload<ExtArgs> | null
+    staff: Prisma.$StaffPayload<ExtArgs>[]
     services: Prisma.$ServicePayload<ExtArgs>[]
     reminders: Prisma.$ReminderPayload<ExtArgs>[]
     appointments: Prisma.$AppointmentPayload<ExtArgs>[]
@@ -2014,6 +2191,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   subscription<T extends Prisma.User$subscriptionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$subscriptionArgs<ExtArgs>>): Prisma.Prisma__SubscriptionClient<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  staff<T extends Prisma.User$staffArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$staffArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StaffPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   services<T extends Prisma.User$servicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reminders<T extends Prisma.User$remindersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$remindersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReminderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   appointments<T extends Prisma.User$appointmentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2430,6 +2608,30 @@ export type User$subscriptionArgs<ExtArgs extends runtime.Types.Extensions.Inter
    */
   include?: Prisma.SubscriptionInclude<ExtArgs> | null
   where?: Prisma.SubscriptionWhereInput
+}
+
+/**
+ * User.staff
+ */
+export type User$staffArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Staff
+   */
+  select?: Prisma.StaffSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Staff
+   */
+  omit?: Prisma.StaffOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.StaffInclude<ExtArgs> | null
+  where?: Prisma.StaffWhereInput
+  orderBy?: Prisma.StaffOrderByWithRelationInput | Prisma.StaffOrderByWithRelationInput[]
+  cursor?: Prisma.StaffWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.StaffScalarFieldEnum | Prisma.StaffScalarFieldEnum[]
 }
 
 /**
