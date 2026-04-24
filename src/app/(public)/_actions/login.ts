@@ -1,9 +1,14 @@
 'use server'
 
 import { signIn } from '@/lib/auth'
+import { redirect } from 'next/navigation'
 
 type LoginType = 'google'
 
 export async function handleRegister(provider: LoginType) {
-  await signIn(provider, { redirectTo: '/dashboard' })
+  const result = await signIn(provider, { redirectTo: '/dashboard' })
+  
+  if (result?.url) {
+    redirect(result.url)
+  }
 }

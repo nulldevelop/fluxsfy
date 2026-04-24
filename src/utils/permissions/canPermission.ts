@@ -1,7 +1,7 @@
 'use server'
 
 import { auth } from '@/lib/auth'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { canCreateService } from './canCreateService'
 import type { PlanDetailInfo } from './get-plans'
 

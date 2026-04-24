@@ -1,5 +1,5 @@
 import type { Plan } from '@prisma/client'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { stripe } from '@/utils/stripe'
 
 /**
@@ -63,6 +63,5 @@ export async function manageSubscription(
     } catch {
       console.error('Error updating subscription in database')
     }
-    
   }
 }

@@ -2,7 +2,7 @@
 
 import type { Subscription } from '@prisma/client'
 import type { Session } from 'next-auth'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { checkSubscriptionExpired } from '@/utils/permissions/checkSubscriptionExpired'
 import { plans } from '../plans'
 import type { ResultPermissionProp } from './canPermission'

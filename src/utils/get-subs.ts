@@ -1,6 +1,6 @@
 'use server'
 
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export async function getSubs(userId: string) {
   if (!userId) {

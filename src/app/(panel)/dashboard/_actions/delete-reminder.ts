@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod/v4'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 const formSchema = z.object({
   reminderId: z.string().min(1, 'O id do lembrete é obrigatório'),

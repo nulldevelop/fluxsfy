@@ -1,7 +1,7 @@
 'use client'
 import { Loader, Upload } from 'lucide-react'
 import Image from 'next/image'
-import { useSession } from 'next-auth/react'
+import { useSession } from '@/lib/auth-client'
 import { type ChangeEvent, useState } from 'react'
 import { toast } from 'sonner'
 import semFoto from '../../../../../../public/banner.png'
@@ -15,7 +15,7 @@ interface AvatarProfileProps {
 export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
   const [previewImage, setPreviewImage] = useState(avatarUrl)
   const [loading, setLoading] = useState(false)
-  const { update } = useSession()
+  const { data: session } = useSession()
 
   async function handleChange(e: ChangeEvent<HTMLInputElement>) {
     // biome-ignore lint/complexity/useOptionalChain: Dev
@@ -41,9 +41,6 @@ export function AvatarProfile({ avatarUrl, userId }: AvatarProfileProps) {
       setPreviewImage(urlImage)
 
       await updateProfileAvatar({ avatarUrl: urlImage })
-      await update({
-        image: urlImage,
-      })
 
       setLoading(false)
     }

@@ -1,6 +1,6 @@
 'use server'
 
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export async function getInfoSchedule({ userId }: { userId: string }) {
   try {
@@ -27,7 +27,7 @@ export async function getInfoSchedule({ userId }: { userId: string }) {
     }
 
     return user
-  } catch{
+  } catch {
     return null
   }
 }

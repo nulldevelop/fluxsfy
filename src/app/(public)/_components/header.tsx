@@ -2,7 +2,7 @@
 
 import { Loader, LogIn, Menu } from 'lucide-react'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { useSession } from '@/lib/auth-client'
 import { useState } from 'react'
 import {
   Sheet,
@@ -16,7 +16,7 @@ import { Button } from '../../../components/ui/button'
 import { handleRegister } from '../_actions/login'
 
 export function Header() {
-  const { data: session, status } = useSession()
+  const { data: session, isPending } = useSession()
   const [isOpen, setIsOpen] = useState(false)
 
   const navItems = [{ href: '#professionals', label: 'Profissionais' }]
@@ -41,7 +41,7 @@ export function Header() {
         </Button>
       ))}
 
-      {status === 'loading' ? (
+      {isPending ? (
         <Loader className='animate-spin text-white' />
       ) : session ? (
         <Button

@@ -1,7 +1,7 @@
 'use server'
 
 import { addDays, differenceInDays, isAfter } from 'date-fns'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 import { TRIAL_DAYS } from './trial-limits'
 
 export async function checkSubscription(userId: string) {

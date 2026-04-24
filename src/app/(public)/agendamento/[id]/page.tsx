@@ -1,7 +1,7 @@
 import { CheckCircle2 } from 'lucide-react'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 function formatLocalDateTime(date: Date, time: string) {
   const [hourStr, minuteStr] = time.split(':')

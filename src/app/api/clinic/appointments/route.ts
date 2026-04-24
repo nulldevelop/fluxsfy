@@ -1,6 +1,6 @@
-import { NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/lib/auth'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 /*
   Rota para buscar todos os agendamentos de uma clinica
@@ -9,8 +9,10 @@ import prisma from '@/lib/prisma'
   > Preciso ter o id da clinica (NAO POSSO RECEBER DA ROTA req.params)
 */
 
-export const GET = auth(async function GET(request) {
-  if (!request.auth) {
+export async function GET(request: NextRequest) {
+  const session = await auth()
+
+  if (!session) {
     return NextResponse.json(
       { error: 'Acesso nao autorizado!' },
       { status: 401 }
@@ -19,7 +21,7 @@ export const GET = auth(async function GET(request) {
 
   const searchParams = request.nextUrl.searchParams
   const dateString = searchParams.get('date') as string
-  const clinicId = request.auth?.user?.id
+  const clinicId = session.user?.id
 
   if (!dateString) {
     return NextResponse.json({ error: 'Data não informada!' }, { status: 400 })
@@ -60,4 +62,5 @@ export const GET = auth(async function GET(request) {
       { status: 400 }
     )
   }
-})
+}
+)

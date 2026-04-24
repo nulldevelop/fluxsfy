@@ -1,7 +1,7 @@
 'use server'
 
 import { z } from 'zod'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 const formSchema = z.object({
   name: z.string().min(1, 'O nome é obrigatório'),

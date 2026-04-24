@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod/v4'
 import { auth } from '@/lib/auth'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 const formSchema = z.object({
   description: z.string().min(1, 'A descrição é obrigatório'),

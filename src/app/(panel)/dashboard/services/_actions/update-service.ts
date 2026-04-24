@@ -3,7 +3,7 @@
 import { revalidatePath } from 'next/cache'
 import { z } from 'zod/v4'
 import { auth } from '@/lib/auth'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 const formSchema = z.object({
   serviceId: z.string().min(1, 'O id do serviço é obrigatório'),

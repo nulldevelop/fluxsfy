@@ -2,7 +2,7 @@
 import type { Prisma } from '@prisma/client'
 import { ArrowRight } from 'lucide-react'
 import { useRouter } from 'next/navigation'
-import { signOut, useSession } from 'next-auth/react'
+import { signOut, useSession } from '@/lib/auth-client'
 import { useState } from 'react'
 import { toast } from 'sonner'
 import { Button } from '@/components/ui/button'
@@ -52,7 +52,6 @@ export function ProfileContent({ user }: ProfileContentProps) {
   const router = useRouter()
   const [selectedHours, setSelectedHours] = useState<string[]>(user.times ?? [])
   const [dialogIsOpen, setDialogIsOpen] = useState(false)
-  const { update } = useSession()
 
   const form = useProfileForm({
     name: user.name,
@@ -118,7 +117,6 @@ export function ProfileContent({ user }: ProfileContentProps) {
 
   async function handleLogout() {
     await signOut()
-    await update()
     router.replace('/')
   }
 

@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from 'next/server'
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
@@ -51,13 +51,14 @@ export async function GET(request: NextRequest) {
 
     const blockedSlots = new Set<string>()
 
+    const userTimes = user.times as string[]
     for (const apt of appointments) {
       const requiredSlots = Math.ceil(apt.service.duration / 30)
-      const startIndex = user.times.indexOf(apt.time)
+      const startIndex = userTimes.indexOf(apt.time)
 
       if (startIndex !== -1) {
         for (let i = 0; i < requiredSlots; i++) {
-          const blokedSlot = user.times[startIndex + i]
+          const blokedSlot = userTimes[startIndex + i]
           if (blokedSlot) {
             blockedSlots.add(blokedSlot)
           }

@@ -1,16 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/client"
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "mysql"
 }
 
 enum Role {
@@ -25,42 +19,34 @@ model Appointment {
   phone           String
   appointmentDate DateTime
   time            String
-
-  serviceId String
-  service   Service @relation(fields: [serviceId], references: [id])
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  serviceId       String
+  service         Service  @relation(fields: [serviceId], references: [id])
+  userId          String
+  user            User     @relation(fields: [userId], references: [id])
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
 
 model Reminder {
-  id          String @id @default(uuid())
+  id          String   @id @default(uuid())
   description String
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 model Service {
-  id       String  @id @default(uuid())
-  name     String
-  price    Int
-  duration Int
-  status   Boolean @default(true)
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
+  id          String        @id @default(uuid())
+  name        String
+  price       Int
+  duration    Int
+  status      Boolean       @default(true)
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
   appointment Appointment[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
 }
 
 enum Plan {
@@ -70,101 +56,85 @@ enum Plan {
 }
 
 model Subscription {
-  id      String @id @default(uuid())
-  status  String
-  plan    Plan
-  priceId String
-
+  id        String   @id @default(uuid())
+  status    String
+  plan      Plan
+  priceId   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  userId String @unique
-  user   User   @relation(fields: [userId], references: [id])
+  userId    String   @unique
+  user      User     @relation(fields: [userId], references: [id])
 }
 
 model User {
-  id                 String    @id @default(uuid())
-  name               String?
-  email              String    @unique
-  emailVerified      DateTime?
+  id                 String        @id
+  name               String
+  email              String        @unique
+  emailVerified      Boolean
   image              String?
-  address            String?   @default("")
-  phone              String?   @default("")
-  status             Boolean   @default(false)
+  createdAt          DateTime
+  updatedAt          DateTime
+  // Custom fields
+  address            String?       @default("")
+  phone              String?       @default("")
+  status             Boolean       @default(false)
   timeZone           String?
   stripe_customer_id String?
-  times              String[]  @default([])
-  rating             Int       @default(0)
-  role               Role      @default(USER)
+  times              Json          @default("[]")
+  rating             Int           @default(0)
+  role               Role          @default(USER)
+  latitude           Float?
+  longitude          Float?
+  subscription       Subscription?
+  services           Service[]
+  reminders          Reminder[]
+  appointments       Appointment[]
+  sessions           Session[]
+  accounts           Account[]
 
-  latitude Float?
-  longitude Float?
-
-  subscription Subscription?
-  services     Service[]
-  reminders    Reminder[]
-  appointments Appointment[]
-
-  accounts      Account[]
-  sessions      Session[]
-  // Optional for WebAuthn support
-  Authenticator Authenticator[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model Account {
-  userId            String
-  type              String
-  provider          String
-  providerAccountId String
-  refresh_token     String?
-  access_token      String?
-  expires_at        Int?
-  token_type        String?
-  scope             String?
-  id_token          String?
-  session_state     String?
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([provider, providerAccountId])
+  @@map("user")
 }
 
 model Session {
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  @@map("session")
 }
 
-model VerificationToken {
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?   @db.Text
+  refreshToken          String?   @db.Text
+  idToken               String?   @db.Text
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
   identifier String
-  token      String
-  expires    DateTime
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
 
-  @@id([identifier, token])
-}
-
-// Optional for WebAuthn support
-model Authenticator {
-  credentialID         String  @unique
-  userId               String
-  providerAccountId    String
-  credentialPublicKey  String
-  counter              Int
-  credentialDeviceType String
-  credentialBackedUp   Boolean
-  transports           String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@id([userId, credentialID])
+  @@map("verification")
 }

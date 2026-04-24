@@ -1,6 +1,6 @@
 'use server'
 
-import prisma from '@/lib/prisma'
+import { prisma } from '@/lib/prisma'
 
 export async function getTimesClinic({ userId }: { userId: string }) {
   if (!userId) {
@@ -29,7 +29,7 @@ export async function getTimesClinic({ userId }: { userId: string }) {
     }
 
     return {
-      times: user.times,
+      times: user.times as string[],
       userId: user.id,
     }
   } catch (err) {
