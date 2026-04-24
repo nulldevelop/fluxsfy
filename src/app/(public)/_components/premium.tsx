@@ -8,19 +8,11 @@ export function PremiumBadge({ plan }: PremiumBadgeProps) {
   if (plan === 'BASIC') {
     return null
   }
-  const bgColor =
-    plan === 'PLUS'
-      ? 'bg-gray-300'
-      : plan === 'PRO'
-        ? 'bg-yellow-500'
-        : 'bg-yellow-300'
 
   return (
-    <div>
-      <span
-        className={`absolute top-2 left-2 flex h-10 w-10 items-center justify-center rounded-full px-2 py-1 ${bgColor} text-xs`}
-      >
-        <Star />
+    <div className="absolute top-4 left-4 z-20">
+      <span className="badge-clipped bg-gold text-black shadow-lg">
+        {plan === 'PRO' ? 'PREMIUM' : 'PLUS'}
       </span>
     </div>
   )

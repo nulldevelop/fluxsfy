@@ -51,28 +51,29 @@ export function ServiceList({ services, permissions }: ServiceListProps) {
     >
       <section>
         <Card className='mx-3'>
-          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-2'>
-            <CardTitle className='font-bold text-xl md:text-2xl'>
-              Serviços
+          <CardHeader className='flex flex-row items-center justify-between space-y-0 pb-6'>
+            <CardTitle className='font-bebas text-4xl text-gold tracking-widest'>
+              SERVIÇOS
             </CardTitle>
             {permissions.hasPermission && (
               <DialogTrigger asChild>
-                <Button>
-                  <Plus className='h-4 w-4' />
+                <Button size="icon" variant="default">
+                  <Plus className='h-5 w-5' />
                 </Button>
               </DialogTrigger>
             )}
 
             {!permissions.hasPermission && (
               <Link
-                className='text-emerald-500 text-sm hover:underline'
+                className='font-barlow font-bold text-gold uppercase tracking-widest hover:underline text-sm'
                 href={'/dashboard/plans'}
               >
-                Limite de serviços atingido - Atualize seu plano
+                Limite atingido - Atualize seu plano
               </Link>
             )}
 
             <DialogContent
+              className="bg-black border-gold text-cream"
               onInteractOutside={(e) => {
                 e.preventDefault()
                 setIsDialogOpen(false)
@@ -104,34 +105,36 @@ export function ServiceList({ services, permissions }: ServiceListProps) {
           </CardHeader>
 
           <CardContent>
-            <section className='mt-4 space-y-4'>
+            <section className='space-y-4'>
               {servicesList.map((service) => (
                 <article
-                  className='flex flex-center justify-between'
+                  className='flex items-center justify-between bg-zinc-900 p-4 border-l-4 border-gold group hover:bg-zinc-800 transition-colors'
                   key={service.id}
                 >
-                  <div className='flex items-center space-x-2'>
-                    <span className='font-medium'>{service.name}</span>
-                    <span className='text-gray-300'>-</span>
-                    <span className='font-medium text-gray-500'>
-                      {formatCurrency(service.price / 100)}
-                    </span>
-                    <span className='text-gray-300'>-</span>
-                    <span className='font-medium text-gray-500'>
-                      {service.duration}m
-                    </span>
+                  <div className='flex flex-col'>
+                    <span className='font-barlow font-bold text-cream uppercase tracking-widest'>{service.name}</span>
+                    <div className='flex items-center gap-2 mt-1'>
+                        <span className='font-bebas text-2xl text-gold'>
+                        {formatCurrency(service.price / 100)}
+                        </span>
+                        <span className='text-zinc-600 font-barlow text-xs'>/</span>
+                        <span className='text-zinc-500 font-barlow font-bold uppercase tracking-widest text-xs'>
+                        {service.duration} MIN
+                        </span>
+                    </div>
                   </div>
 
-                  <div className='flex gap-2'>
+                  <div className='flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity'>
                     <Button
                       onClick={() => handleEditService(service)}
                       size='icon'
-                      variant='secondary'
+                      variant='outline'
+                      className="size-8"
                     >
                       <Pencil className='h-4 w-4' />
                     </Button>
                     <Button
-                      className='cursor-pointer'
+                      className='cursor-pointer size-8'
                       onClick={() => handleDeleteService(service.id)}
                       size='icon'
                       variant='destructive'

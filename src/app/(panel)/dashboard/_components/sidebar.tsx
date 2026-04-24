@@ -70,21 +70,21 @@ export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
   }
 
   return (
-    <Sidebar>
+    <Sidebar className="border-r border-primary">
       <SidebarContent>
         <SidebarGroup>
-          <SidebarGroupLabel>Painel</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-bebas text-lg tracking-widest text-gold">Painel</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {data.navMain
                 .filter((item) => (item.adminOnly ? isAdmin : true))
                 .map((item) => (
                   <SidebarMenuItem key={item.title}>
-                    <SidebarMenuButton asChild>
+                    <SidebarMenuButton asChild className="hover:text-gold transition-colors font-barlow font-bold uppercase tracking-widest">
                       <a href={item.url}>
-                        <item.icon />
+                        <item.icon className="text-gold" />
                         <span>{item.title}</span>
-                        <SidebarMenuBadge>{item.bagde}</SidebarMenuBadge>
+                        <SidebarMenuBadge className="bg-gold text-black">{item.bagde}</SidebarMenuBadge>
                       </a>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -93,14 +93,14 @@ export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
           </SidebarGroupContent>
         </SidebarGroup>
         <SidebarGroup>
-          <SidebarGroupLabel>Configurações</SidebarGroupLabel>
+          <SidebarGroupLabel className="font-bebas text-lg tracking-widest text-gold">Configurações</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {data.navSecondary.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
+                  <SidebarMenuButton asChild className="hover:text-gold transition-colors font-barlow font-bold uppercase tracking-widest">
                     <a href={item.url}>
-                      <item.icon />
+                      <item.icon className="text-gold" />
                       <span>{item.title}</span>
                     </a>
                   </SidebarMenuButton>
@@ -110,15 +110,17 @@ export function AppSidebar({ isAdmin = false }: { isAdmin?: boolean }) {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter>
+      <SidebarFooter className="border-t border-primary/20">
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton asChild onClick={handleLogout} size='lg'>
-              <Button className='flex w-full items-center gap-2 rounded p-2 text-left hover:bg-gray-200'>
-                <LogOut size={16} />
-                <span>Sair</span>
-              </Button>
-            </SidebarMenuButton>
+            <Button 
+              variant="destructive"
+              className="w-full justify-start gap-2"
+              onClick={handleLogout}
+            >
+              <LogOut size={16} />
+              <span>Sair</span>
+            </Button>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
